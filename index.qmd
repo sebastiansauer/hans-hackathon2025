@@ -46,3 +46,9 @@ Bitte beachten Sie, dass sich eine bestimmte Challenge noch ändern kann, solang
 Beachten Sie auch die Prüfungshinweise und sonstige Hinweise im [Hinweisbuch](https://hinweisbuch.netlify.app/).
 
 
+## Vorbereitung
+
+Bitte stellen Sie sicher, dass Sie eine aktuelle Version von R auf Ihrem Computer am Laufen haben.
+Bitte bringen Sie einen Computer (mit Internetanschluss) in jede Stunde mit.
+Als Oberfläche (IDE) für R bietet sich neben RStudio auch die IDE von Posit an: [Positron](https://posit.co/products/ide/positron/).
+

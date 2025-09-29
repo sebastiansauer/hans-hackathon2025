@@ -70,12 +70,12 @@ Punkte-Noten-Zuordnung:
 
 - Wird eine Lösung für eine bestimmte Challenge nicht *frist- und formgerecht eingereicht*, so gilt sie als nicht eingereicht (0 Punkte).
 - Die *Bearbeitungszeit jeder Challenge ist jeweils eine Woche*,
-d.h. die Lösung muss bis zum jeweiligen Abgabetermin eingereicht werden. Der Abgabetermin ist der Vorabend des nächsten Unterrichtstermin. Beispiel: Der Unterricht findet wöchentlich am Dienstag statt. Die Challenge wird am heutige Dienstag besprochen und muss bis Montagabend der nächsten Woche eingereicht werden. Ausnahmen von dieser Regel (z.B. bei Feiertagen) werden rechtzeitig bekannt gegeben.
+d.h. die Lösung muss bis zum jeweiligen Abgabetermin eingereicht werden. Der *späteste* Abgabetermin ist der Vorabend des nächsten Unterrichtstermin - um 23.59.00. Beispiel: Der Unterricht findet wöchentlich am Dienstag statt. Die Challenge wird am heutige Dienstag besprochen und muss bis Montagabend der nächsten Woche eingereicht werden. Ausnahmen von dieser Regel (z.B. bei Feiertagen) werden rechtzeitig bekannt gegeben.
+- Im Falle von Krankheit oder anderen schwerwiegenden Gründen, die eine fristgerechte Abgabe verhindern, ist die Lehrkraft *unverzüglich* zu informieren. Ein ärztliches Attest ist vorzulegen.
 - *Prüfen Sie* vor Beginn der ersten Challenge, ob Sie auf die *Daten zugreifen* können und diese einlesen können. Melden Sie sich bei Problemen vor Beginn der (jeweiligen) Challenge beim Dozenten.
 - Geben Sie in jeder eingereichten Datei *Ihren Namen und die Nummer* der Challenge an.
 - *Benennen* Sie Ihre *Dateien* nach folgendem Schema: `challenge01-max-mustermann.R` (für R-Skripte) oder `challenge01-max-mustermann.qmd` (für Quarto-Dateien).
 - Nutzen Sie den [Tidyverse-Styleguide](https://style.tidyverse.org/).
-- Achten Sie auf einen guten Programmierstil.
 
 
 
@@ -98,7 +98,9 @@ reichen Sie Ihre Ergebnisse bitte in Form eines Dokuments ein,
 - das "*Standalone*" lesbar ist, also keine Abhängigkeiten zu anderen Dokumenten benötigt,
 - das als *PDF*- oder *HTML*-Datei formatiert ist,
 - das soweit als möglich *reproduzierbar* ist.
-
+- das *kommentiert* ist,
+- das wohl *gegliedert* ist
+- das *durchläuft*, ohne Fehler zu werfen.
 
 
 #### R
