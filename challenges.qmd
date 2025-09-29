@@ -1,0 +1,78 @@
+---
+title: "Challenges im Überblick"
+format: html
+author: Sebastian Sauer
+date: today
+number-sections: true
+toc: true
+---
+
+
+
+
+## Daten verstehen
+
+{{< include children/challenge01-base.qmd >}}
+
+
+## Daten einlesen
+
+
+{{< include children/challenge02-base.qmd >}}
+
+
+
+
+## Daten verschlanken
+
+
+{{< include children/challenge03-base.qmd >}}
+
+
+
+
+## Daten pivotieren
+
+{{< include children/challenge04-base.qmd >}}
+
+
+
+
+## Projektmanagement
+
+{{< include children/challenge05-base.qmd >}}
+
+
+## Großer Datensatz
+
+
+{{< include children/challenge06-base.qmd >}}
+
+
+## Verweildauer
+
+{{< include children/challenge07-base.qmd >}}
+
+
+
+## Interaktion mit dem LLM
+
+{{< include children/challenge08-base.qmd >}}
+
+
+
+## "Glotzdauer"
+
+
+{{< include children/challenge09-base.qmd >}}
+
+
+
+
+## Optimierung
+
+
+{{< include children/challenge10-base.qmd >}}
+
+
+

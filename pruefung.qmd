@@ -1,0 +1,208 @@
+
+
+# Prüfung
+
+## Allgemeines
+
+Es handelt sich um eine Einzelleistung.
+
+
+## Prüfungsleistung: Portfolio-Prüfung
+
+
+
+### Beschreibung
+
+Die Prüfungsleistung dieses Moduls ist eine *Portfolioprüfung*.
+
+Nach §17 Absatz 4, Satz 2 ff der APO der HS Ansbach (vom 9. Februar 2023):
+
+>   Eine Portfolioprüfung ist eine modulbezogene Prüfungsleistung, die mehrere Prüfungsbestandteile umfasst, welche über die gesamte Lehrveranstaltung eines Moduls hinweg abgeprüft werden. ³Die einzelnen Prüfungsbestandteile ergeben eine Gesamtnote.
+
+
+### Bestandteile
+
+
+Die Portfolioprüfung setzt sich aus folgenden Teilnoten zusammen:
+
+1. Teilnoten für die 10 Challenges
+2. Teilnote für ein abschließendes Fachgespräch
+
+
+Die (Gesamt-)Note setzt sich aus folgenden Teilen zusammen:
+
+- Teilnote 1: Punktzahl bei den Challenges (50%)
+- Teilnote 2: Note beim Fachgespräch (50%)
+
+
+:::{.callout-note}
+Jede Teilnote darf nicht schlechter als 4,0 bewertet werden, um die Prüfung als Ganze zu bestehen.
+:::
+
+
+## Teil 1: Wöchentliche Challenges
+
+Bitte beachten Sie auch die [Hinweise zum Thema 'Programmieren'](https://hinweisbuch.netlify.app/109-hinweise-programmier).
+
+
+
+
+### Benotung der Challenges
+
+Jede Challenge wird wie folgt bepunktet:
+
+- 0 Punkte: nicht eingereicht oder keine substanzielle Lösungsansätze
+- 0,5 Punkte: substanzielle Lösungsansätze eingereicht, aber nicht komplett gelöst
+- 1 Punkt: komplett oder fast komplett gelöst
+
+
+Punkte-Noten-Zuordnung:
+
+
+- mind. 50% der Punkte - Note 4,0
+- mind. 60% der Punkte  - Note 3,0
+- mind. 70% der Punkte - Note 2,0
+- mind. 80% der Punkte - Note 1,0
+
+
+
+### Formalia
+
+- Wird eine Lösung für eine bestimmte Challenge nicht *frist- und formgerecht eingereicht*, so gilt sie als nicht eingereicht (0 Punkte).
+- Die *Bearbeitungszeit jeder Challenge ist jeweils eine Woche*,
+d.h. die Lösung muss bis zum jeweiligen Abgabetermin eingereicht werden. Der Abgabetermin ist der Vorabend des nächsten Unterrichtstermin. Beispiel: Der Unterricht findet wöchentlich am Dienstag statt. Die Challenge wird am heutige Dienstag besprochen und muss bis Montagabend der nächsten Woche eingereicht werden. Ausnahmen von dieser Regel (z.B. bei Feiertagen) werden rechtzeitig bekannt gegeben.
+- *Prüfen Sie* vor Beginn der ersten Challenge, ob Sie auf die *Daten zugreifen* können und diese einlesen können. Melden Sie sich bei Problemen vor Beginn der (jeweiligen) Challenge beim Dozenten.
+- Geben Sie in jeder eingereichten Datei *Ihren Namen und die Nummer* der Challenge an.
+- *Benennen* Sie Ihre *Dateien* nach folgendem Schema: `challenge01-max-mustermann.R` (für R-Skripte) oder `challenge01-max-mustermann.qmd` (für Quarto-Dateien).
+- Nutzen Sie den [Tidyverse-Styleguide](https://style.tidyverse.org/).
+- Achten Sie auf einen guten Programmierstil.
+
+
+
+
+### Abgabeformat
+
+
+#### Quarto
+
+Sofern das Ausgabeformat "Quarto" definiert ist, 
+reichen Sie Ihre Ergebnisse bitte in Form eines Dokuments ein,
+
+- das die *Lösung* (der Aufgabenstellung) enthält,
+- das Ihren *Computer-Code* enthält (mit Syntax-Highlighting),
+- das Ihre *Ausgaben* zu Ihrem Computer-Code enthält,
+- das Ihre *Gedanken* und Überlegungen (also Text, angereichert ggf. mit Diagrammen etc.) enthält,
+- das übersichtlich und ansprechend *formatiert* ist,
+- das in RMarkdown oder Quarto erstellt wurde,
+- das die *Grundlagen wissenschaftlichen Arbeitens* beachtet,
+- das "*Standalone*" lesbar ist, also keine Abhängigkeiten zu anderen Dokumenten benötigt,
+- das als *PDF*- oder *HTML*-Datei formatiert ist,
+- das soweit als möglich *reproduzierbar* ist.
+
+
+
+#### R
+
+Sofern als Ausgabeformat "R-Syntax" definiert ist, reichen Sie Ihren Code bitte in Form eines R-Skripts ein, 
+
+- das die *Lösung* der Challenge enthält.
+- *reproduzierbar* ist
+- *durchläuft*, ohne Fehler zu werfen
+- *kommentiert* ist
+- wohl *gegliedert* ist
+
+
+
+
+
+## Teil 2: Fachgespräch
+
+
+
+
+Die Termine für das Fachgespräch liegen in der Prüfungszeit und werden rechtzeitig bekannt gegeben über geeignete Kanäle.
+
+Weitere Hinweise zum Fachgespräch finden sich im [entsprechenden Kapitel im Hinweisbuch](https://hinweisbuch.netlify.app/045-hinweise-pruefung-fachgespraech-frame).
+
+
+### Gegenstand
+
+Prüfungsgegenstand sind alle Inhalte aus dem Unterricht.
+Ein Schwerpunkt liegt auf den Musterlösungen sowie den eigenen, selbst eingereichten Lösungen der Challenges.
+
+
+
+
+### Beispiele für Prüfungsfragen
+
+1. Erklären Sie den Aufbau einer Funktion in R!
+2. Wie haben Sie die Glotzdauer berechnet?
+1. Was besagt die Variable idvisit?
+1. Wie groß war der von uns verwendete Rohdatensatz (Zeilen, Spalten)?
+1. Nennen Sie ein Beispiel für einen gut und einen schlecht gewählten Objektnamen!
+1. Erläutern Sie, wie die Daten laut Musterlösung in R importiert wurden.
+1. Mit welchem R-Paket wurden laut Musterlösung Datums-/Zeitangaben bearbeitet?
+1. Erklären Sie eine Funktion aus dem R-Paket `stringr`!
+1. Was macht die Funktion `purrr::map`?
+1. Was ist das "Tidyverse"?
+1. Wann ist ein Mittelwert mehr bzw. weniger aussagekräftig?
+1. Was macht ein gutes Datendiagramm aus?
+1. Im Rohdatensatz: Es gibt ein Muster in den Spaltennamen. Was fällt Ihnen dazu auf?
+1. Im Rohdatensatz: Was fällt Ihnen zur Anteil und zum Muster der fehlenden Werte auf?
+1. Was versteht man unter "Regex" im Kontext der String-Verarbeitung?
+1. Wie kann man leere Zeilen oder leere Spalten auf einem Dataframe entfernen?
+1. Wie kann man konstante Zeilen oder Spalten aus einem Dataframe entfernen? Warum sollte man das tun?
+1. Erläutern Sie folgenden R-Code: 
+```
+out <1. list()
+for (i in 1:length(datafiles_list)) {
+ out[[i]] <1. read.csv(datafiles_list[i]) 
+}
+```
+3. Wie kann man eine Spalte an den Anfang eines Dataframes ziehen?
+1. Nennen Sie Vor1. und Nachteile des Einsatzes von Excel für eine Aufgabe wie das Projekt im vorliegenden Modul.
+1. Nennen Sie eine Funktion, um eine als String (`character`) formatierte Spalte (z.B. "1970-01-01") in ein Datums-/Zeitobjekt umzuwandeln!
+1. Erklären Sie folgende Syntax: 
+```
+str_remove(string = names(d),
+           pattern = "_[:digit:].*") |> 
+  unique()
+```
+2. Erklären Sie folgende Syntax:
+```
+d_only_subtitles_and_timestamps |> 
+   mutate(across(contains("timestamp"), ~ as_datetime(as.numeric(.x))))
+```
+2. Erklären Sie folgende Syntax:
+```
+d_time_repaired |> 
+  filter(!str_detect(actionDetails_0_subtitle, "developer|lecturer|admin")) 
+```
+2. Erläutern Sie, was mit "Pivotieren" gemeint ist im Kontext des vorliegenden Projekts der Datenanalyse. Was ist der Nutzen des Pivotierens?
+1. Geben Sie eine Syntax an, um alle Spalten als Strings (`character`) zu formatieren.
+1. Erläutern Sie den Aufbau einer Targets-Pipeline.
+1. Beim zeilenweisen Zusammenbinden einer großen Zahl an CSV-Dateien kann es zu Problemen kommen. So auch im vorliegenden Projekt. Erläutern Sie ein Problem und schlagen Sie eine Lösung vor.
+1. An welchen Wochentagen und an welchen Uhrzeiten wird Hans bevorzugt besucht?
+1. Was ist der älteste und was der neueste Timestamp in unserem Datensatz?
+1. Beschreiben Sie ein Problem, das während Ihrer Analyse aufgetreten ist und wie Sie es gelöst haben. Was haben Sie daraus gelernt?
+1. Was würden Sie anders machen, wenn Sie die Daten erneut analysieren würden?
+1. Was ist eine (wichtige) Sache, die Sie während der Analyse gelernt haben?
+1. Was macht die "Pfeife" ` |> ` in einer R-Syntax?
+1. Diskutieren Sie die Für und Wider einer kompetenzorientierten Prüfung, also einer Prüfung, in der es weniger um Kenntnis theoretischer Inhalte, sondern um die Kompetenz zur Lösung eines Problems geht.
+1. Hier ist ein Auszug aus Ihrer Lösung zu Challenge *X*. Erläutern Sie Ihre Syntax zu Aufgabe Y!
+1. Erläutern Sie einen Weg, um die Musterlösung auf Geschwindigkeit zu optimieren.
+1. Geben Sie ein Beispiel für eine zu wenig allgemeine Funktion! Beispiel: `read_csv_meine_lieblingsdatei()`.
+1. Was sind Vorteile, Funktionen beim Programmieren zu nutzen?
+
+
+
+
+
+## Sonstiges
+
+Bitte beachten Sie die allgemeinen Hinweise im [Hinweisbuch](https://hinweisbuch.netlify.app/) besonders die [allgemeinen Prüfungshinweise](https://hinweisbuch.netlify.app/010-hinweise-pruefung-allgemein-frame) sowie die Hinweise zum [Programmieren](https://hinweisbuch.netlify.app/109-hinweise-programmieren).
+
+Bei Fragen, die eine Verteilung als Antwort haben, sollten Sie die Verteilung mit statistischen Methoden beschreiben. Beispiel: "Was ist die typische Verweildauer?" - Antwort: "Die mittlere Verweildauer beträgt 3 Minuten, mit einer Standardabweichung von 2 Minuten. Die Verteilung ist rechtsschief." Eine Visualisierung der Verteilung bietet sich an (z.B. mit einem Histogramm).
+
+
+

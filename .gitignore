@@ -1,0 +1,46 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+/.quarto/
+
+
+# data:
+data*/
+
+# solutions:
+challenges-solutions/
+_targets.R
+funs/hidden/
+
+
+# artifacts:
+_freeze/
+_extensions/
+*_cache/
+#_site/
+#*_files/
+.quarto/
+
+
+# built target objects:
+_targets/
+challenge05/
+challenge06/
+challenge07/
+challenge08/
+challenge09/
+mastersolution/
+
+# playing around:
+_archive/
+
+
+
+
+
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto

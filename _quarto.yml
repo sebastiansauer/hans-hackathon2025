@@ -1,0 +1,102 @@
+project:
+  type: website
+  title: "Hans-Hackathon"
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "!challenges-solutions/"
+
+  # image: img/statistik1_icon.png
+  # description:  "Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools 'HaNS'"
+
+
+website:
+  title: "hans-hackathon"
+  search: true
+  repo-actions: [source, issue]
+  repo-url: https://github.com/sebastiansauer/hans-hackathon
+  page-footer:
+    border: true
+    left: |
+      Powered by [Quarto](https://quarto.org)
+    center: |
+      [Impressum](/imprint.qmd)
+    right: |
+      [Datenschutzhinweise](/data-privacy.qmd)
+  sidebar:
+    contents:
+      - href: index.qmd
+        text: Home
+      - href: einstieg.qmd
+        text: R, zweiter Blick
+      - href: projektmanagement.qmd
+        text: Projektmanagement
+      - href: pruefung.qmd
+        text: Prüfung
+      - href: challenges.qmd
+      # - href: challenge01-solution.qmd
+      #   text: Lösung 01
+      # - href: challenge02-solution.qmd
+      #   text: Lösung 02
+      # - href: challenge03-solution.qmd
+      #   text: Lösung 03
+      # - href: challenge04-solution.qmd
+      #   text: Lösung 04
+      # - text: Lösung 05
+      #   href: challenge05-solution.qmd
+      # - text: Lösung 06
+      #   href: challenge06-solution.qmd
+      # - text: Lösung 07
+      #   href: challenge07-solution.qmd
+      # - href: challenge08-solution.qmd
+      #   text: Lösung 08
+      # - text: Lösung 09
+      #   href: challenge09-solution.qmd
+      # - text: Lösung 10
+      #   href: challenge10-solution.qmd
+      # - text: Challenge 03
+      #   href: challenge03.qmd
+      # - text: Challenge 04
+      #   href: challenge04.qmd
+
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    number-sections: true
+    out-width: "75%"
+    df-print: paged
+    highlight-style: gruvbox
+
+
+# bibliography: bib/bib.bib
+bibliography: bib-project.bib
+
+
+lang: de-DE
+citation: true
+#google-scholar: true
+description: |
+ "Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools 'HaNS'"
+license: "MIT" 
+
+
+execute: 
+  freeze: auto 
+  warning: false
+  cache: true
+  message: false
+
+knitr:
+  opts_knit:
+    verbose: true
+    fig-align: center
+  opts_chunk: 
+    collapse: true
+    out.width: "75%"
+    fig-align: "center"
+    fig-width: 6
+    R.options:
+      knitr.graphics.auto_pdf: false 
