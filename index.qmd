@@ -52,3 +52,17 @@ Bitte stellen Sie sicher, dass Sie eine aktuelle Version von R auf Ihrem Compute
 Bitte bringen Sie einen Computer (mit Internetanschluss) in jede Stunde mit.
 Als Oberfläche (IDE) für R bietet sich neben RStudio auch die IDE von Posit an: [Positron](https://posit.co/products/ide/positron/).
 
+
+## Werkzeuge
+
+- [R](https://www.r-project.org/) (Programmiersprache)
+- [RStudio](https://posit.co/download/rstudio-desktop/) (IDE für R)
+- [Positron](https://posit.co/products/ide/positron/) (IDE für R, Alternative zu RStudio)
+- [Quarto](https://quarto.org/) (für Berichte) - schon vorinstalliert in RStudio und Positron
+- [Git](https://git-scm.com/) (Versionsverwaltung) - optiona
+- [GitHub](https://www.github.com/) (Online-Plattform für Git-Repositories) - optional
+- [Tidyverse](https://www.tidyverse.org/) (R-Paket-Sammlung für Datenanalyse)
+- [Vim](https://www.vim.org/) (Texteditor) - optional; VIM-Modus in RStudio und Positron ist auch möglich; [Liebeserklärung an VIM](https://www.youtube.com/watch?v=sqm4-B07LsE)
+- [Obsidian](https://obsidian.md/) (Notizen) - optional
+- AI-Bots wie Claude, ChatGPT, Bard, etc. - optional, aber empfohlen
+
