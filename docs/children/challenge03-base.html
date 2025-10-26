@@ -153,17 +153,17 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p><strong>Datensatz verschlanken</strong></p>
+<p><strong>Datensatz pivotieren</strong></p>
 <p>Aufbauend auf dem Ergebnis der letzten Challenge:</p>
 <ol type="1">
-<li>Welche Spalten halten Sie für nicht relevant, um das Nutzerverhalten besser zu verstehen?. Begründen Sie die Auswahl.</li>
-<li>Entfernen Sie redundante Spalten (nach eigenem Ermessen und mit Begründung).</li>
-<li>Behalten Sie - neben allgemeinen Informationen zum Nutzer - nur die Spalten mit <code>subtitle</code> und <code>timestamp</code> im Namen.</li>
-<li>Reparieren Sie die Spalten mit Datumsangaben.</li>
-<li>Entfernen Sie Spalten, die Bilddaten enthalten.</li>
-<li>Entfernen Sie Zeilen, die Daten von Admins, Developern oder <code>lecturer</code>s enthalten.</li>
+<li><p>Listen Sie die <em>Spaltennamen</em> auf, aber nur max. 20. Wenn es mehr als 20 Spalten gibt, listen Sie nur die ersten 20 auf. Wenn es weniger als 20 Spalten gibt, listen Sie alle auf.</p></li>
+<li><p>Geben Sie <em>Arten von Spaltennamen</em> an, z.b. <code>actionDetails_482_timestamp</code> und <code>actionDetails_327_subtitle</code> und <code>actionDetails_327_timestampe</code> wären 2 verschiedene Typen von Spalten: Timestamp und Subtitle.</p></li>
+<li><p><em>Pivotieren</em> Sie den Datensatz in das Langformat. Aber nehmen Sie <code>idvisit</code> vom Pivotieren aus; d.h. Sie nehmen alle Spalten bis auf <code>idvisit</code> in das Pivotieren auf. Es sollen also drei Spalten resultieren: <code>idvisit</code>, <code>name</code> und <code>value</code>.</p></li>
+<li><p><em>Begrenzen</em> Sie beim Pivotieren die Spalten auf die Spaltentypen mit dem Namen vom Typ <code>subtitle</code>; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also drei Spalten resultieren: <code>idvisit</code>, <code>name</code> und <code>value</code>.</p></li>
+<li><p>Prüfen Sie, ob es stimmt, dass in der Spalte <code>name</code> die enthaltene Zahl die einzige Information ist. Anders gesagt: Außer der Zahl in den Werten <code>name</code> sind alle Teile der Werte konstant.</p></li>
+<li><p>Die Spalten, die die Werte wie <code>actionDetails_0_subtitle</code> nennen Sie in <code>id</code> um. Aus den Werten (wie <code>actionDetails_0_subtitle</code>) extrahieren Sie die Zahl in der Mitte des Textes (den Rest des Textes löschen).</p></li>
+<li><p>Erläutern Sie die Funktionen zum Lang-Pivotieren aus dem Tidyverse sowie aus einem anderen R-Paket, welches angibt, <em>schneller</em> zu sein als die Tidyverse-Funktion (also größere Datenmengen in der gleichen Zeit schafft). Geben Sie auch einen Faktor an, um diese Funktion angibt, schneller zu sein.</p></li>
 </ol>
-<p>Ausgabeformat: Quarto (Bericht)</p>
 
 
 

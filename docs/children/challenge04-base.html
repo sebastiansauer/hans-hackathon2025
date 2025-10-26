@@ -153,18 +153,23 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p><strong>Datensatz pivotieren</strong></p>
-<p>Aufbauend auf dem Ergebnis der letzten Challenge:</p>
+<p><strong>Targets-Pipeline</strong></p>
 <ol type="1">
-<li><p>Listen Sie die <em>Spaltennamen</em> auf, aber nur max. 20. Wenn es mehr als 20 Spalten gibt, listen Sie nur die ersten 20 auf. Wenn es weniger als 20 Spalten gibt, listen Sie alle auf.</p></li>
-<li><p>Geben Sie <em>Arten von Spaltennamen</em> an, z.b. <code>actionDetails_482_timestamp</code> und <code>actionDetails_327_subtitle</code> und <code>actionDetails_327_timestampe</code> wären 2 verschiedene Typen von Spalten: Timestamp und Subtitle.</p></li>
-<li><p><em>Pivotieren</em> Sie den Datensatz in das Langformat. Aber nehmen Sie <code>idvisit</code> vom Pivotieren aus; d.h. Sie nehmen alle Spalten bis auf <code>idvisit</code> in das Pivotieren auf. Es sollen also drei Spalten resultieren: <code>idvisit</code>, <code>name</code> und <code>value</code>.</p></li>
-<li><p><em>Begrenzen</em> Sie beim Pivotieren die Spalten auf die Spaltentypen mit dem Namen vom Typ <code>subtitle</code>; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also drei Spalten resultieren: <code>idvisit</code>, <code>name</code> und <code>value</code>.</p></li>
-<li><p>Prüfen Sie, ob es stimmt, dass in der Spalte <code>name</code> die enthaltene Zahl die einzige Information ist. Anders gesagt: Außer der Zahl in den Werten <code>name</code> sind alle Teile der Werte konstant.</p></li>
-<li><p>Die Spalten, die die Werte wie <code>actionDetails_0_subtitle</code> nennen Sie in <code>id</code> um. Aus den Werten (wie <code>actionDetails_0_subtitle</code>) extrahieren Sie die Zahl in der Mitte des Textes (den Rest des Textes löschen).</p></li>
-<li><p>Erläutern Sie die Funktionen zum Lang-Pivotieren aus dem Tidyverse sowie aus einem anderen R-Paket, welches angibt, <em>schneller</em> zu sein als die Tidyverse-Funktion (also größere Datenmengen in der gleichen Zeit schafft). Geben Sie auch einen Faktor an, um diese Funktion angibt, schneller zu sein.</p></li>
+<li>Schreiben Sie Ihre Analyse-Pipeline als Targets-Pipeline.</li>
+<li><em>Pivotieren</em> Sie dieses Mal <em>wie folgt</em>: Entfernen Sie alle Spalten <em>außer</em> <code>idvisit</code> und alle Spalten, die <code>actionDetails</code> enthalten. Pivotieren Sie dann <em>nur</em> Spalten mit dem Namen vom Typ <code>actionDetails</code>; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also drei Spalten resultieren: <code>idvisit</code>, <code>name</code> und <code>value</code>.</li>
+<li>Fügen Sie am Ende der Pipeline ein <em>Target</em> hinzu, das den zentralen, resultierenden Dataframe <em>als Excel-Datei exportiert</em> (aber nicht den Dataframe im Langformat, sondern den Dataframe im “breiten” Format).</li>
+<li>Diskutieren Sie Vor- und Nachteile der Targets-Pipeline.</li>
 </ol>
-<p>Ausgabeformat: Quarto (Bericht)</p>
+<p>Tipps:</p>
+<ul>
+<li>Lesen Sie sich die <a href="https://books.ropensci.org/targets/">targets-Dokumentation</a> durch.</li>
+<li>Diese <a href="https://wlandau.github.io/targets-tutorial/#1">Präsentation</a> gibt einen guten Überblick über die Funktionsweise von Targets.</li>
+<li>Nutzen Sie ggf. das Template für die Lösung dieser Challenge (l<a href="https://github.com/sebastiansauer/hans-hackathon/blob/main/challenge05-solution-template.R">iegt im Repo im Root-Folder</a>).</li>
+<li>Beim Importieren können sich die Spaltennamen ändern, z.B. von <code>actionDetails_XXX</code> zu <code>action_details_XXX</code>.</li>
+<li>Nutzen Sie die Funktion <code>pivot_longer()</code> aus dem Paket <code>tidyr</code> für die Pivotierung. Bei Performanzproblemen könnte sich das Paket <code>collapse</code> anbieten, wo es auch eine Pivotierungsfunktion gibt. Auch das Paket <code>polar</code> ist für hohe Performanz bekannt.</li>
+</ul>
+<p>Ausgabeformat: R-Syntax (Targets-Pipeline).</p>
+<p><strong>Hinweis</strong>: Die Lösung dieser Challenge ist nicht trivial. Sie erfordert einiges an Recherche und Einarbeitung in die Targets-Pipeline.</p>
 
 
 

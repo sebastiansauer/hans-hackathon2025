@@ -40,6 +40,8 @@ Jede Teilnote darf nicht schlechter als 4,0 bewertet werden, um die Prüfung als
 
 ## Teil 1: Wöchentliche Challenges
 
+Bitte beachten Sie, dass sich die Challenges noch ändern können, solange sie nicht begonnen haben.
+
 Bitte beachten Sie auch die [Hinweise zum Thema 'Programmieren'](https://hinweisbuch.netlify.app/109-hinweise-programmier).
 
 

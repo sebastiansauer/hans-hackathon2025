@@ -9,7 +9,11 @@ Betrachten Sie die (chronologisch) erste Datendatei und beantworten Sie folgende
 4. Was fällt Ihnen zur Anteil und zum Muster der fehlenden Werte auf?
 5. Was sind ID-Variablen und welche finden Sie im Datensatz?
 6. Sei $X$ die Anzahl der Buchstaben Ihres Vornamens und $Y$ die Anzahl der Buchstaben Ihres Nachnamens. Was steht in Zelle $(X,Y)$, also in der X. Spalte und Y. Zeile?
-
+7. Wie viele unique Werte finden sind in den Spalte `idVisit`, `visitip`, `visitorid`, `fingerprint`, `actiondetails_0_type`, `actiondetails_0_url`, `actiondetails_0_subtitle`, `actiondetail_0_eventcategory`?
+8. Listen Sie die unique Werte der o.g. Spalten auf (von der letzten Aufgabe).
+9. Was ist der häufigste Wert in der Spalte `actiondetails_0_type` und wie oft kommt dieser vor?
+10. Vergleichen Sie die Spalten `actiondetails_0_subtitle` und `actiondetails_0_type`. Was fällt Ihnen auf?
+11. Nennen Sie drei Forschungsfragen, die sich mit diesem Datensatz beantworten lassen könnten.
 
 
 @wickham_2023 stellt Schulungsmaterial auch für String-Verarbeitung bereit (im [Kapitel 11](https://r4ds.hadley.nz/strings)) und (fortgeschrittener) im folgenden Kapitel.

@@ -66,3 +66,13 @@ Als Oberfläche (IDE) für R bietet sich neben RStudio auch die IDE von Posit an
 - [Obsidian](https://obsidian.md/) (Notizen) - optional
 - AI-Bots wie Claude, ChatGPT, Bard, etc. - optional, aber empfohlen
 
+## Nutzen Sie KI-Dienste
+
+Nutzen Sie KI-Dienste wie ChatGPT, Claude, Bard, etc., um Ihre Produktivität zu steigern.
+Diese Dienste können Ihnen helfen, schneller zu programmieren, Fehler zu finden, Dokumentation zu verstehen, und vieles mehr.
+Seien Sie kreativ und probieren Sie verschiedene Dienste aus, um herauszufinden, welcher Dienst am besten zu Ihnen passt.
+IDEen wie RStudio und Positron haben oft auch Plugins oder Erweiterungen, die KI-Dienste integrieren.
+
+## Los geht's!
+Viel Erfolg und Spaß im Kurs!
+

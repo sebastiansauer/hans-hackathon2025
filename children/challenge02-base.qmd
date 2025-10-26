@@ -1,16 +1,21 @@
 
 
-**Daten einlesen**
+**Daten einlesen und aufbereiten**
 
-1. *Importieren* Sie alle CSV-Dateien in R als Data Frames und binden Sie (zeilenweise) sie zu einem “langen” Data Frame.
+1. *Importieren* Sie alle CSV-Dateien aus folgenden in R als Data Frames und binden Sie (zeilenweise) sie zu einem “langen” Data Frame: 2025-07-07 bis 2025-07-14
 2. Wandeln Sie *leere Strings in NAs* um (für alle Spalten).
 3. Entfernen Sie alle *leeren Zeilen und Spalten*.
 4. Entfernen Sie alle *konstanten Zeilen und Spalten*.
 5. Entfernen Sie alle *redundanten Zeilen und Spalten*, d.h. Duplikate, also sich wiederholende Zeilen und Spalten.
 6. Überlegen Sie die *Vor- und Nachteile*, wenn Sie diese Aufgaben mit *Excel* lösen würden.
 7. Exportieren Sie die Datentabelle als Excel-Datei. Prüfen Sie dann die Excel-Datei; fällt Ihnen etwas Besonderes auf?
+8. Welche Spalten halten Sie für nicht relevant, um das Nutzerverhalten besser zu verstehen?. Begründen Sie die Auswahl.
+9. Entfernen Sie redundante Spalten (nach eigenem Ermessen und mit Begründung).
+3. Behalten Sie - neben allgemeinen Informationen zum Nutzer - nur die Spalten mit `subtitle` und `timestamp` im Namen.
+4. Reparieren Sie die Spalten mit Datumsangaben.
+5. Entfernen Sie Spalten, die Bilddaten enthalten.
+6. Entfernen Sie Zeilen, die Daten von Admins, Developern oder `lecturer`s enthalten.
 
 
 
-
-Ausgabeformat: Quarto (Bericht)
+Ausgabeformat: Quarto-Dokument (Bericht)

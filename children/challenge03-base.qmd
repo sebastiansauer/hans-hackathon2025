@@ -1,17 +1,22 @@
-**Datensatz verschlanken**
+**Datensatz pivotieren**
 
 
 Aufbauend auf dem Ergebnis der letzten Challenge:
 
 
-1. Welche Spalten halten Sie für nicht relevant, um das Nutzerverhalten besser zu verstehen?. Begründen Sie die Auswahl.
-2. Entfernen Sie redundante Spalten (nach eigenem Ermessen und mit Begründung).
-3. Behalten Sie - neben allgemeinen Informationen zum Nutzer - nur die Spalten mit `subtitle` und `timestamp` im Namen.
-4. Reparieren Sie die Spalten mit Datumsangaben.
-5. Entfernen Sie Spalten, die Bilddaten enthalten.
-6. Entfernen Sie Zeilen, die Daten von Admins, Developern oder `lecturer`s enthalten.
+
+1. Listen Sie die *Spaltennamen* auf, aber nur max. 20. Wenn es mehr als 20 Spalten gibt, listen Sie nur die ersten 20 auf. Wenn es weniger als 20 Spalten gibt, listen Sie alle auf.
+
+2. Geben Sie *Arten von Spaltennamen* an, z.b. `actionDetails_482_timestamp` und `actionDetails_327_subtitle` und `actionDetails_327_timestampe` wären 2 verschiedene Typen von Spalten: Timestamp und Subtitle.
+
+2. *Pivotieren* Sie den Datensatz in das Langformat. Aber nehmen Sie `idvisit` vom Pivotieren aus; d.h. Sie nehmen alle Spalten bis auf `idvisit` in das Pivotieren auf. Es sollen also drei Spalten resultieren: `idvisit`, `name` und `value`.
+
+3. *Begrenzen* Sie beim Pivotieren die Spalten auf die Spaltentypen mit dem Namen vom Typ `subtitle`; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also drei Spalten resultieren: `idvisit`, `name` und `value`.
+
+4. Prüfen Sie, ob es stimmt, dass in der Spalte `name` die enthaltene Zahl die einzige Information ist. Anders gesagt: Außer der Zahl in den Werten `name` sind alle Teile der Werte konstant.
+
+5. Die Spalten, die die Werte wie `actionDetails_0_subtitle` nennen Sie in `id` um. Aus den Werten (wie `actionDetails_0_subtitle`) extrahieren Sie die Zahl in der Mitte des Textes (den Rest des Textes löschen).
+
+6. Erläutern Sie die Funktionen zum Lang-Pivotieren aus dem Tidyverse sowie aus einem anderen R-Paket, welches angibt, *schneller* zu sein als die Tidyverse-Funktion (also größere Datenmengen in der gleichen Zeit schafft). Geben Sie auch einen Faktor an, um diese Funktion angibt, schneller zu sein.
 
 
-
-
-Ausgabeformat: Quarto (Bericht)
