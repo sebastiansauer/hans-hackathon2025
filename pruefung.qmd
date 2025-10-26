@@ -44,6 +44,12 @@ Bitte beachten Sie, dass sich die Challenges noch ändern können, solange sie n
 
 Bitte beachten Sie auch die [Hinweise zum Thema 'Programmieren'](https://hinweisbuch.netlify.app/109-hinweise-programmier).
 
+Die Challenges werden im Unterricht vorgestellt und besprochen.
+
+Für jede Aufgabe lassen sich verschiedene Lösungswege finden. Es ist nicht nötig, dass Ihre Lösung exakt der Musterlösung entspricht. Wichtig ist, dass Sie die Aufgabe lösen und Ihre Lösung nachvollziehbar dokumentieren.
+Treffen Sie Annahmen, wenn die Aufgabenstellung dies erfordert, und dokumentieren Sie diese Annahmen in Ihrer Lösung.
+
+
 
 
 

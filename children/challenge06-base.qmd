@@ -5,13 +5,20 @@
 
 Arbeiten Sie mit Ihrer Pipeline weiter:
 
-1. Importieren Sie die *zusätzlichen* (neu eingestellten) *Daten*; lassen Sie die Pipeline auf dieser Basis neu durchlaufen. 
+1. Importieren Sie alle *zusätzlichen Daten*; lassen Sie die Pipeline auf dieser Basis neu durchlaufen. 
 2. Gab es *Probleme* beim Importieren? Wenn ja, welche? Wie haben Sie diese gelöst?
 3. Wie viel *Rechenzeit* hat die Pipeline beansprucht?
 2. Stellen Sie sicher, dass die *Spaltennamen einheitlich* und im Tidyverse-Stil benannt sind.
-3. Fügen Sie ein *Target* hinzu, dass einen *Quarto-Bericht* erstellt.
 4. Im Quarto-Bericht schreiben Sie, *wie viele Visits* Ihr Datensatz umfasst.
+6. Berechnen Sie die *Anzahl der Aktionen pro Visit*.
+7. Berechnen Sie die Anzahl der Aktionen pro uniquen Besucher.
 5. Schreiben Sie außerdem im Quarto-Bericht, *wie viele Aktionen pro Visit* stattfinden. Berichten Sie dazu relevante Statistiken und visualisieren Sie die Daten.
+6. Welche Betriebsysteme und Browser werden von den Besuchern verwendet? Visualisieren Sie die Daten.
+7. Visualisieren Sie die Anzahl der Tage seit dem letzten Besuch (insgesamt).
+8. Visualisieren Sie die Anzahl der Tage seit dem letzten Besuch (pro Modul).
+9. Visualisieren Sie die Anzahl der Besuche im Zeitverlauf.
+
+
 
 
 
@@ -21,7 +28,7 @@ Tipps:
 - Bei Problemen während des Importieren kann es zu Problemen kommen, wenn die Spaltentypen der CSV-Dateien als unterschiedlich erkannt werden. Ein Workaround ist es, alle Spalten auf Typ "`character`" zu setzen. Funktionen wie `fread` und `read_csv` bieten dafür einen Parameter.
 - `rbindlist` aus `data.table` ist ähnlich zu `rbind`, was von `map_dfr` aufgerufen wird, aber schneller und weniger streng,
 produziert also weniger Fehlermeldungen (was von Vorteil, aber auch von Nachteil sein kann).
-- Wenn Sie beim Importieren keinen Erfolg haben, dann überspringen Sie diesen Schritt und arbeiten Sie mit den Daten, die Sie bereits haben.
+- Wenn Sie beim Importieren keinen Erfolg haben, dann überspringen Sie diesen Schritt und arbeiten Sie mit den Daten, die Sie bereits haben (als zweitbeste Lösung).
 - Wenn Sie Probleme mit der Performance haben, dann können Sie die Datenmenge reduzieren, indem Sie nur die ersten paar Dateien importieren. Kleinere Datenmengen sind auch für das Debuggen nützlich.
 
 
