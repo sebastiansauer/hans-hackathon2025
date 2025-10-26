@@ -543,5 +543,105 @@
     "crumbs": [
       "Projektmanagement"
     ]
+  },
+  {
+    "objectID": "challenges.html#challenge-1",
+    "href": "challenges.html#challenge-1",
+    "title": "Challenges im Überblick",
+    "section": "",
+    "text": "Daten verstehen\nBetrachten Sie die (chronologisch) erste Datendatei und beantworten Sie folgende Fragen:\n\nWas ist die Anzahl von Zeilen und Spalten?\nEs gibt ein Muster in den Spaltennamen. Was fällt Ihnen dazu auf?\nWelche verschiedenen Spaltennamen gibt es, wenn man die Zahlen (fortlaufenden Nummern in den Spaltennamen) außer Acht lässt? Wie heißen diese (uniquen) Spalten?\nWas fällt Ihnen zur Anteil und zum Muster der fehlenden Werte auf?\nWas sind ID-Variablen und welche finden Sie im Datensatz?\nSei \\(X\\) die Anzahl der Buchstaben Ihres Vornamens und \\(Y\\) die Anzahl der Buchstaben Ihres Nachnamens. Was steht in Zelle \\((X,Y)\\), also in der X. Spalte und Y. Zeile?\nWie viele unique Werte finden sind in den Spalte idVisit, visitip, visitorid, fingerprint, actiondetails_0_type, actiondetails_0_url, actiondetails_0_subtitle, actiondetail_0_eventcategory?\nListen Sie die unique Werte der o.g. Spalten auf (von der letzten Aufgabe).\nWas ist der häufigste Wert in der Spalte actiondetails_0_type und wie oft kommt dieser vor?\nVergleichen Sie die Spalten actiondetails_0_subtitle und actiondetails_0_type. Was fällt Ihnen auf?\nNennen Sie drei Forschungsfragen, die sich mit diesem Datensatz beantworten lassen könnten.\n\nWickham, Çetinkaya-Rundel, und Grolemund (2023) stellt Schulungsmaterial auch für String-Verarbeitung bereit (im Kapitel 11) und (fortgeschrittener) im folgenden Kapitel. Mit dem R-Paket lubridate kann man recht bequem mit Datums- und Zeitangaben arbeiten. Möchte man einen Teil eines Strings entfernen, so ist die Funktion str_remove hilfreich. Da hilft das Paket stringr. Möchte man mehrere Spalten auf einmal (mit summarise) zusammenfassen, so hilft u.a. die Funktion across, die die Summarise-Operation “durch”, “hinweg”, “über” (engl. across) mehrere Spalten durchführt, s. Kap. 26 in Wickham, Çetinkaya-Rundel, und Grolemund (2023).\nAusgabeformat: Quarto (Bericht)",
+    "crumbs": [
+      "Challenges im Überblick"
+    ]
+  },
+  {
+    "objectID": "challenges.html#challenge-2",
+    "href": "challenges.html#challenge-2",
+    "title": "Challenges im Überblick",
+    "section": "2 Challenge 2",
+    "text": "2 Challenge 2\nDaten einlesen und aufbereiten\n\nImportieren Sie alle CSV-Dateien aus folgenden in R als Data Frames und binden Sie (zeilenweise) sie zu einem “langen” Data Frame: 2025-07-07 bis 2025-07-14\nWandeln Sie leere Strings in NAs um (für alle Spalten).\nEntfernen Sie alle leeren Zeilen und Spalten.\nEntfernen Sie alle konstanten Zeilen und Spalten.\nEntfernen Sie alle redundanten Zeilen und Spalten, d.h. Duplikate, also sich wiederholende Zeilen und Spalten.\nÜberlegen Sie die Vor- und Nachteile, wenn Sie diese Aufgaben mit Excel lösen würden.\nExportieren Sie die Datentabelle als Excel-Datei. Prüfen Sie dann die Excel-Datei; fällt Ihnen etwas Besonderes auf?\nWelche Spalten halten Sie für nicht relevant, um das Nutzerverhalten besser zu verstehen?. Begründen Sie die Auswahl.\nEntfernen Sie redundante Spalten (nach eigenem Ermessen und mit Begründung).\nBehalten Sie - neben allgemeinen Informationen zum Nutzer - nur die Spalten mit subtitle und timestamp im Namen.\nReparieren Sie die Spalten mit Datumsangaben.\nEntfernen Sie Spalten, die Bilddaten enthalten.\nEntfernen Sie Zeilen, die Daten von Admins, Developern oder lecturers enthalten.\n\nAusgabeformat: Quarto-Dokument (Bericht)",
+    "crumbs": [
+      "Challenges im Überblick"
+    ]
+  },
+  {
+    "objectID": "challenges.html#challenge-3",
+    "href": "challenges.html#challenge-3",
+    "title": "Challenges im Überblick",
+    "section": "3 Challenge 3",
+    "text": "3 Challenge 3\nDatensatz pivotieren\nAufbauend auf dem Ergebnis der letzten Challenge:\n\nListen Sie die Spaltennamen auf, aber nur max. 20. Wenn es mehr als 20 Spalten gibt, listen Sie nur die ersten 20 auf. Wenn es weniger als 20 Spalten gibt, listen Sie alle auf.\nGeben Sie Arten von Spaltennamen an, z.b. actionDetails_482_timestamp und actionDetails_327_subtitle und actionDetails_327_timestampe wären 2 verschiedene Typen von Spalten: Timestamp und Subtitle.\nPivotieren Sie den Datensatz in das Langformat. Aber nehmen Sie idvisit vom Pivotieren aus; d.h. Sie nehmen alle Spalten bis auf idvisit in das Pivotieren auf. Es sollen also drei Spalten resultieren: idvisit, name und value.\nBegrenzen Sie beim Pivotieren die Spalten auf die Spaltentypen mit dem Namen vom Typ subtitle; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also drei Spalten resultieren: idvisit, name und value.\nPrüfen Sie, ob es stimmt, dass in der Spalte name die enthaltene Zahl die einzige Information ist. Anders gesagt: Außer der Zahl in den Werten name sind alle Teile der Werte konstant.\nDie Spalten, die die Werte wie actionDetails_0_subtitle nennen Sie in id um. Aus den Werten (wie actionDetails_0_subtitle) extrahieren Sie die Zahl in der Mitte des Textes (den Rest des Textes löschen).\nErläutern Sie die Funktionen zum Lang-Pivotieren aus dem Tidyverse sowie aus einem anderen R-Paket, welches angibt, schneller zu sein als die Tidyverse-Funktion (also größere Datenmengen in der gleichen Zeit schafft). Geben Sie auch einen Faktor an, um diese Funktion angibt, schneller zu sein.",
+    "crumbs": [
+      "Challenges im Überblick"
+    ]
+  },
+  {
+    "objectID": "challenges.html#challenge-4",
+    "href": "challenges.html#challenge-4",
+    "title": "Challenges im Überblick",
+    "section": "4 Challenge 4",
+    "text": "4 Challenge 4\nTargets-Pipeline\n\nSchreiben Sie Ihre Analyse-Pipeline als Targets-Pipeline.\nPivotieren Sie dieses Mal wie folgt: Entfernen Sie alle Spalten außer idvisit und alle Spalten, die actionDetails enthalten. Pivotieren Sie dann nur Spalten mit dem Namen vom Typ actionDetails; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also drei Spalten resultieren: idvisit, name und value.\nFügen Sie am Ende der Pipeline ein Target hinzu, das den zentralen, resultierenden Dataframe als Excel-Datei exportiert (aber nicht den Dataframe im Langformat, sondern den Dataframe im “breiten” Format).\nDiskutieren Sie Vor- und Nachteile der Targets-Pipeline.\n\nTipps:\n\nLesen Sie sich die targets-Dokumentation durch.\nDiese Präsentation gibt einen guten Überblick über die Funktionsweise von Targets.\nNutzen Sie ggf. das Template für die Lösung dieser Challenge (liegt im Repo im Root-Folder).\nBeim Importieren können sich die Spaltennamen ändern, z.B. von actionDetails_XXX zu action_details_XXX.\nNutzen Sie die Funktion pivot_longer() aus dem Paket tidyr für die Pivotierung. Bei Performanzproblemen könnte sich das Paket collapse anbieten, wo es auch eine Pivotierungsfunktion gibt. Auch das Paket polar ist für hohe Performanz bekannt.\n\nAusgabeformat: R-Syntax (Targets-Pipeline).\nHinweis: Die Lösung dieser Challenge ist nicht trivial. Sie erfordert einiges an Recherche und Einarbeitung in die Targets-Pipeline.",
+    "crumbs": [
+      "Challenges im Überblick"
+    ]
+  },
+  {
+    "objectID": "challenges.html#challenge-5",
+    "href": "challenges.html#challenge-5",
+    "title": "Challenges im Überblick",
+    "section": "5 Challenge 5",
+    "text": "5 Challenge 5",
+    "crumbs": [
+      "Challenges im Überblick"
+    ]
+  },
+  {
+    "objectID": "challenges.html#challenge-6",
+    "href": "challenges.html#challenge-6",
+    "title": "Challenges im Überblick",
+    "section": "6 Challenge 6",
+    "text": "6 Challenge 6\nGroßer Datensatz\nArbeiten Sie mit Ihrer Pipeline weiter:\n\nImportieren Sie alle zusätzlichen Daten; lassen Sie die Pipeline auf dieser Basis neu durchlaufen.\nGab es Probleme beim Importieren? Wenn ja, welche? Wie haben Sie diese gelöst?\nWie viel Rechenzeit hat die Pipeline beansprucht?\nStellen Sie sicher, dass die Spaltennamen einheitlich und im Tidyverse-Stil benannt sind.\nIm Quarto-Bericht schreiben Sie, wie viele Visits Ihr Datensatz umfasst.\nBerechnen Sie die Anzahl der Aktionen pro Visit.\nBerechnen Sie die Anzahl der Aktionen pro uniquen Besucher.\nSchreiben Sie außerdem im Quarto-Bericht, wie viele Aktionen pro Visit stattfinden. Berichten Sie dazu relevante Statistiken und visualisieren Sie die Daten.\nWelche Betriebsysteme und Browser werden von den Besuchern verwendet? Visualisieren Sie die Daten.\nVisualisieren Sie die Anzahl der Tage seit dem letzten Besuch (insgesamt).\nVisualisieren Sie die Anzahl der Tage seit dem letzten Besuch (pro Modul).\nVisualisieren Sie die Anzahl der Besuche im Zeitverlauf.\n\nTipps:\n\nfread aus data.table ist ähnlich zu read.csv, aber schneller.\nBei Problemen während des Importieren kann es zu Problemen kommen, wenn die Spaltentypen der CSV-Dateien als unterschiedlich erkannt werden. Ein Workaround ist es, alle Spalten auf Typ “character” zu setzen. Funktionen wie fread und read_csv bieten dafür einen Parameter.\nrbindlist aus data.table ist ähnlich zu rbind, was von map_dfr aufgerufen wird, aber schneller und weniger streng, produziert also weniger Fehlermeldungen (was von Vorteil, aber auch von Nachteil sein kann).\nWenn Sie beim Importieren keinen Erfolg haben, dann überspringen Sie diesen Schritt und arbeiten Sie mit den Daten, die Sie bereits haben (als zweitbeste Lösung).\nWenn Sie Probleme mit der Performance haben, dann können Sie die Datenmenge reduzieren, indem Sie nur die ersten paar Dateien importieren. Kleinere Datenmengen sind auch für das Debuggen nützlich.\n\nAusgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).",
+    "crumbs": [
+      "Challenges im Überblick"
+    ]
+  },
+  {
+    "objectID": "challenges.html#challenge-7",
+    "href": "challenges.html#challenge-7",
+    "title": "Challenges im Überblick",
+    "section": "7 Challenge 7",
+    "text": "7 Challenge 7\nVerweildauer\nFür alle folgenden Aufgaben dieser Challenge: Berichten Sie zentrale deskriptive Statistiken zu Lage und Streuung. Visualisieren Sie die Verteilung.\n\nWieviel Zeit verbringen die Nutzer pro Visit?\nWie viele Aktionen führen die Nutzer pro Visit aus?\nAn welchen Tagen und zu welcher Zeit kommen die User zu HaNS?\nAn welchen Wochentagen wird die Seite bevorzugt besucht?\nZu welchen Uhrzeiten wird die Seite bevorzugt besucht?\nGeben Sie den Zeitraum der Nutzung an (von  bis ). Hier geht es um insgesamte erste (bzw. letzte) Nutzung über alle User hinweg. Gefragt ist der älteste und neueste Time Stamp, den der Server insgesamt/überhaupt protokolliert hat.\nGeben Sie den Zeitraum seit der letzten Nutzung an (pro User) und die Verteilung inkl. zentraler Statistiken (wie Mittelwert).\n\nAusgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline). Rendern Sie den Bericht im Format typst.\nHinweise:\n\nBitte beachten Sie Hinweise zum Programmieren.\nBei Fragen, die eine Verteilung als Antwort haben, sollten Sie die Verteilung mit statistischen Methoden beschreiben. Beispiel: “Was ist die typische Verweildauer?” - Antwort: “Die mittlere Verweildauer beträgt 3 Minuten, mit einer Standardabweichung von 2 Minuten. Die Verteilung ist rechtsschief.” Eine Visualisierung der Verteilung bietet sich an (z.B. mit einem Histogramm).",
+    "crumbs": [
+      "Challenges im Überblick"
+    ]
+  },
+  {
+    "objectID": "challenges.html#challenge-8",
+    "href": "challenges.html#challenge-8",
+    "title": "Challenges im Überblick",
+    "section": "8 Challenge 8",
+    "text": "8 Challenge 8\nInteraktion mit dem LLM\n\nWie oft wird (pro Monat) ein AI Transkript angefordert? (Tipp: Suche nach click_transcript_word.)\nWie oft wird (pro Monat) mit dem LLM interagiert (Tipp: llm)?\nWelcher Anteil der Visits (id_visit) interagiert mit dem LLM?\n\nAusgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).\nHinweise:\n\nNutzen Sie Typst als Ausgabeformat.\nBitte beachten Sie Hinweise zum Programmieren.",
+    "crumbs": [
+      "Challenges im Überblick"
+    ]
+  },
+  {
+    "objectID": "challenges.html#challenge-9",
+    "href": "challenges.html#challenge-9",
+    "title": "Challenges im Überblick",
+    "section": "9 Challenge 9",
+    "text": "9 Challenge 9\nWas machen die User?\n\nStellen Sie die Namen der ersten 100 Spalten im Bericht dar.\nWerten Sie die Top-10-Tätigkeiten aus, die die Besucher auf der Website durchführen, z.B. Videos anschauen. Zählen Sie dafür, welche Werte wie oft bei subtitle stehen.\nBerechnen Sie die “Glotzdauer”, d.h. wie lange die Besucher sich Videos anschauen. Berichten Sie relevante Statistiken.\nUntersuchen und visualisieren Sie, ob sich die Anzahl der Nutzer oder die Verweildauer auf der Website verändert hat im Laufe der Zeit (Wochen und Monate).\nUntersuchen und visualisieren Sie, ob sich das Verhalten in Bezug auf die Videos verändert hat im Laufe der Zeit (Wochen und Monate), v.a. im Hinblick auf die Glotzdauer.\n\nAusgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).\nBitte beachten Sie Hinweise zum Programmieren.",
+    "crumbs": [
+      "Challenges im Überblick"
+    ]
+  },
+  {
+    "objectID": "challenges.html#challenge-10",
+    "href": "challenges.html#challenge-10",
+    "title": "Challenges im Überblick",
+    "section": "10 Challenge 10",
+    "text": "10 Challenge 10\nOptimierung\n\nOptimieren Sie Ihre Analyse-Pipeline (der letzten Challenge) mit Blick auf Geschwindigkeit (des Durchlaufs der Pipeline). Berichten Sie die Laufzeit vor und nach der Optimierung.\nOptimieren Sie Ihre Analyse-Pipeline mit Blick auf Robustheit. Begründen Sie Ihre Entscheidungen.\nOptimieren Sie Ihre Analyse-Pipeline mit Blick auf Allgemeinheit und Flexibilität. Begründen Sie Ihre Entscheidungen.\n\nAusgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).\nBitte beachten Sie Hinweise zum Programmieren.",
+    "crumbs": [
+      "Challenges im Überblick"
+    ]
   }
 ]
