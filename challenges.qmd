@@ -15,7 +15,7 @@ toc: true
 {{< include children/challenge01-base.qmd >}}
 
 
-## Daten einlesen
+## Daten einlesen und aufbereiten
 
 
 {{< include children/challenge02-base.qmd >}}
@@ -23,7 +23,7 @@ toc: true
 
 
 
-## Daten verschlanken
+## Daten pivotieren und analysieren
 
 
 {{< include children/challenge03-base.qmd >}}
@@ -31,14 +31,14 @@ toc: true
 
 
 
-## Daten pivotieren
+## Projektmanagement mit Targets
 
 {{< include children/challenge04-base.qmd >}}
 
 
 
 
-## Projektmanagement
+## Großer Datensatz mit Targets
 
 {{< include children/challenge05-base.qmd >}}
 

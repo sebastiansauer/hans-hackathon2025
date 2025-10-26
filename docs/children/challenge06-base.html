@@ -156,20 +156,25 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Großer Datensatz</strong></p>
 <p>Arbeiten Sie mit Ihrer Pipeline weiter:</p>
 <ol type="1">
-<li>Importieren Sie die <em>zusätzlichen</em> (neu eingestellten) <em>Daten</em>; lassen Sie die Pipeline auf dieser Basis neu durchlaufen.</li>
+<li>Importieren Sie alle <em>zusätzlichen Daten</em>; lassen Sie die Pipeline auf dieser Basis neu durchlaufen.</li>
 <li>Gab es <em>Probleme</em> beim Importieren? Wenn ja, welche? Wie haben Sie diese gelöst?</li>
 <li>Wie viel <em>Rechenzeit</em> hat die Pipeline beansprucht?</li>
 <li>Stellen Sie sicher, dass die <em>Spaltennamen einheitlich</em> und im Tidyverse-Stil benannt sind.</li>
-<li>Fügen Sie ein <em>Target</em> hinzu, dass einen <em>Quarto-Bericht</em> erstellt.</li>
 <li>Im Quarto-Bericht schreiben Sie, <em>wie viele Visits</em> Ihr Datensatz umfasst.</li>
+<li>Berechnen Sie die <em>Anzahl der Aktionen pro Visit</em>.</li>
+<li>Berechnen Sie die Anzahl der Aktionen pro uniquen Besucher.</li>
 <li>Schreiben Sie außerdem im Quarto-Bericht, <em>wie viele Aktionen pro Visit</em> stattfinden. Berichten Sie dazu relevante Statistiken und visualisieren Sie die Daten.</li>
+<li>Welche Betriebsysteme und Browser werden von den Besuchern verwendet? Visualisieren Sie die Daten.</li>
+<li>Visualisieren Sie die Anzahl der Tage seit dem letzten Besuch (insgesamt).</li>
+<li>Visualisieren Sie die Anzahl der Tage seit dem letzten Besuch (pro Modul).</li>
+<li>Visualisieren Sie die Anzahl der Besuche im Zeitverlauf.</li>
 </ol>
 <p>Tipps:</p>
 <ul>
 <li><code>fread</code> aus <code>data.table</code> ist ähnlich zu <code>read.csv</code>, aber schneller.</li>
 <li>Bei Problemen während des Importieren kann es zu Problemen kommen, wenn die Spaltentypen der CSV-Dateien als unterschiedlich erkannt werden. Ein Workaround ist es, alle Spalten auf Typ “<code>character</code>” zu setzen. Funktionen wie <code>fread</code> und <code>read_csv</code> bieten dafür einen Parameter.</li>
 <li><code>rbindlist</code> aus <code>data.table</code> ist ähnlich zu <code>rbind</code>, was von <code>map_dfr</code> aufgerufen wird, aber schneller und weniger streng, produziert also weniger Fehlermeldungen (was von Vorteil, aber auch von Nachteil sein kann).</li>
-<li>Wenn Sie beim Importieren keinen Erfolg haben, dann überspringen Sie diesen Schritt und arbeiten Sie mit den Daten, die Sie bereits haben.</li>
+<li>Wenn Sie beim Importieren keinen Erfolg haben, dann überspringen Sie diesen Schritt und arbeiten Sie mit den Daten, die Sie bereits haben (als zweitbeste Lösung).</li>
 <li>Wenn Sie Probleme mit der Performance haben, dann können Sie die Datenmenge reduzieren, indem Sie nur die ersten paar Dateien importieren. Kleinere Datenmengen sind auch für das Debuggen nützlich.</li>
 </ul>
 <p>Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).</p>
