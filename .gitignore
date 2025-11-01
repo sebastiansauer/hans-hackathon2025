@@ -22,6 +22,9 @@ _extensions/
 #_site/
 #*_files/
 .quarto/
+Icon?
+icon\r
+.DS_Store
 
 
 # built target objects:
@@ -32,6 +35,9 @@ challenge07/
 challenge08/
 challenge09/
 mastersolution/
+*-solution*/
+
+
 
 # playing around:
 _archive/
