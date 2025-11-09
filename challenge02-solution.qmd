@@ -1,0 +1,438 @@
+---
+title: "Challenge 02: Daten einlesen und Aufbereiten -- Lösung"
+format: html
+author: Sebastian Sauer
+date: today
+number-sections: true
+
+execute: 
+  cache: true
+---
+
+
+
+# Daten einlesen
+
+
+
+
+
+
+
+## Setup
+
+
+```{r}
+library(tidyverse)
+#library(stringr)  # Strings verarbeiten
+library(here)  # liest aktuelles Verzeichnis aus
+library(visdat)
+library(janitor)
+library(tictoc)
+```
+
+
+## Lösungen
+
+### Importieren
+
+Wir definieren die Liste der zu importierenden CSV-Dateien:
+
+```{r}
+datafiles_list <- list.files(path = paste0(here(),"/", "data-processed"),
+                             pattern = "csv$",
+                             recursive = TRUE, 
+                             full.names = TRUE)
+datafiles_list
+```
+
+
+Wie viele Tage, d.h. Dateinamen, sind das?
+
+```{r}
+length(datafiles_list)
+```
+
+Und dann importieren wir die CSV-Dateien und "binden" sie "zeilenweise" in einen großen, Gesamt-Data-Frame:
+
+```{r import-data}
+tic()
+d <- 
+datafiles_list |> 
+  map_dfr(read.csv, .id = "file_id")  # dauert etwas ...
+toc()
+```
+
+Über die Performanz sollte man sich noch Gedanken machen ...
+
+
+Mit `.id` bekommt man eine laufende Nummer für jede eingehende CSV-Datei.
+
+
+`map_XXX(list, fun)` wendet die Funktion `fun` auf jedes Element
+von `list` an. `map_dfr` ist eine spezielle Variante, die die
+Ergebnisse in einem Data-Frame zusammenführt und zwar zeilenweise (row),
+daher `_dfr`.
+
+
+Wie groß ist der resultierende Datensatz?
+
+```{r}
+dim(d)
+```
+
+
+Check:
+
+
+```{r}
+d_small <-
+  d |> 
+  select(1:50)
+
+d_small |> glimpse()
+```
+
+
+Scheint zu passen.
+
+Alternativ kann man den Namen der Datei hinzufügen:
+
+```{r import-data-with-filename}
+tic()
+d <- 
+datafiles_list |> 
+  map_dfr(~ read.csv(.x) |> 
+            mutate(filename = basename(.x)))  # dauert etwas ...
+toc()
+```
+
+
+
+
+Die Tilde-Notation `~` ist eine Kurzschreibweise für eine Funktion.
+Man könnte also auch schreiben:
+
+```{r import-data-with-filename-alt}
+#| eval: false
+meine_funktion <- function(x) {
+  read.csv(x) |> 
+    mutate(filename = basename(x))
+}
+
+
+datafiles_list |> 
+  map_dfr(meine_funktion)
+```
+
+
+Exkurs: Noch etwas Erklärung zu `map`.
+`map` ist eine Art von "Schleife": 
+Die darauf bezogene Funktion wird für jedes Element der Liste ausgeführt.
+Im folgenden Beispiel wird die Funktion `basename` auf jedes Element der Liste `datafiles_list` angewendet,
+also der Dateiname ohne Pfad zurückgegeben.
+
+
+```{r}
+datafiles_list |> 
+  map(basename)
+```
+
+
+
+
+
+Check:
+
+
+```{r}
+d_small <-
+  d |> 
+  select(filename, everything()) |>  # `filename` nach vorne ziehen
+  select(1:50)
+
+d_small |> glimpse()  # Blick reinwerfen
+```
+
+
+
+### Leere Strings in NAs umwandeln
+
+
+Anteil NAs:
+
+
+```{r}
+mean(is.na(d))
+```
+
+
+Echte NAs:
+
+```{r}
+d_with_true_nas <-
+  d |> 
+   mutate(across(where(is.character), ~ na_if(., "")))
+```
+
+Diese Syntax heißt sinngemäß auf Deutsch:
+
+- Hey R, nimm den Datensatz `d`
+- transformiere durch alle Spalte, wo der Typ der Spalte "Text" ist wie folgt:
+- Setze `NA` wenn der Wert in der jeweiligen Zelle `""` ist, also ein leerer Text
+
+
+
+```{r}
+mean(is.na(d_with_true_nas))
+```
+
+Puh! Das ist ein großer Anteil.
+
+
+
+Prüfen wir das lieber noch einmal.
+
+
+```{r}
+d_with_true_nas_small <-
+  d_with_true_nas |> 
+  select(1:100)
+```
+
+
+```{r}
+vis_dat(d_with_true_nas_small)
+```
+
+Hm, sieht ja gar nicht nach so vielen NAs aus...
+
+
+Vielleicht kommen die NAs erst weiter hinten?
+
+```{r}
+d_with_true_nas_small <-
+  d_with_true_nas |> 
+  select(3500:3700)
+```
+
+
+
+```{r}
+vis_dat(d_with_true_nas_small)
+```
+
+
+
+Tatsächlich!
+
+Was sagt uns dieser Befund?
+
+
+
+### Leere Spalten und Zeilen entfernen
+
+
+```{r}
+d_no_empty_cols_no_empty_rows <-
+  d_with_true_nas |> 
+  remove_empty(which = c("rows", "cols"))
+```
+
+
+Check:
+
+```{r}
+dim(d_with_true_nas)
+```
+
+
+```{r}
+dim(d_no_empty_cols_no_empty_rows)
+```
+
+Ein paar Spalten haben wir eingespart.
+
+Es würde Sinn machen, sich diese komplett leeren Spalten näher anzuschauen. Warum sind sie überhaupt enthalten?
+
+
+### Konstanten entfernen
+
+
+```{r}
+d_no_constants <- 
+  d_no_empty_cols_no_empty_rows |> 
+  remove_constant(quiet = FALSE)
+```
+
+Es bietet sich an, das Ergebnis, `d_no_constants` abzuspeichern, 
+um damit dann später wieder weiterzuarbeiten.
+
+Man kann es als CSV-Datei abspeichern:
+
+
+```{r}
+#| eval: false
+write.csv(d_no_constants, "data-processed/d_no_constants.csv")
+```
+
+
+Oder als R-Datendatei:
+
+
+```{r}
+#| eval: false
+write_rds(d_no_constants, "data-processed/d_no_constants.rds")
+```
+
+
+
+### Excel -- Pro und Contra
+
+Eine (große) Menge an Tabellen zu einer Master-Exceltabelle zusammenzufügen ist schwierig.
+Mit einem Copy-Paste-Ansatz ist es nicht gesichert, dass die richtigen Spalten untereinander gesetzt werden, zumindest prüft es Excel nicht.
+Bei großen Tabellen wird die Sache unpraktisch (viel Scrollen) und langsam.
+
+Schließlich -- vielleicht am wichtigsten -- ist das händische Vorgehen mit Excel nicht reproduzierbar.
+Es ist also nicht präzise zu beschreiben, was man (genau) gemacht hat. Daher fällt es auch schwierig, Fehler zu finden und den Prozess zu verbessern. 
+Eine klare Kommunikation über das Vorgehen ist kaum möglich.
+
+
+### Irrelevante Spalten identifizieren
+
+```{r}
+names(d) |> head(100)
+```
+
+- file_id
+- idSite
+- visitIp
+- actionDetails_0_timeSpentPretty  - nur ein "hübsches" Format
+- actionDetails_0_pageLoadTime - unabhängig von Nutzerverhalten
+- actionDetails_0_pageId._pageId - vermutlich redundant
+- actionDetails_0_pageviewPosition - unabhängig von Nutzerverhalten
+- actionDetails_0_icon - unabhängig von Nutzerverhalten
+- actionDetails_0_iconSVG - unabhängig von Nutzerverhalten
+- actionDetails_1_pageIdAction - unabhängig von Nutzerverhalten
+- actionDetails_1_idpageview - unabhängig von Nutzerverhalten
+- actionDetails_1_pageviewPosition - unabhängig von Nutzerverhalten
+- actionDetails_2_timeSpentPretty - nur ein "hübsches" Format
+
+
+
+### Irrelevante Spalten entfernen
+
+Irrelevante Spalten entfernen, die im letzten Schritt identifiziert wurden.
+
+```{r}
+d_names <- names(d)
+
+cols_parts_irrelavant <- c(
+  "timeSpentPretty",
+  "pageLoadTime",
+  "pageId._pageId",
+  "_pageviewposition",
+  "icon",
+  "iconSVG",
+  "pageIdAction",
+  "idpageview",
+  "pageviewPosition",
+  "timeSpentPretty"
+)
+```
+
+
+Entfernen:
+
+
+```{r}
+d_no_irrelevant_cols <- d %>%
+  select(!matches(paste(cols_parts_irrelavant, collapse = "|")))
+```
+
+
+Check:
+
+
+```{r}
+dim(d_no_irrelevant_cols)
+```
+
+Ok, das sind weniger.
+
+### Nur wenige Spalten behalten
+
+
+
+```{r}
+id_cols <- 
+  c("idVisit", "fingerprint")
+```
+
+`fingerprint` und `visitorId` sind vermutlich redundant, daher nur eine der beiden Spalten behalten.
+
+
+```{r}
+target_cols_parts <- c("subtitle", "timestamp")
+```
+
+```{r}
+all_targets <- c(id_cols, target_cols_parts)
+
+d_few_cols <- d_no_irrelevant_cols %>%
+  select(matches(paste(all_targets, collapse = "|")))
+```
+
+Check:
+
+
+```{r}
+dim(d_few_cols)
+```
+
+
+
+### Datum reparieren
+
+```{r}
+d_repair_dates <-
+  d_few_cols |> 
+  mutate(across(contains("timestamp"), ~ as_datetime(as.numeric(.x))))
+```
+
+
+
+```{r}
+d_repair_dates |> 
+  select(contains("timestamp")) |> 
+  select(1:10) |> 
+  head()
+```
+
+
+### Bildspalten entfernen
+
+... schon erledigt oben ...
+
+
+
+### Zeilen nur mit Studis behalten
+
+Die Frage ist, ob man "role=undefined" auch behalten will?. 
+Es sieht so aus, als ob das meistens Studis sind.
+
+```{r}
+d_students_only <-
+d_repair_dates |> 
+  filter(!str_detect(actionDetails_0_subtitle, "=admin|=developer|=lecturer"))
+```
+
+
+Check:
+
+
+
+```{r}
+d_students_only |> nrow()
+d_repair_dates |> nrow()
+```
