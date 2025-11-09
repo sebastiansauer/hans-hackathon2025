@@ -6,6 +6,7 @@ project:
     - "*.qmd"
     - "!challenges-solutions/"
     - "!**/Icon*"
+    - "!challenges-solutions-dev/"
 
 
   # image: img/statistik1_icon.png

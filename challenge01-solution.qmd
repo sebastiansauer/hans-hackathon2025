@@ -6,6 +6,8 @@ format:
 author: Sebastian Sauer
 date: today
 number-sections: true
+execute: 
+  cache: true
 ---
 
 
@@ -22,28 +24,49 @@ number-sections: true
 
 ## Setup
 
-```{r}
+```{r setup}
 #| message: false
 #| output: hide 
 library(tidyverse)
 library(stringr)  # Strings verarbeiten
 library(here)  # liest aktuelles Verzeichnis aus
-library(tictoc)
+library(tictoc)  # Zeit messen
 ```
 
-
-```{r load-data}
-datafile_name <- paste0(here(),"/", "data-processed/matomo_export_2025-07-07.csv")
+/Users/sebastiansaueruser/github-repos/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14
+```{r datafile-name}
+datafile_name <- paste0(here(),"/", "data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-07.csv")
 datafile_name
 ```
 
 Wie lange dauer das Laden der Daten?
 
-```{r}
+```{r read-csv}
 tic("load data")
 d_matomo1 <- read.csv(datafile_name)
 toc()
 ```
+
+
+Oder so, mit `read_csv` aus dem `readr`-Paket (Teil des Tidyverse):
+
+Puffer vergrößern:
+
+```{r setup-buffer}
+#| cache: false
+Sys.setenv(VROOM_CONNECTION_SIZE = 131072 * 10) 
+```
+
+
+
+```{r read-csv2}
+tic("load data")
+d_matomo2 <- read_csv(datafile_name)
+toc()
+```
+
+
+
 
 Da müsste man mal überlegen, wie man das schneller machen kann...
 
