@@ -5,6 +5,8 @@ project:
   render:
     - "*.qmd"
     - "!challenges-solutions/"
+    - "!**/Icon*"
+
 
   # image: img/statistik1_icon.png
   # description:  "Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools 'HaNS'"
@@ -34,8 +36,8 @@ website:
       - href: pruefung.qmd
         text: Prüfung
       - href: challenges.qmd
-      # - href: challenge01-solution.qmd
-      #   text: Lösung 01
+      - href: challenge01-solution.qmd
+        text: Lösung 01
       # - href: challenge02-solution.qmd
       #   text: Lösung 02
       # - href: challenge03-solution.qmd
@@ -93,6 +95,7 @@ knitr:
   opts_knit:
     verbose: true
     fig-align: center
+    df-print: kable
   opts_chunk: 
     collapse: true
     out.width: "75%"
