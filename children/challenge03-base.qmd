@@ -5,17 +5,25 @@ Aufbauend auf dem Ergebnis der letzten Challenge:
 
 
 
-1. Listen Sie die *Spaltennamen* auf, aber nur max. 20. Wenn es mehr als 20 Spalten gibt, listen Sie nur die ersten 20 auf. Wenn es weniger als 20 Spalten gibt, listen Sie alle auf.
+<!-- 1. Listen Sie die *Spaltennamen* auf, aber nur max. 20. Wenn es mehr als 20 Spalten gibt, listen Sie nur die ersten 20 auf. Wenn es weniger als 20 Spalten gibt, listen Sie alle auf.
 
-2. Geben Sie *Arten von Spaltennamen* an, z.b. `actionDetails_482_timestamp` und `actionDetails_327_subtitle` und `actionDetails_327_timestampe` wären 2 verschiedene Typen von Spalten: Timestamp und Subtitle.
+2. Geben Sie *Arten von Spaltennamen* an, z.b. `actionDetails_482_timestamp` und `actionDetails_327_subtitle` und `actionDetails_327_timestampe` wären 2 verschiedene Typen von Spalten: Timestamp und Subtitle. -->
 
-2. *Pivotieren* Sie den Datensatz in das Langformat. Aber nehmen Sie `idvisit` vom Pivotieren aus; d.h. Sie nehmen alle Spalten bis auf `idvisit` in das Pivotieren auf. Es sollen also drei Spalten resultieren: `idvisit`, `name` und `value`.
+1. *Pivotieren* Sie den Datensatz in das Langformat. Aber nehmen Sie ID-Variable `idvisit` vom Pivotieren aus; d.h. Sie nehmen alle Spalten bis auf `idvisit` in das Pivotieren auf. Es sollen also drei Spalten resultieren: `idvisit`, `name` und `value`.
 
-3. *Begrenzen* Sie beim Pivotieren die Spalten auf die Spaltentypen mit dem Namen vom Typ `subtitle`; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also drei Spalten resultieren: `idvisit`, `name` und `value`.
+2. Jetzt *pivotieren* Sie den Datensatz erneut in das Langformat. Aber dieses Mal verwenden Sie eine andere ID-Variablen, nämlich `fingerprint`. Ansonsten bleibt alles gleich. Es sollen also drei Spalten resultieren: `fingerprint`, `name` und `value`.
+
+3. Jetzt *pivotieren* Sie den Datensatz erneut in das Langformat. Aber dieses Mal verwenden Sie zwei ID-Variaben: Die ID-Variable `idvisit` und auch `fingerprint`. Ansonsten bleibt alles gleich. Es sollen also *vier* Spalten resultieren: `idvisit`, `fingerprint`, `name` und `value`.
+
+4. *Begrenzen* Sie beim Pivotieren die Spalten auf die Spaltentypen mit dem Namen vom Typ `subtitle`; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also drei Spalten resultieren: `idvisit`, `name` und `value`.
+
+5. Jetzt *begrenzen* Sie das Pivotieren wie in der vorherigen Aufgabe. Aber dieses Mal verwenden Sie die ID-Variable `fingerprint`. Es sollen also drei Spalten resultieren: `fingerprint`, `name` und `value`.
+
+5. Jetzt begrenzen Sie das Pivotieren wie in der vorherigen Aufgabe. Aber dieses Mal verwenden Sie zwei ID-Variablen: `idvisit` und `fingerprint`. Es sollen also *vier* Spalten resultieren: `idvisit`, `fingerprint`, `name` und `value`.
 
 4. Prüfen Sie, ob es stimmt, dass in der Spalte `name` die enthaltene Zahl die einzige Information ist. Anders gesagt: Außer der Zahl in den Werten `name` sind alle Teile der Werte konstant.
 
-5. Die Spalten, die die Werte wie `actionDetails_0_subtitle` nennen Sie in `id` um. Aus den Werten (wie `actionDetails_0_subtitle`) extrahieren Sie die Zahl in der Mitte des Textes (den Rest des Textes löschen).
+5. Die Spalten, die die Werte wie `actionDetails_0_subtitle` nennen Sie in `id` um. Aus den Werten (wie `actionDetails_0_subtitle`) extrahieren Sie die Zahl in der Mitte des Textes (den Rest des jeweiligen Spaltennamens löschen).
 
 6. Erläutern Sie die Funktionen zum Lang-Pivotieren aus dem Tidyverse sowie aus einem anderen R-Paket, welches angibt, *schneller* zu sein als die Tidyverse-Funktion (also größere Datenmengen in der gleichen Zeit schafft). Geben Sie auch einen Faktor an, um diese Funktion angibt, schneller zu sein.
 
