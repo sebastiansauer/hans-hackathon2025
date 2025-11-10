@@ -39,8 +39,8 @@ website:
       - href: challenges.qmd
       - href: challenge01-solution.qmd
         text: Lösung 01
-      # - href: challenge02-solution.qmd
-      #   text: Lösung 02
+      - href: challenge02-solution.qmd
+        text: Lösung 02
       # - href: challenge03-solution.qmd
       #   text: Lösung 03
       # - href: challenge04-solution.qmd
