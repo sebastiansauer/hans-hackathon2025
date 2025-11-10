@@ -443,3 +443,10 @@ Check:
 d_students_only |> nrow()
 d_repair_dates |> nrow()
 ```
+
+# Abschluss - Daten abspeichern
+
+
+```{r write-csv}
+write.csv(d_students_only, "data/d_students_only.csv")
+```
