@@ -71,9 +71,35 @@ Mit `.id` bekommt man eine laufende Nummer für jede eingehende CSV-Datei.
 
 `map_XXX(list, fun)` wendet die Funktion `fun` auf jedes Element
 von `list` an. `map_dfr` ist eine spezielle Variante, die die
-Ergebnisse in einem Data-Frame zusammenführt und zwar zeilenweise (row),
+Ergebnisse in einem Dataframe zusammenführt und zwar zeilenweise (row),
 daher `_dfr`.
 
+
+Alternative:
+
+```{r}
+#| eval: false
+purrr::map_df(
+  dateien,
+  ~ read_csv(.x, col_types = cols(.default = "c"), show_col_types = FALSE),
+  .id = "file_id"
+)
+
+```
+
+Synonym zur Tilde-Schreibweise kann man schreiben:
+
+```{r}
+urrr::map_df(
+  dateien,
+  function(.x) {
+    read_csv(.x, col_types = cols(.default = "c"), show_col_types = FALSE)
+  },
+  .id = "quelle_datei"
+)
+```
+
+Die Tilde ist also nur eine Abkürzung für eine Formel.
 
 Wie groß ist der resultierende Datensatz?
 
@@ -247,6 +273,14 @@ d_no_empty_cols_no_empty_rows <-
 ```
 
 
+Alternativ: 
+
+```{r}
+daten_lang_ohne_Na %>%
+  select(where(~ dplyr::n_distinct(.x, na.rm = TRUE) > 1))
+```
+
+
 Check:
 
 ```{r}
@@ -261,6 +295,7 @@ dim(d_no_empty_cols_no_empty_rows)
 Ein paar Spalten haben wir eingespart.
 
 Es würde Sinn machen, sich diese komplett leeren Spalten näher anzuschauen. Warum sind sie überhaupt enthalten?
+
 
 
 ### Konstanten entfernen

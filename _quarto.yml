@@ -9,6 +9,8 @@ project:
     - "!challenges-solutions-dev/"
 
 
+editor: source
+
   # image: img/statistik1_icon.png
   # description:  "Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools 'HaNS'"
 
