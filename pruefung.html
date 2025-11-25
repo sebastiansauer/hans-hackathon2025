@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="“Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools ‘HaNS’”">
+
+<title>pruefung – hans-hackathon</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-629432c7d29b615b3888e3cdfd62b7a9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-1a7ff3268f5f6ee961e8afaef3a72c9f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pruefung.html">Prüfung</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">hans-hackathon</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einstieg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R, zweiter Blick</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projektmanagement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projektmanagement</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pruefung.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Prüfung</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./challenges.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenges im Überblick</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./challenge01-solution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lösung 01</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./challenge02-solution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lösung 02</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Auf dieser Seite</h2>
+   
+  <ul>
+  <li><a href="#prüfung" id="toc-prüfung" class="nav-link active" data-scroll-target="#prüfung"><span class="header-section-number">1</span> Prüfung</a>
+  <ul class="collapse">
+  <li><a href="#allgemeines" id="toc-allgemeines" class="nav-link" data-scroll-target="#allgemeines"><span class="header-section-number">1.1</span> Allgemeines</a></li>
+  <li><a href="#prüfungsleistung-portfolio-prüfung" id="toc-prüfungsleistung-portfolio-prüfung" class="nav-link" data-scroll-target="#prüfungsleistung-portfolio-prüfung"><span class="header-section-number">1.2</span> Prüfungsleistung: Portfolio-Prüfung</a>
+  <ul class="collapse">
+  <li><a href="#beschreibung" id="toc-beschreibung" class="nav-link" data-scroll-target="#beschreibung"><span class="header-section-number">1.2.1</span> Beschreibung</a></li>
+  <li><a href="#bestandteile" id="toc-bestandteile" class="nav-link" data-scroll-target="#bestandteile"><span class="header-section-number">1.2.2</span> Bestandteile</a></li>
+  </ul></li>
+  <li><a href="#teil-1-wöchentliche-challenges" id="toc-teil-1-wöchentliche-challenges" class="nav-link" data-scroll-target="#teil-1-wöchentliche-challenges"><span class="header-section-number">1.3</span> Teil 1: Wöchentliche Challenges</a>
+  <ul class="collapse">
+  <li><a href="#benotung-der-challenges" id="toc-benotung-der-challenges" class="nav-link" data-scroll-target="#benotung-der-challenges"><span class="header-section-number">1.3.1</span> Benotung der Challenges</a></li>
+  <li><a href="#formalia" id="toc-formalia" class="nav-link" data-scroll-target="#formalia"><span class="header-section-number">1.3.2</span> Formalia</a></li>
+  <li><a href="#tipps" id="toc-tipps" class="nav-link" data-scroll-target="#tipps"><span class="header-section-number">1.3.3</span> Tipps</a></li>
+  <li><a href="#abgabeformat" id="toc-abgabeformat" class="nav-link" data-scroll-target="#abgabeformat"><span class="header-section-number">1.3.4</span> Abgabeformat</a></li>
+  </ul></li>
+  <li><a href="#teil-2-fachgespräch" id="toc-teil-2-fachgespräch" class="nav-link" data-scroll-target="#teil-2-fachgespräch"><span class="header-section-number">1.4</span> Teil 2: Fachgespräch</a>
+  <ul class="collapse">
+  <li><a href="#gegenstand" id="toc-gegenstand" class="nav-link" data-scroll-target="#gegenstand"><span class="header-section-number">1.4.1</span> Gegenstand</a></li>
+  <li><a href="#beispiele-für-prüfungsfragen" id="toc-beispiele-für-prüfungsfragen" class="nav-link" data-scroll-target="#beispiele-für-prüfungsfragen"><span class="header-section-number">1.4.2</span> Beispiele für Prüfungsfragen</a></li>
+  </ul></li>
+  <li><a href="#sonstiges" id="toc-sonstiges" class="nav-link" data-scroll-target="#sonstiges"><span class="header-section-number">1.5</span> Sonstiges</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/sebastiansauer/hans-hackathon/blob/main/pruefung.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li><li><a href="https://github.com/sebastiansauer/hans-hackathon/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="prüfung" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Prüfung</h1>
+<section id="allgemeines" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="allgemeines"><span class="header-section-number">1.1</span> Allgemeines</h2>
+<p>Es handelt sich um eine Einzelleistung.</p>
+</section>
+<section id="prüfungsleistung-portfolio-prüfung" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="prüfungsleistung-portfolio-prüfung"><span class="header-section-number">1.2</span> Prüfungsleistung: Portfolio-Prüfung</h2>
+<section id="beschreibung" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="beschreibung"><span class="header-section-number">1.2.1</span> Beschreibung</h3>
+<p>Die Prüfungsleistung dieses Moduls ist eine <em>Portfolioprüfung</em>.</p>
+<p>Nach §17 Absatz 4, Satz 2 ff der APO der HS Ansbach (vom 9. Februar 2023):</p>
+<blockquote class="blockquote">
+<p>Eine Portfolioprüfung ist eine modulbezogene Prüfungsleistung, die mehrere Prüfungsbestandteile umfasst, welche über die gesamte Lehrveranstaltung eines Moduls hinweg abgeprüft werden. ³Die einzelnen Prüfungsbestandteile ergeben eine Gesamtnote.</p>
+</blockquote>
+</section>
+<section id="bestandteile" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="bestandteile"><span class="header-section-number">1.2.2</span> Bestandteile</h3>
+<p>Die Portfolioprüfung setzt sich aus folgenden Teilnoten zusammen:</p>
+<ol type="1">
+<li>Teilnoten für die 10 Challenges</li>
+<li>Teilnote für ein abschließendes Fachgespräch</li>
+</ol>
+<p>Die (Gesamt-)Note setzt sich aus folgenden Teilen zusammen:</p>
+<ul>
+<li>Teilnote 1: Punktzahl bei den Challenges (50%)</li>
+<li>Teilnote 2: Note beim Fachgespräch (50%)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hinweis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Jede Teilnote darf nicht schlechter als 4,0 bewertet werden, um die Prüfung als Ganze zu bestehen.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="teil-1-wöchentliche-challenges" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="teil-1-wöchentliche-challenges"><span class="header-section-number">1.3</span> Teil 1: Wöchentliche Challenges</h2>
+<p>Bitte beachten Sie, dass sich die Challenges noch ändern können, solange sie nicht begonnen haben.</p>
+<p>Bitte beachten Sie auch die <a href="https://hinweisbuch.netlify.app/109-hinweise-programmier">Hinweise zum Thema ‘Programmieren’</a>.</p>
+<p>Die Challenges werden im Unterricht vorgestellt und besprochen.</p>
+<p>Für jede Aufgabe lassen sich <em>verschiedene Lösungswege</em> finden. Es ist nicht nötig, dass Ihre Lösung exakt der Musterlösung entspricht. Wichtig ist, dass Sie die Aufgabe lösen und Ihre Lösung <em>nachvollziehbar dokumentieren</em>. <em>Treffen Sie Annahmen</em>, wenn die Aufgabenstellung dies erfordert, und dokumentieren Sie diese Annahmen in Ihrer Lösung. Schreiben Sie nicht nur <em>Code</em>, sondern <em>erklären</em> Sie diesen auch kurz: was machen Sie da gerade und warum? Erläutern Sie ebenfalls das Ergebnis: Was resultiert aus Ihrem Code als Ausgabe? Wie ist die Ausgabe zu interpretieren? Wie fügt Sie sich als Antwort zur Aufgabenstellung?</p>
+<section id="benotung-der-challenges" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="benotung-der-challenges"><span class="header-section-number">1.3.1</span> Benotung der Challenges</h3>
+<p>Jede Challenge wird wie folgt bepunktet:</p>
+<ul>
+<li>0 Punkte: nicht eingereicht oder keine substanzielle Lösungsansätze</li>
+<li>0,5 Punkte: substanzielle Lösungsansätze eingereicht, aber nicht komplett gelöst</li>
+<li>1 Punkt: komplett oder fast komplett gelöst</li>
+</ul>
+<p>Punkte-Noten-Zuordnung:</p>
+<ul>
+<li>mind. 50% der Punkte - Note 4,0</li>
+<li>mind. 60% der Punkte - Note 3,0</li>
+<li>mind. 70% der Punkte - Note 2,0</li>
+<li>mind. 80% der Punkte - Note 1,0</li>
+</ul>
+</section>
+<section id="formalia" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="formalia"><span class="header-section-number">1.3.2</span> Formalia</h3>
+<ul>
+<li>Wird eine Lösung für eine bestimmte Challenge nicht <em>frist- und formgerecht eingereicht</em>, so gilt sie als nicht eingereicht (0 Punkte).</li>
+<li>Die <em>Bearbeitungszeit jeder Challenge ist jeweils eine Woche</em>, d.h. die Lösung muss bis zum jeweiligen Abgabetermin eingereicht werden. Der <em>späteste</em> Abgabetermin ist der Vorabend des nächsten Unterrichtstermin - um 23.59.00. Beispiel: Der Unterricht findet wöchentlich am Dienstag statt. Die Challenge wird am Dienstag diese Woche besprochen und muss bis Montagabend der nächsten Woche eingereicht werden. Ausnahmen von dieser Regel (z.B. bei Feiertagen) werden rechtzeitig bekannt gegeben; s. auch den Modulverlaufsplan.</li>
+<li>Im Falle von Krankheit oder anderen schwerwiegenden Gründen, die eine fristgerechte Abgabe verhindern, ist die Lehrkraft <em>unverzüglich</em> zu informieren. Ein ärztliches Attest ist vorzulegen.</li>
+<li><em>Prüfen Sie</em> vor Beginn der ersten Challenge, ob Sie auf die <em>Daten zugreifen</em> können und diese einlesen können. Melden Sie sich bei Problemen vor Beginn der (jeweiligen) Challenge beim Dozenten.</li>
+<li>Geben Sie in jeder eingereichten Datei <em>Ihren Namen und die Nummer</em> der Challenge an.</li>
+<li><em>Benennen</em> Sie Ihre <em>Dateien</em> nach folgendem Schema: <code>challenge01-max-mustermann.R</code> (für R-Skripte) oder <code>challenge01-max-mustermann.qmd</code> (für Quarto-Dateien).</li>
+<li>Nutzen Sie den <a href="https://style.tidyverse.org/">Tidyverse-Styleguide</a>.</li>
+<li>Im Fall eines Plagiats (d.h. wenn Sie Code von anderen übernehmen, ohne dies kenntlich zu machen), wird das Modul mit “nicht bestanden” bewertet.</li>
+<li>Im Fall, dass sich (quasi) identischer Text in mehreren Lösungen findet, wird dies als Plagiat gewertet bei <em>allen</em> Beteiligten.</li>
+<li>Reichen Sie in einer Challenge Ihre Lösungen zu dieser Challenge ein, nicht auch die Lösungen vorheriger Challenges.</li>
+<li>Füllen Sie im YAML-Header von Quarto-Dateien die Felder <code>title</code>, <code>author</code> und <code>date</code> aus.</li>
+</ul>
+</section>
+<section id="tipps" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="tipps"><span class="header-section-number">1.3.3</span> Tipps</h3>
+<ul>
+<li>Gehen Sie nicht davon aus, dass die Groß- bzw. Kleinschreibung von Datei- oder Spaltennamen in der Aufgabenstellung notwendig der in der Datendatei entspricht. Beispiel: “actiondetails_” und “actionDetails_” können sind möglich. Sie (bzw. Ihr Computer-Code) sollte damit zurechtkommen.</li>
+<li>Nutzen Sie die Markdown-Syntax sinnvoll bei der Formatierung/Gestaltung von Quarto-Dateien (.qmd). Beispiel: <code>##### Der häufigste Wert ist "action" und er kommt 30mal vor</code>. Hier wird eine Überschrift auf Ebene 5 verwendet, das ist nicht empfehlenswert.</li>
+<li>Oftmals lassen Aufgabenstellung Freiraum und Interpretationsspielraum. In diesem Fall haben Sie das Recht und die Pflicht, (sinnvolle) Annahmen zu treffen.</li>
+<li>Experimentieren Sie mit der Source- und der Visual-Ansicht des Editors. Beide haben Vorteile.</li>
+</ul>
+</section>
+<section id="abgabeformat" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="abgabeformat"><span class="header-section-number">1.3.4</span> Abgabeformat</h3>
+<section id="quarto" class="level4" data-number="1.3.4.1">
+<h4 data-number="1.3.4.1" class="anchored" data-anchor-id="quarto"><span class="header-section-number">1.3.4.1</span> Quarto</h4>
+<p>Sofern das Ausgabeformat “Quarto” definiert ist, reichen Sie Ihre Ergebnisse bitte in Form eines Dokuments ein,</p>
+<ul>
+<li>das die <em>Lösung</em> (der Aufgabenstellung) enthält,</li>
+<li>das Ihren <em>Computer-Code</em> enthält (mit Syntax-Highlighting),</li>
+<li>das Ihre <em>Ausgaben</em> zu Ihrem Computer-Code enthält,</li>
+<li>das Ihre <em>Gedanken</em> und Überlegungen (also Text, angereichert ggf. mit Diagrammen etc.) enthält,</li>
+<li>das übersichtlich und ansprechend <em>formatiert</em> ist,</li>
+<li>das in RMarkdown oder Quarto erstellt wurde,</li>
+<li>das die <em>Grundlagen wissenschaftlichen Arbeitens</em> beachtet,</li>
+<li>das “<em>Standalone</em>” lesbar ist, also keine Abhängigkeiten zu anderen Dokumenten benötigt,</li>
+<li>das als <em>PDF</em>- oder <em>HTML</em>-Datei formatiert ist,</li>
+<li>das soweit als möglich <em>reproduzierbar</em> ist.</li>
+<li>das <em>kommentiert</em> ist,</li>
+<li>das wohl <em>gegliedert</em> ist</li>
+<li>das <em>durchläuft</em>, ohne Fehler zu werfen.</li>
+</ul>
+</section>
+<section id="r" class="level4" data-number="1.3.4.2">
+<h4 data-number="1.3.4.2" class="anchored" data-anchor-id="r"><span class="header-section-number">1.3.4.2</span> R</h4>
+<p>Sofern als Ausgabeformat “R-Syntax” definiert ist, reichen Sie Ihren Code bitte in Form eines R-Skripts ein,</p>
+<ul>
+<li>das die <em>Lösung</em> der Challenge enthält.</li>
+<li><em>reproduzierbar</em> ist</li>
+<li><em>durchläuft</em>, ohne Fehler zu werfen</li>
+<li><em>kommentiert</em> ist</li>
+<li>wohl <em>gegliedert</em> ist</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="teil-2-fachgespräch" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="teil-2-fachgespräch"><span class="header-section-number">1.4</span> Teil 2: Fachgespräch</h2>
+<p>Die Termine für das Fachgespräch liegen in der Prüfungszeit und werden rechtzeitig bekannt gegeben über geeignete Kanäle.</p>
+<p>Weitere Hinweise zum Fachgespräch finden sich im <a href="https://hinweisbuch.netlify.app/045-hinweise-pruefung-fachgespraech-frame">entsprechenden Kapitel im Hinweisbuch</a>.</p>
+<section id="gegenstand" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="gegenstand"><span class="header-section-number">1.4.1</span> Gegenstand</h3>
+<p>Prüfungsgegenstand sind alle Inhalte aus dem Unterricht. Ein Schwerpunkt liegt auf den Musterlösungen sowie den eigenen, selbst eingereichten Lösungen der Challenges.</p>
+</section>
+<section id="beispiele-für-prüfungsfragen" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="beispiele-für-prüfungsfragen"><span class="header-section-number">1.4.2</span> Beispiele für Prüfungsfragen</h3>
+<ol type="1">
+<li>Erklären Sie den Aufbau einer Funktion in R!</li>
+<li>Wie haben Sie die Glotzdauer berechnet?</li>
+<li>Was besagt die Variable idvisit?</li>
+<li>Wie groß war der von uns verwendete Rohdatensatz (Zeilen, Spalten)?</li>
+<li>Nennen Sie ein Beispiel für einen gut und einen schlecht gewählten Objektnamen!</li>
+<li>Erläutern Sie, wie die Daten laut Musterlösung in R importiert wurden.</li>
+<li>Mit welchem R-Paket wurden laut Musterlösung Datums-/Zeitangaben bearbeitet?</li>
+<li>Erklären Sie eine Funktion aus dem R-Paket <code>stringr</code>!</li>
+<li>Was macht die Funktion <code>purrr::map</code>?</li>
+<li>Was ist das “Tidyverse”?</li>
+<li>Wann ist ein Mittelwert mehr bzw. weniger aussagekräftig?</li>
+<li>Was macht ein gutes Datendiagramm aus?</li>
+<li>Im Rohdatensatz: Es gibt ein Muster in den Spaltennamen. Was fällt Ihnen dazu auf?</li>
+<li>Im Rohdatensatz: Was fällt Ihnen zur Anteil und zum Muster der fehlenden Werte auf?</li>
+<li>Was versteht man unter “Regex” im Kontext der String-Verarbeitung?</li>
+<li>Wie kann man leere Zeilen oder leere Spalten auf einem Dataframe entfernen?</li>
+<li>Wie kann man konstante Zeilen oder Spalten aus einem Dataframe entfernen? Warum sollte man das tun?</li>
+<li>Erläutern Sie folgenden R-Code:</li>
+</ol>
+<pre><code>out &lt;1. list()
+for (i in 1:length(datafiles_list)) {
+ out[[i]] &lt;1. read.csv(datafiles_list[i]) 
+}</code></pre>
+<ol start="3" type="1">
+<li>Wie kann man eine Spalte an den Anfang eines Dataframes ziehen?</li>
+<li>Nennen Sie Vor1. und Nachteile des Einsatzes von Excel für eine Aufgabe wie das Projekt im vorliegenden Modul.</li>
+<li>Nennen Sie eine Funktion, um eine als String (<code>character</code>) formatierte Spalte (z.B. “1970-01-01”) in ein Datums-/Zeitobjekt umzuwandeln!</li>
+<li>Erklären Sie folgende Syntax:</li>
+</ol>
+<pre><code>str_remove(string = names(d),
+           pattern = "_[:digit:].*") |&gt; 
+  unique()</code></pre>
+<ol start="2" type="1">
+<li>Erklären Sie folgende Syntax:</li>
+</ol>
+<pre><code>d_only_subtitles_and_timestamps |&gt; 
+   mutate(across(contains("timestamp"), ~ as_datetime(as.numeric(.x))))</code></pre>
+<ol start="2" type="1">
+<li>Erklären Sie folgende Syntax:</li>
+</ol>
+<pre><code>d_time_repaired |&gt; 
+  filter(!str_detect(actionDetails_0_subtitle, "developer|lecturer|admin")) </code></pre>
+<ol start="2" type="1">
+<li>Erläutern Sie, was mit “Pivotieren” gemeint ist im Kontext des vorliegenden Projekts der Datenanalyse. Was ist der Nutzen des Pivotierens?</li>
+<li>Geben Sie eine Syntax an, um alle Spalten als Strings (<code>character</code>) zu formatieren.</li>
+<li>Erläutern Sie den Aufbau einer Targets-Pipeline.</li>
+<li>Beim zeilenweisen Zusammenbinden einer großen Zahl an CSV-Dateien kann es zu Problemen kommen. So auch im vorliegenden Projekt. Erläutern Sie ein Problem und schlagen Sie eine Lösung vor.</li>
+<li>An welchen Wochentagen und an welchen Uhrzeiten wird Hans bevorzugt besucht?</li>
+<li>Was ist der älteste und was der neueste Timestamp in unserem Datensatz?</li>
+<li>Beschreiben Sie ein Problem, das während Ihrer Analyse aufgetreten ist und wie Sie es gelöst haben. Was haben Sie daraus gelernt?</li>
+<li>Was würden Sie anders machen, wenn Sie die Daten erneut analysieren würden?</li>
+<li>Was ist eine (wichtige) Sache, die Sie während der Analyse gelernt haben?</li>
+<li>Was macht die “Pfeife” <code>|&gt;</code> in einer R-Syntax?</li>
+<li>Diskutieren Sie die Für und Wider einer kompetenzorientierten Prüfung, also einer Prüfung, in der es weniger um Kenntnis theoretischer Inhalte, sondern um die Kompetenz zur Lösung eines Problems geht.</li>
+<li>Hier ist ein Auszug aus Ihrer Lösung zu Challenge <em>X</em>. Erläutern Sie Ihre Syntax zu Aufgabe Y!</li>
+<li>Erläutern Sie einen Weg, um die Musterlösung auf Geschwindigkeit zu optimieren.</li>
+<li>Geben Sie ein Beispiel für eine zu wenig allgemeine Funktion! Beispiel: <code>read_csv_meine_lieblingsdatei()</code>.</li>
+<li>Was sind Vorteile, Funktionen beim Programmieren zu nutzen?</li>
+<li>Erläutern Sie folgenden Code: <code>unique_counts &lt;- sapply(Matomo1[ , spalten_aufgabe7], function(x) length(unique(x)))</code>.</li>
+<li>Erläutern Sie folgenden Code: <code>matomo_aufgabe8 &lt;- Matomo1[, (spalten_aufgabe7)]; lapply(matomo_aufgabe8, unique)</code>.</li>
+<li>Erläutern Sie folgenden Code: <code>daten_clean %&gt;% summarise(across(everything(), ~ mean(is.na(.))))</code>.</li>
+<li>? <code>sum(str_detect(names(matomo_day1), "^actionDetails_"))</code></li>
+<li>? <code>grep("id|ID|Ip|ip|fingerprint", names(matomo_day1), value = TRUE)</code></li>
+</ol>
+</section>
+</section>
+<section id="sonstiges" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="sonstiges"><span class="header-section-number">1.5</span> Sonstiges</h2>
+<p>Bitte beachten Sie die allgemeinen Hinweise im <a href="https://hinweisbuch.netlify.app/">Hinweisbuch</a> besonders die <a href="https://hinweisbuch.netlify.app/010-hinweise-pruefung-allgemein-frame">allgemeinen Prüfungshinweise</a> sowie die Hinweise zum <a href="https://hinweisbuch.netlify.app/109-hinweise-programmieren">Programmieren</a>.</p>
+<p>Bei Fragen, die eine Verteilung als Antwort haben, sollten Sie die Verteilung mit statistischen Methoden beschreiben. Beispiel: “Was ist die typische Verweildauer?” - Antwort: “Die mittlere Verweildauer beträgt 3 Minuten, mit einer Standardabweichung von 2 Minuten. Die Verteilung ist rechtsschief.” Eine Visualisierung der Verteilung bietet sich an (z.B. mit einem Histogramm).</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>MIT</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Zitat</h2><div><div class="quarto-appendix-secondary-label">Mit BibTeX zitieren:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{untitled,
+  author = {},
+  url = {https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html},
+  langid = {de-DE}
+}
+</code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Bitte zitieren Sie diese Arbeit als:</div><div id="ref-untitled" class="csl-entry quarto-appendix-citeas" role="listitem">
+n.d. <a href="https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html">https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/sebastiansauer\.github\.io\/hans-hackathon2025\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Powered by <a href="https://quarto.org">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="./imprint.qmd">Impressum</a></p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sebastiansauer/hans-hackathon/blob/main/pruefung.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li><li><a href="https://github.com/sebastiansauer/hans-hackathon/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="./data-privacy.qmd">Datenschutzhinweise</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
