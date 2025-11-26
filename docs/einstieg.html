@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -92,10 +92,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1d9754e6b7e1dc15a659fbcd6780067e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-629432c7d29b615b3888e3cdfd62b7a9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8fab3344b279532328a9fb85fb74ff60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1a7ff3268f5f6ee961e8afaef3a72c9f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/downloadthis-1.9.1/downloadthis.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -236,6 +236,9 @@ window.Quarto = {
  <span class="menu-text">Lösung 02</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+ <span class="menu-text">Lösung 03</span>
+  </li>
     </ul>
     </div>
 </nav>
@@ -271,7 +274,7 @@ window.Quarto = {
   <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map"><span class="header-section-number">1.7.2</span> <code>map()</code></a></li>
   <li><a href="#weiterführende-hinweise-1" id="toc-weiterführende-hinweise-1" class="nav-link" data-scroll-target="#weiterführende-hinweise-1"><span class="header-section-number">1.7.3</span> Weiterführende Hinweise</a></li>
   </ul></li>
-  <li><a href="#r-ist-schwierig" id="toc-r-ist-schwierig" class="nav-link" data-scroll-target="#r-ist-schwierig"><span class="header-section-number">1.8</span> R ist schwierig</a></li>
+  <li><a href="#r-war-schwierig" id="toc-r-war-schwierig" class="nav-link" data-scroll-target="#r-war-schwierig"><span class="header-section-number">1.8</span> R war schwierig</a></li>
   <li><a href="#fallstudien" id="toc-fallstudien" class="nav-link" data-scroll-target="#fallstudien"><span class="header-section-number">1.9</span> Fallstudien</a></li>
   </ul></li>
   </ul>
@@ -471,7 +474,7 @@ Abbildung&nbsp;3: Vektoren stehen im Zentrum der Datenstrukturen in R
 <p>Aber <em>nicht</em> so:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ein_vektor[<span class="dv">1</span>,<span class="dv">2</span>]</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in ein_vektor[1, 2]: incorrect number of dimensions</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in ein_vektor[1, 2]: falsche Anzahl von Dimensionen</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Man darf Vektoren auch wie Listen ansprechen, also eine doppelte Eckklammer zum Indizieren verwenden</p>
 <div class="cell" data-layout-align="center">
@@ -551,7 +554,7 @@ Abbildung&nbsp;3: Vektoren stehen im Zentrum der Datenstrukturen in R
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>eine_liste[[<span class="dv">6</span>]]</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in eine_liste[[6]]: subscript out of bounds</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in eine_liste[[6]]: Indizierung außerhalb der Grenzen</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Unser Versuch wird mit einer Fehlermeldung quittiert.</p>
 <p>Sprechen wir die Liste wie einen (atomaren) Vektor an, bekommen wir hingegen ein <code>NA</code> bzw. ein <code>NULL</code>:</p>
@@ -645,7 +648,7 @@ Tipp
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"input/mtcars.csv"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p><a href="#dnldts50777" onclick="fetch('data:text/csv;base64,bW9kZWwsbXBnLGN5bCxkaXNwLGhwLGRyYXQsd3QscXNlYyx2cyxhbSxnZWFyLGNhcmIKTWF6ZGEgUlg0LDIxLDYsMTYwLDExMCwzLjksMi42MiwxNi40NiwwLDEsNCw0Ck1hemRhIFJYNCBXYWcsMjEsNiwxNjAsMTEwLDMuOSwyLjg3NSwxNy4wMiwwLDEsNCw0CkRhdHN1biA3MTAsMjIuOCw0LDEwOCw5MywzLjg1LDIuMzIsMTguNjEsMSwxLDQsMQpIb3JuZXQgNCBEcml2ZSwyMS40LDYsMjU4LDExMCwzLjA4LDMuMjE1LDE5LjQ0LDEsMCwzLDEKSG9ybmV0IFNwb3J0YWJvdXQsMTguNyw4LDM2MCwxNzUsMy4xNSwzLjQ0LDE3LjAyLDAsMCwzLDIKVmFsaWFudCwxOC4xLDYsMjI1LDEwNSwyLjc2LDMuNDYsMjAuMjIsMSwwLDMsMQpEdXN0ZXIgMzYwLDE0LjMsOCwzNjAsMjQ1LDMuMjEsMy41NywxNS44NCwwLDAsMyw0Ck1lcmMgMjQwRCwyNC40LDQsMTQ2LjcsNjIsMy42OSwzLjE5LDIwLDEsMCw0LDIKTWVyYyAyMzAsMjIuOCw0LDE0MC44LDk1LDMuOTIsMy4xNSwyMi45LDEsMCw0LDIKTWVyYyAyODAsMTkuMiw2LDE2Ny42LDEyMywzLjkyLDMuNDQsMTguMywxLDAsNCw0Ck1lcmMgMjgwQywxNy44LDYsMTY3LjYsMTIzLDMuOTIsMy40NCwxOC45LDEsMCw0LDQKTWVyYyA0NTBTRSwxNi40LDgsMjc1LjgsMTgwLDMuMDcsNC4wNywxNy40LDAsMCwzLDMKTWVyYyA0NTBTTCwxNy4zLDgsMjc1LjgsMTgwLDMuMDcsMy43MywxNy42LDAsMCwzLDMKTWVyYyA0NTBTTEMsMTUuMiw4LDI3NS44LDE4MCwzLjA3LDMuNzgsMTgsMCwwLDMsMwpDYWRpbGxhYyBGbGVldHdvb2QsMTAuNCw4LDQ3MiwyMDUsMi45Myw1LjI1LDE3Ljk4LDAsMCwzLDQKTGluY29sbiBDb250aW5lbnRhbCwxMC40LDgsNDYwLDIxNSwzLDUuNDI0LDE3LjgyLDAsMCwzLDQKQ2hyeXNsZXIgSW1wZXJpYWwsMTQuNyw4LDQ0MCwyMzAsMy4yMyw1LjM0NSwxNy40MiwwLDAsMyw0CkZpYXQgMTI4LDMyLjQsNCw3OC43LDY2LDQuMDgsMi4yLDE5LjQ3LDEsMSw0LDEKSG9uZGEgQ2l2aWMsMzAuNCw0LDc1LjcsNTIsNC45MywxLjYxNSwxOC41MiwxLDEsNCwyClRveW90YSBDb3JvbGxhLDMzLjksNCw3MS4xLDY1LDQuMjIsMS44MzUsMTkuOSwxLDEsNCwxClRveW90YSBDb3JvbmEsMjEuNSw0LDEyMC4xLDk3LDMuNywyLjQ2NSwyMC4wMSwxLDAsMywxCkRvZGdlIENoYWxsZW5nZXIsMTUuNSw4LDMxOCwxNTAsMi43NiwzLjUyLDE2Ljg3LDAsMCwzLDIKQU1DIEphdmVsaW4sMTUuMiw4LDMwNCwxNTAsMy4xNSwzLjQzNSwxNy4zLDAsMCwzLDIKQ2FtYXJvIFoyOCwxMy4zLDgsMzUwLDI0NSwzLjczLDMuODQsMTUuNDEsMCwwLDMsNApQb250aWFjIEZpcmViaXJkLDE5LjIsOCw0MDAsMTc1LDMuMDgsMy44NDUsMTcuMDUsMCwwLDMsMgpGaWF0IFgxLTksMjcuMyw0LDc5LDY2LDQuMDgsMS45MzUsMTguOSwxLDEsNCwxClBvcnNjaGUgOTE0LTIsMjYsNCwxMjAuMyw5MSw0LjQzLDIuMTQsMTYuNywwLDEsNSwyCkxvdHVzIEV1cm9wYSwzMC40LDQsOTUuMSwxMTMsMy43NywxLjUxMywxNi45LDEsMSw1LDIKRm9yZCBQYW50ZXJhIEwsMTUuOCw4LDM1MSwyNjQsNC4yMiwzLjE3LDE0LjUsMCwxLDUsNApGZXJyYXJpIERpbm8sMTkuNyw2LDE0NSwxNzUsMy42MiwyLjc3LDE1LjUsMCwxLDUsNgpNYXNlcmF0aSBCb3JhLDE1LDgsMzAxLDMzNSwzLjU0LDMuNTcsMTQuNiwwLDEsNSw4ClZvbHZvIDE0MkUsMjEuNCw0LDEyMSwxMDksNC4xMSwyLjc4LDE4LjYsMSwxLDQsMgo=').then(res => res.blob()).then(blob => {
+<p><a href="#dnldts22837" onclick="fetch('data:text/csv;base64,bW9kZWwsbXBnLGN5bCxkaXNwLGhwLGRyYXQsd3QscXNlYyx2cyxhbSxnZWFyLGNhcmIKTWF6ZGEgUlg0LDIxLDYsMTYwLDExMCwzLjksMi42MiwxNi40NiwwLDEsNCw0Ck1hemRhIFJYNCBXYWcsMjEsNiwxNjAsMTEwLDMuOSwyLjg3NSwxNy4wMiwwLDEsNCw0CkRhdHN1biA3MTAsMjIuOCw0LDEwOCw5MywzLjg1LDIuMzIsMTguNjEsMSwxLDQsMQpIb3JuZXQgNCBEcml2ZSwyMS40LDYsMjU4LDExMCwzLjA4LDMuMjE1LDE5LjQ0LDEsMCwzLDEKSG9ybmV0IFNwb3J0YWJvdXQsMTguNyw4LDM2MCwxNzUsMy4xNSwzLjQ0LDE3LjAyLDAsMCwzLDIKVmFsaWFudCwxOC4xLDYsMjI1LDEwNSwyLjc2LDMuNDYsMjAuMjIsMSwwLDMsMQpEdXN0ZXIgMzYwLDE0LjMsOCwzNjAsMjQ1LDMuMjEsMy41NywxNS44NCwwLDAsMyw0Ck1lcmMgMjQwRCwyNC40LDQsMTQ2LjcsNjIsMy42OSwzLjE5LDIwLDEsMCw0LDIKTWVyYyAyMzAsMjIuOCw0LDE0MC44LDk1LDMuOTIsMy4xNSwyMi45LDEsMCw0LDIKTWVyYyAyODAsMTkuMiw2LDE2Ny42LDEyMywzLjkyLDMuNDQsMTguMywxLDAsNCw0Ck1lcmMgMjgwQywxNy44LDYsMTY3LjYsMTIzLDMuOTIsMy40NCwxOC45LDEsMCw0LDQKTWVyYyA0NTBTRSwxNi40LDgsMjc1LjgsMTgwLDMuMDcsNC4wNywxNy40LDAsMCwzLDMKTWVyYyA0NTBTTCwxNy4zLDgsMjc1LjgsMTgwLDMuMDcsMy43MywxNy42LDAsMCwzLDMKTWVyYyA0NTBTTEMsMTUuMiw4LDI3NS44LDE4MCwzLjA3LDMuNzgsMTgsMCwwLDMsMwpDYWRpbGxhYyBGbGVldHdvb2QsMTAuNCw4LDQ3MiwyMDUsMi45Myw1LjI1LDE3Ljk4LDAsMCwzLDQKTGluY29sbiBDb250aW5lbnRhbCwxMC40LDgsNDYwLDIxNSwzLDUuNDI0LDE3LjgyLDAsMCwzLDQKQ2hyeXNsZXIgSW1wZXJpYWwsMTQuNyw4LDQ0MCwyMzAsMy4yMyw1LjM0NSwxNy40MiwwLDAsMyw0CkZpYXQgMTI4LDMyLjQsNCw3OC43LDY2LDQuMDgsMi4yLDE5LjQ3LDEsMSw0LDEKSG9uZGEgQ2l2aWMsMzAuNCw0LDc1LjcsNTIsNC45MywxLjYxNSwxOC41MiwxLDEsNCwyClRveW90YSBDb3JvbGxhLDMzLjksNCw3MS4xLDY1LDQuMjIsMS44MzUsMTkuOSwxLDEsNCwxClRveW90YSBDb3JvbmEsMjEuNSw0LDEyMC4xLDk3LDMuNywyLjQ2NSwyMC4wMSwxLDAsMywxCkRvZGdlIENoYWxsZW5nZXIsMTUuNSw4LDMxOCwxNTAsMi43NiwzLjUyLDE2Ljg3LDAsMCwzLDIKQU1DIEphdmVsaW4sMTUuMiw4LDMwNCwxNTAsMy4xNSwzLjQzNSwxNy4zLDAsMCwzLDIKQ2FtYXJvIFoyOCwxMy4zLDgsMzUwLDI0NSwzLjczLDMuODQsMTUuNDEsMCwwLDMsNApQb250aWFjIEZpcmViaXJkLDE5LjIsOCw0MDAsMTc1LDMuMDgsMy44NDUsMTcuMDUsMCwwLDMsMgpGaWF0IFgxLTksMjcuMyw0LDc5LDY2LDQuMDgsMS45MzUsMTguOSwxLDEsNCwxClBvcnNjaGUgOTE0LTIsMjYsNCwxMjAuMyw5MSw0LjQzLDIuMTQsMTYuNywwLDEsNSwyCkxvdHVzIEV1cm9wYSwzMC40LDQsOTUuMSwxMTMsMy43NywxLjUxMywxNi45LDEsMSw1LDIKRm9yZCBQYW50ZXJhIEwsMTUuOCw4LDM1MSwyNjQsNC4yMiwzLjE3LDE0LjUsMCwxLDUsNApGZXJyYXJpIERpbm8sMTkuNyw2LDE0NSwxNzUsMy42MiwyLjc3LDE1LjUsMCwxLDUsNgpNYXNlcmF0aSBCb3JhLDE1LDgsMzAxLDMzNSwzLjU0LDMuNTcsMTQuNiwwLDEsNSw4ClZvbHZvIDE0MkUsMjEuNCw0LDEyMSwxMDksNC4xMSwyLjc4LDE4LjYsMSwxLDQsMgo=').then(res => res.blob()).then(blob => {
       const downloadURL = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       document.body.appendChild(a);
@@ -653,7 +656,7 @@ Tipp
       a.download = 'mtcars.csv'; a.click();
       window.URL.revokeObjectURL(downloadURL);
       document.body.removeChild(a);
-        });"><button class="btn btn-info downloadthis  " id="dnldts50777"><i class="bi bi-database-fill-down"></i> Download </button></a></p>
+        });"><button class="btn btn-info downloadthis  " id="dnldts22837"><i class="bi bi-database-fill-down"></i> Download </button></a></p>
 <div id="exr-path-abs" class="theorem exercise">
 <p><span class="theorem-title"><strong>Übungsaufgabe 3 (Daten importieren mit absolutem Pfad)</strong></span> Importieren Sie den Datensatz <code>mtcars</code> mit absolutem Pfad. Was sind die Vor- und die Nachteile dieses Vorgehens?</p>
 </div>
@@ -665,13 +668,13 @@ Tipp
 <p>Eine Hilfe bietet da das Paket <code>here</code>, das das aktuelle RStudio-Arbeitsverzeichnis (working directory) zurückgibt:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">here</span>()</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "/Users/sebastiansaueruser/github-repos/hans-hackathon2025"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "/home/sebastian-sauer/Dokumente/hans-hackathon2025"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Entsprechend können wir uns damit portablere absolute Pfade basteln:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>path_abs_portable <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">here</span>(),<span class="st">"/"</span>, <span class="st">"input/mtcars.csv"</span>)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>path_abs_portable</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "/Users/sebastiansaueruser/github-repos/hans-hackathon2025/input/mtcars.csv"</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "/home/sebastian-sauer/Dokumente/hans-hackathon2025/input/mtcars.csv"</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(path_abs_portable)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -691,7 +694,7 @@ Backslashes haben eine besondere Bedeutung in R
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>path_abs <span class="ot">&lt;-</span> <span class="st">"C:/Users/sebastian.sauer/Documents/Github/hans-hackathon/input/mtcars.csv"</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(path_abs)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in file(file, "rt"): cannot open the connection</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Error in file(file, "rt"): kann Verbindung nicht öffnen</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="datensätze-von-lang-nach-breit-umformatieren" class="level2" data-number="1.4">
@@ -859,15 +862,16 @@ Abbildung&nbsp;7: Sinnbild für map aus purrr
 <p>Hier ist ein <a href="https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html">Tutorial</a> zu <code>map()</code> von Jenny BC.</p>
 </section>
 </section>
-<section id="r-ist-schwierig" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="r-ist-schwierig"><span class="header-section-number">1.8</span> R ist schwierig</h2>
+<section id="r-war-schwierig" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="r-war-schwierig"><span class="header-section-number">1.8</span> R war schwierig</h2>
 <p>Manche behaupten, R <a href="https://www.burns-stat.com/pages/Tutor/R_inferno.pdf">sei ein Inferno</a>.</p>
 <p>Zum Glück gibt es auch aufmunternde Stimmen:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>praise<span class="sc">::</span><span class="fu">praise</span>()</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "You are luminous!"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "You are groovy!"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Hat jemand einen guten Rat für uns? Vielleicht ist der häufigste Rat, dass man die <a href="https://en.wikipedia.org/wiki/RTFM">Dokumentation lesen solle</a>.</p>
+<p>Programmieren war schwierig(er), als es noch keine KI-Bots gab. Heutzutage ist es dank dieser Bots deutlich einfacher. Nutzen Sie also diese Erleichterung ausgiebig.</p>
+<p>Hat jemand sonst noch einen guten Rat für uns? Vielleicht ist der häufigste Rat, dass man die <a href="https://en.wikipedia.org/wiki/RTFM">Dokumentation lesen solle</a>.</p>
 </section>
 <section id="fallstudien" class="level2" data-number="1.9">
 <h2 data-number="1.9" class="anchored" data-anchor-id="fallstudien"><span class="header-section-number">1.9</span> Fallstudien</h2>
@@ -891,10 +895,11 @@ Wickham, Hadley, Mine Çetinkaya-Rundel, und Garrett Grolemund. 2023. <em>R for 
 </div>
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>MIT</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Zitat</h2><div><div class="quarto-appendix-secondary-label">Mit BibTeX zitieren:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{untitled,
   author = {},
+  url = {https://sebastiansauer.github.io/hans-hackathon2025/einstieg.html},
   langid = {de-DE}
 }
 </code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Bitte zitieren Sie diese Arbeit als:</div><div id="ref-untitled" class="csl-entry quarto-appendix-citeas" role="listitem">
-n.d.
+n.d. <a href="https://sebastiansauer.github.io/hans-hackathon2025/einstieg.html">https://sebastiansauer.github.io/hans-hackathon2025/einstieg.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -968,7 +973,7 @@ n.d.
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sebastiansauer\.github\.io\/hans-hackathon2025\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1302,10 +1307,10 @@ n.d.
 <p>Powered by <a href="https://quarto.org">Quarto</a></p>
 </div>   
     <div class="nav-footer-center">
-<p><a href="./imprint.html">Impressum</a></p>
+<p><a href="./imprint.qmd">Impressum</a></p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sebastiansauer/hans-hackathon/blob/main/einstieg.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li><li><a href="https://github.com/sebastiansauer/hans-hackathon/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></div>
     <div class="nav-footer-right">
-<p><a href="./data-privacy.html">Datenschutzhinweise</a></p>
+<p><a href="./data-privacy.qmd">Datenschutzhinweise</a></p>
 </div>
   </div>
 </footer>

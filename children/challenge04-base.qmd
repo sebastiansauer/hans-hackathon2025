@@ -1,9 +1,9 @@
 **Targets-Pipeline**
 
 
-1. Schreiben Sie Ihre Analyse-Pipeline als Targets-Pipeline.
-2. *Pivotieren* Sie dieses Mal *wie folgt*: Entfernen Sie alle Spalten *außer* `idvisit` und alle Spalten, die `actionDetails` enthalten. Pivotieren Sie dann *nur* Spalten mit dem Namen vom Typ `actionDetails`; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also drei Spalten resultieren: `idvisit`, `name` und `value`.
-2. Fügen Sie am Ende der Pipeline ein *Target* hinzu, das den zentralen, resultierenden Dataframe *als Excel-Datei exportiert* (aber nicht den Dataframe im Langformat, sondern den Dataframe im "breiten" Format).
+1. Schreiben Sie Ihre Analyse-Pipeline als Targets-Pipeline. Beginnen Sie mit dem Auflisten der Datendateien (wie in Challenge 02), gefolgt vom Einlesen, etc. Anders gesagt: Übertragen Sie Ihre Lösungen von Challenges 02 und 03 in die Targets-Pipeline.
+2. *Pivotieren* Sie dieses Mal *wie folgt*: Entfernen Sie alle Spalten *außer*  den ID-Variablen `id_visit` und `fingerprint` sowie allen Spalten, die `actionDetails` enthalten. Pivotieren Sie dann *nur* Spalten mit dem Namen vom Typ `actionDetails`; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also vier Spalten resultieren: `idvisit`, `fingerprint` `name` und `value`.
+2. 
 2. Diskutieren Sie Vor- und Nachteile der Targets-Pipeline.
 
 
@@ -12,14 +12,12 @@ Tipps:
 
 - Lesen Sie sich die [targets-Dokumentation](https://books.ropensci.org/targets/) durch.
 - Diese [Präsentation](https://wlandau.github.io/targets-tutorial/#1) gibt einen guten Überblick über die Funktionsweise von Targets.
-- Nutzen Sie ggf. das Template für die Lösung dieser Challenge (l[iegt im Repo im Root-Folder](https://github.com/sebastiansauer/hans-hackathon/blob/main/challenge05-solution-template.R)).
+- Nutzen Sie ggf. das Template für die Lösung dieser Challenge (l[iegt im Repo im Root-Folder](https://github.com/sebastiansauer/hans-hackathon/blob/main/challenge04-solution-template.R)).
 - Beim Importieren können sich die Spaltennamen ändern, z.B. von `actionDetails_XXX` zu `action_details_XXX`.
-- Nutzen Sie die Funktion `pivot_longer()` aus dem Paket `tidyr` für die Pivotierung. Bei Performanzproblemen könnte sich das Paket `collapse` anbieten, wo es auch eine Pivotierungsfunktion gibt. Auch das Paket `polar` ist für hohe Performanz bekannt.
+- Nutzen Sie die Funktion `pivot_longer()` aus dem Paket `tidyr` für die Pivotierung. Bei Performanzproblemen könnte sich das Paket `collapse` anbieten oder das Paket `data.table`, wo es auch eine Pivotierungsfunktionen gibt. Auch das Paket `polar` ist für hohe Performanz bekannt.
 
 
 Ausgabeformat: R-Syntax (Targets-Pipeline).
 
-
-**Hinweis**: Die Lösung dieser Challenge ist nicht trivial. Sie erfordert einiges an Recherche und Einarbeitung in die Targets-Pipeline.
 
 

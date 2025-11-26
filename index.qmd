@@ -74,5 +74,6 @@ Seien Sie kreativ und probieren Sie verschiedene Dienste aus, um herauszufinden,
 IDEen wie RStudio und Positron haben oft auch Plugins oder Erweiterungen, die KI-Dienste integrieren.
 
 ## Los geht's!
+
 Viel Erfolg und Spaß im Kurs!
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -37,10 +37,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1d9754e6b7e1dc15a659fbcd6780067e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-629432c7d29b615b3888e3cdfd62b7a9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8fab3344b279532328a9fb85fb74ff60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1a7ff3268f5f6ee961e8afaef3a72c9f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -149,6 +149,9 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Lösung 02</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+ <span class="menu-text">Lösung 03</span>
+  </li>
     </ul>
     </div>
 </nav>
@@ -171,7 +174,8 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#benotung-der-challenges" id="toc-benotung-der-challenges" class="nav-link" data-scroll-target="#benotung-der-challenges"><span class="header-section-number">1.3.1</span> Benotung der Challenges</a></li>
   <li><a href="#formalia" id="toc-formalia" class="nav-link" data-scroll-target="#formalia"><span class="header-section-number">1.3.2</span> Formalia</a></li>
-  <li><a href="#abgabeformat" id="toc-abgabeformat" class="nav-link" data-scroll-target="#abgabeformat"><span class="header-section-number">1.3.3</span> Abgabeformat</a></li>
+  <li><a href="#tipps" id="toc-tipps" class="nav-link" data-scroll-target="#tipps"><span class="header-section-number">1.3.3</span> Tipps</a></li>
+  <li><a href="#abgabeformat" id="toc-abgabeformat" class="nav-link" data-scroll-target="#abgabeformat"><span class="header-section-number">1.3.4</span> Abgabeformat</a></li>
   </ul></li>
   <li><a href="#teil-2-fachgespräch" id="toc-teil-2-fachgespräch" class="nav-link" data-scroll-target="#teil-2-fachgespräch"><span class="header-section-number">1.4</span> Teil 2: Fachgespräch</a>
   <ul class="collapse">
@@ -237,7 +241,7 @@ Hinweis
 <p>Bitte beachten Sie, dass sich die Challenges noch ändern können, solange sie nicht begonnen haben.</p>
 <p>Bitte beachten Sie auch die <a href="https://hinweisbuch.netlify.app/109-hinweise-programmier">Hinweise zum Thema ‘Programmieren’</a>.</p>
 <p>Die Challenges werden im Unterricht vorgestellt und besprochen.</p>
-<p>Für jede Aufgabe lassen sich verschiedene Lösungswege finden. Es ist nicht nötig, dass Ihre Lösung exakt der Musterlösung entspricht. Wichtig ist, dass Sie die Aufgabe lösen und Ihre Lösung nachvollziehbar dokumentieren. Treffen Sie Annahmen, wenn die Aufgabenstellung dies erfordert, und dokumentieren Sie diese Annahmen in Ihrer Lösung.</p>
+<p>Für jede Aufgabe lassen sich <em>verschiedene Lösungswege</em> finden. Es ist nicht nötig, dass Ihre Lösung exakt der Musterlösung entspricht. Wichtig ist, dass Sie die Aufgabe lösen und Ihre Lösung <em>nachvollziehbar dokumentieren</em>. <em>Treffen Sie Annahmen</em>, wenn die Aufgabenstellung dies erfordert, und dokumentieren Sie diese Annahmen in Ihrer Lösung. Schreiben Sie nicht nur <em>Code</em>, sondern <em>erklären</em> Sie diesen auch kurz: was machen Sie da gerade und warum? Erläutern Sie ebenfalls das Ergebnis: Was resultiert aus Ihrem Code als Ausgabe? Wie ist die Ausgabe zu interpretieren? Wie fügt Sie sich als Antwort zur Aufgabenstellung?</p>
 <section id="benotung-der-challenges" class="level3" data-number="1.3.1">
 <h3 data-number="1.3.1" class="anchored" data-anchor-id="benotung-der-challenges"><span class="header-section-number">1.3.1</span> Benotung der Challenges</h3>
 <p>Jede Challenge wird wie folgt bepunktet:</p>
@@ -266,12 +270,23 @@ Hinweis
 <li>Nutzen Sie den <a href="https://style.tidyverse.org/">Tidyverse-Styleguide</a>.</li>
 <li>Im Fall eines Plagiats (d.h. wenn Sie Code von anderen übernehmen, ohne dies kenntlich zu machen), wird das Modul mit “nicht bestanden” bewertet.</li>
 <li>Im Fall, dass sich (quasi) identischer Text in mehreren Lösungen findet, wird dies als Plagiat gewertet bei <em>allen</em> Beteiligten.</li>
+<li>Reichen Sie in einer Challenge Ihre Lösungen zu dieser Challenge ein, nicht auch die Lösungen vorheriger Challenges.</li>
+<li>Füllen Sie im YAML-Header von Quarto-Dateien die Felder <code>title</code>, <code>author</code> und <code>date</code> aus.</li>
 </ul>
 </section>
-<section id="abgabeformat" class="level3" data-number="1.3.3">
-<h3 data-number="1.3.3" class="anchored" data-anchor-id="abgabeformat"><span class="header-section-number">1.3.3</span> Abgabeformat</h3>
-<section id="quarto" class="level4" data-number="1.3.3.1">
-<h4 data-number="1.3.3.1" class="anchored" data-anchor-id="quarto"><span class="header-section-number">1.3.3.1</span> Quarto</h4>
+<section id="tipps" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="tipps"><span class="header-section-number">1.3.3</span> Tipps</h3>
+<ul>
+<li>Gehen Sie nicht davon aus, dass die Groß- bzw. Kleinschreibung von Datei- oder Spaltennamen in der Aufgabenstellung notwendig der in der Datendatei entspricht. Beispiel: “actiondetails_” und “actionDetails_” können sind möglich. Sie (bzw. Ihr Computer-Code) sollte damit zurechtkommen.</li>
+<li>Nutzen Sie die Markdown-Syntax sinnvoll bei der Formatierung/Gestaltung von Quarto-Dateien (.qmd). Beispiel: <code>##### Der häufigste Wert ist "action" und er kommt 30mal vor</code>. Hier wird eine Überschrift auf Ebene 5 verwendet, das ist nicht empfehlenswert.</li>
+<li>Oftmals lassen Aufgabenstellung Freiraum und Interpretationsspielraum. In diesem Fall haben Sie das Recht und die Pflicht, (sinnvolle) Annahmen zu treffen.</li>
+<li>Experimentieren Sie mit der Source- und der Visual-Ansicht des Editors. Beide haben Vorteile.</li>
+</ul>
+</section>
+<section id="abgabeformat" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="abgabeformat"><span class="header-section-number">1.3.4</span> Abgabeformat</h3>
+<section id="quarto" class="level4" data-number="1.3.4.1">
+<h4 data-number="1.3.4.1" class="anchored" data-anchor-id="quarto"><span class="header-section-number">1.3.4.1</span> Quarto</h4>
 <p>Sofern das Ausgabeformat “Quarto” definiert ist, reichen Sie Ihre Ergebnisse bitte in Form eines Dokuments ein,</p>
 <ul>
 <li>das die <em>Lösung</em> (der Aufgabenstellung) enthält,</li>
@@ -289,8 +304,8 @@ Hinweis
 <li>das <em>durchläuft</em>, ohne Fehler zu werfen.</li>
 </ul>
 </section>
-<section id="r" class="level4" data-number="1.3.3.2">
-<h4 data-number="1.3.3.2" class="anchored" data-anchor-id="r"><span class="header-section-number">1.3.3.2</span> R</h4>
+<section id="r" class="level4" data-number="1.3.4.2">
+<h4 data-number="1.3.4.2" class="anchored" data-anchor-id="r"><span class="header-section-number">1.3.4.2</span> R</h4>
 <p>Sofern als Ausgabeformat “R-Syntax” definiert ist, reichen Sie Ihren Code bitte in Form eines R-Skripts ein,</p>
 <ul>
 <li>das die <em>Lösung</em> der Challenge enthält.</li>
@@ -371,6 +386,11 @@ for (i in 1:length(datafiles_list)) {
 <li>Erläutern Sie einen Weg, um die Musterlösung auf Geschwindigkeit zu optimieren.</li>
 <li>Geben Sie ein Beispiel für eine zu wenig allgemeine Funktion! Beispiel: <code>read_csv_meine_lieblingsdatei()</code>.</li>
 <li>Was sind Vorteile, Funktionen beim Programmieren zu nutzen?</li>
+<li>Erläutern Sie folgenden Code: <code>unique_counts &lt;- sapply(Matomo1[ , spalten_aufgabe7], function(x) length(unique(x)))</code>.</li>
+<li>Erläutern Sie folgenden Code: <code>matomo_aufgabe8 &lt;- Matomo1[, (spalten_aufgabe7)]; lapply(matomo_aufgabe8, unique)</code>.</li>
+<li>Erläutern Sie folgenden Code: <code>daten_clean %&gt;% summarise(across(everything(), ~ mean(is.na(.))))</code>.</li>
+<li>? <code>sum(str_detect(names(matomo_day1), "^actionDetails_"))</code></li>
+<li>? <code>grep("id|ID|Ip|ip|fingerprint", names(matomo_day1), value = TRUE)</code></li>
 </ol>
 </section>
 </section>
@@ -385,10 +405,11 @@ for (i in 1:length(datafiles_list)) {
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>MIT</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Zitat</h2><div><div class="quarto-appendix-secondary-label">Mit BibTeX zitieren:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{untitled,
   author = {},
+  url = {https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html},
   langid = {de-DE}
 }
 </code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Bitte zitieren Sie diese Arbeit als:</div><div id="ref-untitled" class="csl-entry quarto-appendix-citeas" role="listitem">
-n.d.
+n.d. <a href="https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html">https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -462,7 +483,7 @@ n.d.
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sebastiansauer\.github\.io\/hans-hackathon2025\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -796,10 +817,10 @@ n.d.
 <p>Powered by <a href="https://quarto.org">Quarto</a></p>
 </div>   
     <div class="nav-footer-center">
-<p><a href="./imprint.html">Impressum</a></p>
+<p><a href="./imprint.qmd">Impressum</a></p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sebastiansauer/hans-hackathon/blob/main/pruefung.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li><li><a href="https://github.com/sebastiansauer/hans-hackathon/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></div>
     <div class="nav-footer-right">
-<p><a href="./data-privacy.html">Datenschutzhinweise</a></p>
+<p><a href="./data-privacy.qmd">Datenschutzhinweise</a></p>
 </div>
   </div>
 </footer>

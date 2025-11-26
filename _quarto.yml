@@ -3,10 +3,14 @@ project:
   title: "Hans-Hackathon"
   output-dir: docs
   render:
-    - "*.qmd"
-    - "!challenges-solutions/"
-    - "!**/Icon*"
-    - "!challenges-solutions-dev/"
+    - index.qmd
+    - einstieg.qmd
+    - projektmanagement.qmd
+    - pruefung.qmd
+    - challenges.qmd
+    - challenge01-solution.qmd
+    - challenge02-solution.qmd
+    - challenge03-solution.qmd
 
 
 editor: source
@@ -43,6 +47,8 @@ website:
         text: Lösung 01
       - href: challenge02-solution.qmd
         text: Lösung 02
+      - hrer: challenge03-solution.qmd
+        text: Lösung 03
       # - href: challenge03-solution.qmd
       #   text: Lösung 03
       # - href: challenge04-solution.qmd

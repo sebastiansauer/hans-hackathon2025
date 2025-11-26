@@ -1,17 +1,16 @@
 
 
-**Interaktion mit dem LLM**
+**Was machen die User?**
 
-1. Wie oft wird (pro Monat) ein AI Transkript angefordert? (Tipp: Suche nach `click_transcript_word`.)
-2. Wie oft wird (pro Monat) mit dem LLM interagiert (Tipp: `llm`)?
-3. Welcher Anteil der Visits (`id_visit`) interagiert mit dem LLM?
+
+1. Stellen Sie die *Namen der ersten 100 Spalten* im Bericht dar.
+1. Werten Sie die *Top-10-Tätigkeiten* aus, die die Besucher auf der Website durchführen, z.B. Videos anschauen. Zählen Sie dafür, welche Werte wie oft bei `subtitle` stehen.
+3. Berechnen Sie die "*Glotzdauer*", d.h. wie lange die Besucher sich Videos anschauen. Berichten Sie relevante Statistiken.
+4. Untersuchen und visualisieren Sie, ob sich die Anzahl der Nutzer oder die Verweildauer auf der Website *verändert hat im Laufe der Zeit* (Wochen und Monate).
+5. Untersuchen und visualisieren Sie, ob sich das Verhalten in Bezug auf die Videos *verändert hat im Laufe der Zeit* (Wochen und Monate), v.a. im Hinblick auf die Glotzdauer.
+
 
 
 Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).
 
-
-Hinweise:
-
-- Nutzen Sie *Typst* als Ausgabeformat.
-- Bitte beachten Sie Hinweise zum [Programmieren](https://hinweisbuch.netlify.app/109-hinweise-programmieren).
-
+Bitte beachten Sie Hinweise zum [Programmieren](https://hinweisbuch.netlify.app/109-hinweise-programmieren).

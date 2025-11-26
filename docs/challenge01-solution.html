@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,10 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1d9754e6b7e1dc15a659fbcd6780067e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-629432c7d29b615b3888e3cdfd62b7a9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8fab3344b279532328a9fb85fb74ff60.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1a7ff3268f5f6ee961e8afaef3a72c9f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -185,6 +185,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Lösung 02</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+ <span class="menu-text">Lösung 03</span>
+  </li>
     </ul>
     </div>
 </nav>
@@ -244,7 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">10. November 2025</p>
+      <p class="date">26. November 2025</p>
     </div>
   </div>
   
@@ -274,14 +277,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>datafile_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">here</span>(),<span class="st">"/"</span>, <span class="st">"data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-07.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>datafile_name</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "/Users/sebastiansaueruser/github-repos/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-07.csv"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "/home/sebastian-sauer/Dokumente/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-07.csv"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Wie lange dauer das Laden der Daten?</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>(<span class="st">"load data"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>d_matomo1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(datafile_name)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## load data: 3.845 sec elapsed</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## load data: 2.104 sec elapsed</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Oder so, mit <code>read_csv</code> aus dem <code>readr</code>-Paket (Teil des Tidyverse):</p>
 <p>Puffer vergrößern:</p>
@@ -292,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>(<span class="st">"load data"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>d_matomo2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(datafile_name)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## load data: 1.274 sec elapsed</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## load data: 0.831 sec elapsed</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Da müsste man mal überlegen, wie man das schneller machen kann…</p>
 </section>
@@ -488,9 +491,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>d_matoma_na_n <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(d_matomo1))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>d_matoma_na_n</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.8328604</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.2444292</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Also ca. 83.29% der Werte sind <code>NA</code>.</p>
+<p>Also ca. 24.44% der Werte sind <code>NA</code>.</p>
 <p>Aber stimmt das wirklich?</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d_small <span class="ot">&lt;-</span> </span>
@@ -716,100 +719,100 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0588235</td>
-<td style="text-align: right;">0.1176471</td>
-<td style="text-align: right;">0.0588235</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.1176471</td>
-<td style="text-align: right;">0.1176471</td>
-<td style="text-align: right;">0.3235294</td>
 <td style="text-align: right;">0.0588235</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.8823529</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.1176471</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.3235294</td>
+<td style="text-align: right;">0.0588235</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.1764706</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.5882353</td>
-<td style="text-align: right;">0.5882353</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2352941</td>
 <td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.5882353</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2352941</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2352941</td>
 <td style="text-align: right;">0.5</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2941176</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.7352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2941176</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.3235294</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.6764706</td>
-<td style="text-align: right;">0.6764706</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.3529412</td>
 <td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.6470588</td>
-<td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.3235294</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.3529412</td>
-<td style="text-align: right;">0.3529412</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.6470588</td>
-<td style="text-align: right;">0.6470588</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.3823529</td>
 <td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.6176471</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.4117647</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.4705882</td>
-<td style="text-align: right;">0.4705882</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.9411765</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0.9411765</td>
 <td style="text-align: right;">0.4705882</td>
-<td style="text-align: right;">0.6176471</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4411765</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.4705882</td>
-<td style="text-align: right;">0.7941176</td>
-<td style="text-align: right;">0.4705882</td>
-<td style="text-align: right;">0.4411765</td>
-<td style="text-align: right;">0.4411765</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
@@ -1037,100 +1040,100 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0588235</td>
-<td style="text-align: right;">0.1176471</td>
-<td style="text-align: right;">0.0588235</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.1176471</td>
-<td style="text-align: right;">0.1176471</td>
-<td style="text-align: right;">0.3235294</td>
 <td style="text-align: right;">0.0588235</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.8823529</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.1176471</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.3235294</td>
+<td style="text-align: right;">0.0588235</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.1764706</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.5882353</td>
-<td style="text-align: right;">0.5882353</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2352941</td>
 <td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.5882353</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
-<td style="text-align: right;">0.1764706</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2352941</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2352941</td>
 <td style="text-align: right;">0.5</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2941176</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.7352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2352941</td>
-<td style="text-align: right;">0.2941176</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.3235294</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.6764706</td>
-<td style="text-align: right;">0.6764706</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.3529412</td>
 <td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.6470588</td>
-<td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.2941176</td>
-<td style="text-align: right;">0.3235294</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.3529412</td>
-<td style="text-align: right;">0.3529412</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.6470588</td>
-<td style="text-align: right;">0.6470588</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.3823529</td>
 <td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.6176471</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.3235294</td>
-<td style="text-align: right;">0.4117647</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.4705882</td>
-<td style="text-align: right;">0.4705882</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.9411765</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0.9411765</td>
 <td style="text-align: right;">0.4705882</td>
-<td style="text-align: right;">0.6176471</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4117647</td>
-<td style="text-align: right;">0.4411765</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">0.4705882</td>
-<td style="text-align: right;">0.7941176</td>
-<td style="text-align: right;">0.4705882</td>
-<td style="text-align: right;">0.4411765</td>
-<td style="text-align: right;">0.4411765</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
@@ -1140,12 +1143,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Schauen wir uns z.B. die Spalte <code>actionDetails_0_timeSpentPretty</code> an:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>d_matomo1<span class="sc">$</span>actionDetails_0_timeSpentPretty</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] "5s"         "2s"         "10s"        "4s"         NA          </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] "5s"         "2s"         "10s"        "4s"         ""          </span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [6] "3s"         "13s"        "4s"         "9s"         "1s"        </span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [11] "1s"         NA           "0s"         "0s"         "1s"        </span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [16] "3s"         NA           "4s"         "3s"         "13 min 45s"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [11] "1s"         ""           "0s"         "0s"         "1s"        </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [16] "3s"         ""           "4s"         "3s"         "13 min 45s"</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [21] "42s"        "1s"         "0s"         "3s"         "4s"        </span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [26] NA           "0s"         "0s"         "35s"        "4s"        </span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [26] ""           "0s"         "0s"         "35s"        "4s"        </span></span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [31] "0s"         "4s"         "3s"         "4s"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Es gibt viele leere Werte, also <code>""</code>, die aber <em>nicht</em> als <code>NA</code> gezählt werden. Jetzt könnte man diskutieren, ob es wirklich keine <code>NA</code>s sind, sondern <em>gewollt</em> leere Werte. Aber vermutlich ist es besser, sie auch als “fehlend” und damit als <code>NA</code> zu zählen.</p>
@@ -1165,7 +1168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>check, ob das gleiche Ergebnis in beiden Operation herauskommt:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(d_with_true_nas, d_with_true_nas2)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Zählen wir also nochmal die NAs:</p>
 <div class="cell" data-layout-align="center">
@@ -1572,12 +1575,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>MIT</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Zitat</h2><div><div class="quarto-appendix-secondary-label">Mit BibTeX zitieren:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{sauer2025,
   author = {Sauer, Sebastian},
   title = {Challenge 01 -\/- Solution},
-  date = {2025-11-10},
+  date = {2025-11-26},
+  url = {https://sebastiansauer.github.io/hans-hackathon2025/challenge01-solution.html},
   langid = {de-DE}
 }
 </code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Bitte zitieren Sie diese Arbeit als:</div><div id="ref-sauer2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Sauer, Sebastian. 2025. <span>“Challenge 01 -- Solution.”</span>
-November 10, 2025.
+November 26, 2025. <a href="https://sebastiansauer.github.io/hans-hackathon2025/challenge01-solution.html">https://sebastiansauer.github.io/hans-hackathon2025/challenge01-solution.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1651,7 +1655,7 @@ November 10, 2025.
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sebastiansauer\.github\.io\/hans-hackathon2025\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1985,10 +1989,10 @@ November 10, 2025.
 <p>Powered by <a href="https://quarto.org">Quarto</a></p>
 </div>   
     <div class="nav-footer-center">
-<p><a href="./imprint.html">Impressum</a></p>
+<p><a href="./imprint.qmd">Impressum</a></p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sebastiansauer/hans-hackathon/blob/main/challenge01-solution.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li><li><a href="https://github.com/sebastiansauer/hans-hackathon/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></div>
     <div class="nav-footer-right">
-<p><a href="./data-privacy.html">Datenschutzhinweise</a></p>
+<p><a href="./data-privacy.qmd">Datenschutzhinweise</a></p>
 </div>
   </div>
 </footer>
