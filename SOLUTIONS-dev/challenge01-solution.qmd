@@ -1,0 +1,344 @@
+---
+title: "Challenge 01 -- Solution"
+format: 
+  html:
+    df-print: kable
+author: Sebastian Sauer
+date: today
+number-sections: true
+---
+
+
+
+# Daten verstehen
+
+
+## Aufgaben
+
+
+{{< include ../children/challenge01-base.qmd >}}
+
+
+
+## Lösungen
+
+### Setup
+
+
+```{r}
+library(tidyverse)
+library(stringr)  # Strings verarbeiten
+library(here)  # liest aktuelles Verzeichnis aus
+library(tictoc)
+```
+
+
+```{r load-data}
+datafile_name <- paste0(here(),"/", "data-processed/matomo_export_2025-07-07.csv")
+datafile_name
+```
+
+Wie lange dauer das Laden der Daten?
+
+```{r}
+tic("load data")
+d_matomo1 <- read.csv(datafile_name)
+toc()
+```
+
+Da müsste man mal überlegen, wie man das schneller machen kann...
+
+
+### 1 dim
+
+Was ist die Anzahl von Zeilen und Spalten?
+
+
+```{r}
+dim(d_matomo1)
+```
+
+
+### 2 Muster in den Spaltennamen
+
+Es gibt ein Muster in den Spaltennamen. Was fällt Ihnen dazu auf?
+
+```{r}
+names(d_matomo1) |> head(50)
+```
+
+
+```{r}
+names(d_matomo1) |> tail(50)
+```
+
+Es gibt Spalten mit einer fortlaufenden Nummer und Spalten ohne.
+
+
+### 3 Unique Spaltennamen
+Welche verschiedenen Spaltennamen gibt es, wenn man die Zahlen (fortlaufenden Nummern in den Spaltennamen) außer Acht lässt? Wie heißen diese (uniquen) Spalten?
+
+Ignoriert man die fortlaufende Nummer, gibt es nicht (mehr so) viele verschiedene Werte (Ausprägungen) an Spaltennamen.
+
+
+Spaltennamen mit fortlaufender Nummer:
+
+
+```{r}
+cols_with_number <- 
+  str_subset(string = names(d_matomo1),
+           pattern = "[:digit:]")
+```
+
+
+Ganz schön viele!
+
+
+Jetzt schneiden wir den hinteren Teil von jedem Spaltennamen ab, dort, wo die Zahl beginnt.
+
+```{r}
+unique_names <- 
+str_remove(string = names(d_matomo1),
+           pattern = "_[:digit:].*") |> 
+  unique()
+
+unique_names
+```
+
+
+
+
+### 4 Was fällt Ihnen zur Anteil und zum Muster der fehlenden Werte auf?
+
+```{r}
+d_matoma_na_n <- mean(is.na(d_matomo1))
+d_matoma_na_n
+```
+
+
+Also ca. `r round(d_matoma_na_n*100,2)`% der Werte sind `NA`.
+
+Aber stimmt das wirklich?
+
+
+```{r}
+d_small <- 
+d_matomo1 |> 
+  select(1:100)
+  
+d_small |> 
+  summarise_all(~ mean(is.na(.)))
+```
+
+Oder so (modernerer Stil):
+
+```{r}
+d_small |> 
+summarise(across(everything(), ~ mean(is.na(.))))
+```
+
+
+Schauen wir uns z.B. die Spalte `actionDetails_0_timeSpentPretty` an:
+
+```{r}
+d_matomo1$actionDetails_0_timeSpentPretty
+```
+
+Es gibt viele leere Werte, also `""`, die aber *nicht* als `NA` gezählt werden.
+Jetzt könnte man diskutieren, ob es wirklich keine `NA`s sind, sondern *gewollt* leere Werte.
+Aber vermutlich ist es besser, sie auch als "fehlend" und damit als `NA` zu zählen.
+
+
+Formatieren wir also alle leeren Strings (`""`) als NA:
+
+
+```{r}
+d_with_true_nas <-
+  d_matomo1 |> 
+   mutate(across(where(is.character), ~ na_if(., "")))
+```
+
+
+
+Base-R ist hier prägnanter:
+
+```{r}
+d_with_true_nas2 <-
+  d_matomo1
+
+d_with_true_nas2[d_with_true_nas2 == ""] <- NA
+```
+
+
+check, ob das gleiche Ergebnis in beiden Operation herauskommt:
+
+```{r}
+identical(d_with_true_nas, d_with_true_nas2)
+```
+
+
+
+Zählen wir also nochmal die NAs:
+
+
+
+```{r}
+mean(is.na(d_with_true_nas))
+```
+
+
+
+Bonus:
+
+Machen wir eine Funktion daraus:
+
+
+```{r}
+transform_to_true_NAs <- function(df) {
+  df[df == ""] <- NA
+  return(df)
+}
+```
+
+
+
+Check:
+
+```{r}
+d_with_true_nas3 <- transform_to_true_NAs(d_matomo1)
+
+identical(d_with_true_nas3, d_with_true_nas2)
+```
+
+Läuft!
+
+# 5 Was sind ID-Variablen und welche finden Sie im Datensatz?
+
+```{r}
+names(d_matomo1) |> 
+  head(20) 
+```
+
+
+Es sieht so aus, als ob die ersten Spalten ID-Variablen sind:
+
+````
+1] "idSite"                                  
+ [2] "idVisit"                                 
+ [3] "visitIp"                                 
+ [4] "visitorId"                               
+ [5] "fingerprint"  
+````
+
+
+# 6Was steht in Zelle , also in der X. Spalte und Y. Zeile?
+
+Achtung, in R wird erst die Zeile, dann die Spalte angegeben.
+
+```{r}
+d_matomo1[5,9]
+```
+
+
+# 7 Anzahl uniquer Werte 
+
+Ein einfacher Weg ist:
+
+```{r}
+length(unique(d_matomo1$visitorId))
+```
+
+Hat man viele Spalten und möchte man die Namen der Spalten einfach ändern können,
+so ist der folgende Weg praktischer:
+
+```{r}
+colnames(d_matomo1) <- tolower(colnames(d_matomo1))
+
+interesting_cols <- c("idVisit", "visitip", "visitorid", "fingerprint", "actiondetails_0_type", "actiondetails_0_url", "actiondetails_0_subtitle", "actiondetail_0_eventcategory")
+
+d_matomo1 |> 
+  select(any_of(interesting_cols)) |> 
+  summarise(across(everything(), ~ n_distinct(.)))
+```
+
+
+
+# 8 Unique Werte 
+
+Ähnlich wie bei der vorherigen Aufgabe, aber jetzt wollen wir die eigentlichen Werte sehen:
+
+```{r}
+unique(d_matomo1$visitorId)
+```
+
+
+```{r}
+d_matomo1 |> 
+  select(any_of(interesting_cols)) |> 
+  summarise(across(everything(), ~ list(unique(.))))
+```
+
+
+
+
+
+Wäre man an den einzigarten Kombinationen dieser Spalten interessiert,
+so könnte man das so schreiben:
+
+
+```{r}
+#| eval: false
+d_matomo1 |> 
+  select(any_of(interesting_cols)) |> 
+  distinct()
+```
+
+
+# 9 Häufigste Werte
+
+
+```{r}
+d_matomo1 |> 
+  count(actiondetails_0_type, sort = TRUE) |> 
+  slice_head(n = 10)
+```
+
+# 10 Vergleichen Sie die Spalten `actiondetails_0_subtitle` und `actiondetails_0_type` 
+
+
+```{r}
+d_matomo1 |> 
+  select(actiondetails_0_subtitle,
+         actiondetails_0_type) |> 
+  head(20)
+```
+
+```{r}
+d_matomo1 |> 
+  count(actiondetails_0_subtitle, sort = TRUE) |> 
+  slice_head(n = 10)
+```
+
+
+# 11 Forschungsfragen
+
+1. Wie viele verschiedene Besucher (visitorId) gab es insgesamt im Datensatz?
+2. Wie viele Besuche (idVisit) gab es insgesamt im Datensatz?
+3.    Wie viele Nutzer gibt es und in welchem Zeitraum?
+4.    In welcher Frequenz wird HaNS aufgesucht? Wie groß sind die zeitlichen Zwischenräume zwischen der Benutzung der Plattform?
+5.     Wie oft wird HaNS pro Zeitraum (z.B. Monat) besucht?
+6.      Wie verändert sich die Nutzung im Zeitverlauf?
+7.    Wie viele Aktionen bringt ein Visit mit sich? Wie ist die statistische Verteilung der Aktionen pro Visit?
+8.   Wie lang verweilen die Nutzer pro Visit?
+9.    W ie verändert sich die Nutzungsdauer pro Visit im Zeitverlauf?
+10.    Welche Aktionen führen die Nutzer auf Hans aus?
+2.    Wie verändern sich die Verteilungen der Aktionshäufigkeiten im Zeitverlauf?
+2.    An welchen Tagen und zu welcher Zeit kommen die User zu HaNS?
+2.    Wie häufig und in welcher Art inteagieren die Nutzer mit dem LLM in HaNS?
+2.    Wie groß ist der Anteil der Nutzer, die mit dem LLM interagieren?
+2.    Wie verändert sich der Anteil der Nutzer, die mit dem LLM interagieren, im Zeitverlauf?
+2.    Wie oft wird auf ein Wort im Transkript des LLM geklickt?
+2.    Wie oft wird ein Transkript-Dienst in HaNS in Anspruch genommen?
+2.    Wie verändert sich die Nutzung der Transkript-Dienste in HaNS im Zeitverlauf?
+2.    Wie lange werden Videos angeschaut?
+2.    Wie verändert sich die Betrachtungsdauer im Zeitverlauf?

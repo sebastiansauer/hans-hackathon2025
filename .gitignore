@@ -17,7 +17,9 @@ funs/hidden/
 challenges-submissions/
 
 
-
+# targets files:
+_targets.R
+*/targets.R
 
 # artifacts:
 _freeze/

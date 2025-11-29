@@ -7,7 +7,6 @@ number-sections: true
 
 execute: 
   cache: true
-  error: true
 ---
 
 
@@ -80,7 +79,6 @@ Alternative:
 
 ```{r}
 #| eval: false
-#| error: true
 purrr::map_df(
   dateien,
   ~ read_csv(.x, col_types = cols(.default = "c"), show_col_types = FALSE),
@@ -92,7 +90,7 @@ purrr::map_df(
 Synonym zur Tilde-Schreibweise kann man schreiben:
 
 ```{r}
-purrr::map_df(
+urrr::map_df(
   dateien,
   function(.x) {
     read_csv(.x, col_types = cols(.default = "c"), show_col_types = FALSE)
