@@ -255,7 +255,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">26. November 2025</p>
+      <p class="date">1. Dezember 2025</p>
     </div>
   </div>
   
@@ -332,7 +332,7 @@ window.Quarto = {
 <ol type="1">
 <li>Schreiben Sie Ihre Analyse-Pipeline als Targets-Pipeline. Beginnen Sie mit dem Auflisten der Datendateien (wie in Challenge 02), gefolgt vom Einlesen, etc. Anders gesagt: Übertragen Sie Ihre Lösungen von Challenges 02 und 03 in die Targets-Pipeline.</li>
 <li><em>Pivotieren</em> Sie dieses Mal <em>wie folgt</em>: Entfernen Sie alle Spalten <em>außer</em> den ID-Variablen <code>id_visit</code> und <code>fingerprint</code> sowie allen Spalten, die <code>actionDetails</code> enthalten. Pivotieren Sie dann <em>nur</em> Spalten mit dem Namen vom Typ <code>actionDetails</code>; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also vier Spalten resultieren: <code>idvisit</code>, <code>fingerprint</code> <code>name</code> und <code>value</code>.</li>
-<li></li>
+<li><em>Optional</em>: Schreiben Sie ein Target, um den Datensatz am Ende der Pipeline als Excel-Datei zu exportieren.</li>
 <li>Diskutieren Sie Vor- und Nachteile der Targets-Pipeline.</li>
 </ol>
 <p>Tipps:</p>
@@ -350,47 +350,54 @@ window.Quarto = {
 <p><strong>Großer Datensatz</strong></p>
 <p>Arbeiten Sie mit Ihrer Pipeline weiter:</p>
 <ol type="1">
-<li>Importieren Sie alle <em>zusätzlichen Daten</em>; lassen Sie die Pipeline auf dieser Basis neu durchlaufen.</li>
-<li>Gab es <em>Probleme</em> beim Importieren? Wenn ja, welche? Wie haben Sie diese gelöst?</li>
+<li>Importieren Sie alle <em>eingestellten Daten</em>; lassen Sie die Pipeline auf dieser Basis neu durchlaufen.</li>
+<li>Gab es <em>Probleme</em> beim Importieren? Wenn ja, welche? Wie haben Sie diese gelöst? Beschreiben Sie.</li>
 <li>Wie viel <em>Rechenzeit</em> hat die Pipeline beansprucht?</li>
 <li>Stellen Sie sicher, dass die <em>Spaltennamen einheitlich</em> und im Tidyverse-Stil benannt sind.</li>
-<li>Im Quarto-Bericht schreiben Sie, <em>wie viele Visits</em> Ihr Datensatz umfasst.</li>
+<li>Berechnen Sie die <em>wie viele Visits</em> Ihr Datensatz umfasst.</li>
 <li>Berechnen Sie die <em>Anzahl der Aktionen pro Visit</em>.</li>
-<li>Berechnen Sie die Anzahl der Aktionen pro uniquen Besucher.</li>
-<li>Schreiben Sie außerdem im Quarto-Bericht, <em>wie viele Aktionen pro Visit</em> stattfinden. Berichten Sie dazu relevante Statistiken und visualisieren Sie die Daten.</li>
-<li>Welche Betriebsysteme und Browser werden von den Besuchern verwendet? Visualisieren Sie die Daten.</li>
-<li>Visualisieren Sie die Anzahl der Tage seit dem letzten Besuch (insgesamt).</li>
-<li>Visualisieren Sie die Anzahl der Tage seit dem letzten Besuch (pro Modul).</li>
-<li>Visualisieren Sie die Anzahl der Besuche im Zeitverlauf.</li>
+<li>Berechnen Sie die <em>Anzahl</em> der <em>Aktionen</em> pro <em>uniquen</em> <em>Besucher.</em></li>
+<li>Berechnen Sie außerdem , <em>wie viele Aktionen pro Visit</em> und pro <em>uniqen Besucher</em> stattfanden.</li>
+<li>Welche <em>Betriebsysteme</em> (Name und Version) und <em>Browser</em> werden von den Besuchern verwendet?</li>
+<li>Berechnen Sie die <em>Anzahl</em> der <em>Tage</em> seit <em>dem letzten Besuch</em> (pro Visit und pro uniquen Besucher).</li>
+<li>Berechnen Sie die <em>Anzahl</em> der <em>Tage</em> seit <em>dem letzten Besuch </em>pro <em>Modul/Lehrveranstaltung</em> (pro Visit und pro uniquen Besucher).</li>
+<li>Für alle in dieser Challenge berechneten Statistiken: <em>Visualisieren</em> Sie diese (mit ggplot), aber nicht in der Targets-Pipeline, sondern in einem <em>Quarto</em>-Dokument. Dieses Dokument können Sie als Target der Pipeline darstellen oder unabhängig von der Pipeline definieren. In jedem Fall aber greifen Sie auf die Objekte zurück, die Sie in der Pipeline berechnet haben.</li>
+<li>Fügen Sie zu Ihrem Quarto-Dokument auch eine <em>“Selbstvergewisserung des Programmierers</em>” hinzu: Visualisieren Sie das Targets-Netzwerk; berichten Sie die verwendeten R-Pakete und Ihr Betriebsystem.</li>
 </ol>
-<p>Tipps:</p>
+<p>Hinweise:</p>
 <ul>
 <li><code>fread</code> aus <code>data.table</code> ist ähnlich zu <code>read.csv</code>, aber schneller.</li>
 <li>Bei Problemen während des Importieren kann es zu Problemen kommen, wenn die Spaltentypen der CSV-Dateien als unterschiedlich erkannt werden. Ein Workaround ist es, alle Spalten auf Typ “<code>character</code>” zu setzen. Funktionen wie <code>fread</code> und <code>read_csv</code> bieten dafür einen Parameter.</li>
 <li><code>rbindlist</code> aus <code>data.table</code> ist ähnlich zu <code>rbind</code>, was von <code>map_dfr</code> aufgerufen wird, aber schneller und weniger streng, produziert also weniger Fehlermeldungen (was von Vorteil, aber auch von Nachteil sein kann).</li>
 <li>Wenn Sie beim Importieren keinen Erfolg haben, dann überspringen Sie diesen Schritt und arbeiten Sie mit den Daten, die Sie bereits haben (als zweitbeste Lösung).</li>
-<li>Wenn Sie Probleme mit der Performance haben, dann können Sie die Datenmenge reduzieren, indem Sie nur die ersten paar Dateien importieren. Kleinere Datenmengen sind auch für das Debuggen nützlich.</li>
+<li>Wenn Sie Probleme mit der <em>Performance</em> haben, dann reduzieren Sie zunächst die Datenmenge, indem Sie nur die ersten paar Dateien importieren. Kleinere Datenmengen sind auch für das Debuggen nützlich. Später erhöhen Sie dann wieder die Datenmenge.</li>
+<li>Mit einer “sessioninfo” kann man die im Durchlauf verwendeten R-Pakete und weitere Spezifika des verwendeten Computers (wie R-Version und Betriebsystem) angeben.</li>
+<li>Ein “visit” bezeichner auf Deutsch als “Besuch (der Webseite)”.</li>
+<li>Die Verteilung der Visits ist möglicherweise zensiert (“abgeschnitten”). Diskutieren Sie diesen Sachverhalt (im Quarto-Bericht).</li>
 </ul>
 <p>Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).</p>
 </section>
 <section id="challenge-6" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="challenge-6"><span class="header-section-number">6</span> Challenge 6</h2>
 <p><strong>Verweildauer</strong></p>
-<p>Für alle folgenden Aufgaben dieser Challenge: Berichten Sie zentrale deskriptive Statistiken zu Lage und Streuung. Visualisieren Sie die Verteilung.</p>
+<p>Für alle folgenden Aufgaben dieser Challenge: Berichten Sie zentrale deskriptive Statistiken zu Lage und Streuung. Visualisieren Sie deren Verteilung.</p>
 <ol type="1">
-<li><del>Wieviel Zeit verbringen die Nutzer pro Visit?</del></li>
-<li><del>Wie viele Aktionen führen die Nutzer pro Visit aus?</del></li>
-<li><del>An welchen Tagen und zu welcher Zeit kommen die User zu HaNS?</del></li>
+<li>Berechnen Sie die Verweildauer: Wieviel Zeit verbringen die Nutzer pro Visit?</li>
+<li>Berechnen Sie die <em>Anzahl</em> der <em>Besuche</em> im <em>Zeitverlauf</em> (pro Woche).</li>
+<li>An welchen <em>Tagen</em> und zu welcher <em>Zeit</em> kommen die Besucher zu HaNS?</li>
 <li>An welchen <em>Wochentagen</em> wird die Seite bevorzugt besucht?</li>
 <li>Zu welchen <em>Uhrzeiten</em> wird die Seite bevorzugt besucht?</li>
 <li>Geben Sie den <em>Zeitraum der Nutzung</em> an (von <datum des="" ersten="" visits=""> bis <datum des="" letzten="" visits="">). Hier geht es um insgesamte erste (bzw. letzte) Nutzung <em>über alle User</em> hinweg. Gefragt ist der älteste und neueste Time Stamp, den der Server insgesamt/überhaupt protokolliert hat.</datum></datum></li>
 <li>Geben Sie den <em>Zeitraum seit der letzten Nutzung</em> an (pro User) und die Verteilung inkl. zentraler Statistiken (wie Mittelwert).</li>
+<li>Verändert sich die <em>Verweildauer</em> im <em>Zeitverlauf</em> (nimmt sie zu oder ab?)? Analysebasis: Woche. Berechnen Sie eine Regression dazu.</li>
+<li>Gibt es einen statistischen <em>Zusammenhang</em> von <em>Modul</em>/Lehrveranstaltung und <em>Verweildauer</em>?</li>
+<li>Gibt es einen statistischen <em>Zusammenhang</em> von <em>Modul</em>/Lehrveranstaltung und <em>der Anzahl der Visits</em>?</li>
 </ol>
 <p>Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline). Rendern Sie den Bericht im Format <code>typst</code>.</p>
 <p>Hinweise:</p>
 <ul>
 <li>Bitte beachten Sie Hinweise zum <a href="https://hinweisbuch.netlify.app/109-hinweise-programmieren">Programmieren</a>.</li>
-<li>Bei Fragen, die eine Verteilung als Antwort haben, sollten Sie die Verteilung mit statistischen Methoden beschreiben. Beispiel: “Was ist die typische Verweildauer?” - Antwort: “Die mittlere Verweildauer beträgt 3 Minuten, mit einer Standardabweichung von 2 Minuten. Die Verteilung ist rechtsschief.” Eine Visualisierung der Verteilung bietet sich an (z.B. mit einem Histogramm).</li>
+<li>Bei Fragen, die eine <em>statistische Verteilung</em> als Antwort haben, sollten Sie die Verteilung mit statistischen Methoden beschreiben. Beispiel: “Was ist die typische Verweildauer?” - Beispielhafte Antwort: “Die mittlere Verweildauer beträgt 3 Minuten, mit einer Standardabweichung von 2 Minuten. Die Verteilung ist rechtsschief.” Eine Visualisierung der Verteilung ist geboten (z.B. mit einem Histogramm).</li>
 </ul>
 </section>
 <section id="challenge-7" class="level2" data-number="7">
@@ -447,13 +454,13 @@ Wickham, Hadley, Mine Çetinkaya-Rundel, und Garrett Grolemund. 2023. <em>R for 
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>MIT</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Zitat</h2><div><div class="quarto-appendix-secondary-label">Mit BibTeX zitieren:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{sauer2025,
   author = {Sauer, Sebastian},
   title = {Challenges im Überblick},
-  date = {2025-11-26},
+  date = {2025-12-01},
   url = {https://sebastiansauer.github.io/hans-hackathon2025/challenges.html},
   langid = {de-DE}
 }
 </code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Bitte zitieren Sie diese Arbeit als:</div><div id="ref-sauer2025" class="csl-entry quarto-appendix-citeas" role="listitem">
-Sauer, Sebastian. 2025. <span>“Challenges im Überblick.”</span> November
-26, 2025. <a href="https://sebastiansauer.github.io/hans-hackathon2025/challenges.html">https://sebastiansauer.github.io/hans-hackathon2025/challenges.html</a>.
+Sauer, Sebastian. 2025. <span>“Challenges im Überblick.”</span> December
+1, 2025. <a href="https://sebastiansauer.github.io/hans-hackathon2025/challenges.html">https://sebastiansauer.github.io/hans-hackathon2025/challenges.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

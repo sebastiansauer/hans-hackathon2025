@@ -90,7 +90,8 @@ purrr::map_df(
 Synonym zur Tilde-Schreibweise kann man schreiben:
 
 ```{r}
-urrr::map_df(
+#| eval: false
+purrr::map_df(
   dateien,
   function(.x) {
     read_csv(.x, col_types = cols(.default = "c"), show_col_types = FALSE)
@@ -125,6 +126,7 @@ Scheint zu passen.
 Alternativ kann man den Namen der Datei hinzufügen:
 
 ```{r import-data-with-filename}
+#| eval: false
 tic()
 d <- 
 datafiles_list |> 
@@ -276,7 +278,7 @@ d_no_empty_cols_no_empty_rows <-
 Alternativ: 
 
 ```{r}
-daten_lang_ohne_Na %>%
+d_no_empty_cols_no_empty_rows %>%
   select(where(~ dplyr::n_distinct(.x, na.rm = TRUE) > 1))
 ```
 
