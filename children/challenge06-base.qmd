@@ -2,17 +2,19 @@
 **Verweildauer**
 
 
-Für alle folgenden Aufgaben dieser Challenge:  Berichten Sie zentrale deskriptive Statistiken zu Lage und Streuung. Visualisieren Sie die Verteilung. 
+Für alle folgenden Aufgaben dieser Challenge:  Berichten Sie zentrale deskriptive Statistiken zu Lage und Streuung. Visualisieren Sie deren Verteilung. 
 
 
-1. ~~Wieviel Zeit verbringen die Nutzer pro Visit?~~
-2. ~~Wie viele Aktionen führen die Nutzer pro Visit aus?~~
-3. ~~An welchen Tagen und zu welcher Zeit kommen die User zu HaNS?~~
+1. Berechnen Sie die Verweildauer: Wieviel Zeit verbringen die Nutzer pro Visit?
+2. Berechnen Sie die *Anzahl* der *Besuche* im *Zeitverlauf* (pro Woche).
+2. An welchen *Tagen* und zu welcher *Zeit* kommen die Besucher zu HaNS?
 4. An welchen *Wochentagen* wird die Seite bevorzugt besucht?
 5. Zu welchen *Uhrzeiten* wird die Seite bevorzugt besucht?
 6. Geben Sie den *Zeitraum der Nutzung* an (von <Datum des ersten Visits> bis <Datum des letzten Visits>). Hier geht es um insgesamte erste (bzw. letzte) Nutzung *über alle User* hinweg. Gefragt ist der älteste und neueste Time Stamp, den der Server insgesamt/überhaupt protokolliert hat.
 7. Geben Sie den *Zeitraum seit der letzten Nutzung* an (pro User) und die Verteilung inkl. zentraler Statistiken (wie Mittelwert).
-
+8. Verändert sich die *Verweildauer* im *Zeitverlauf* (nimmt sie zu oder ab?)? Analysebasis: Woche. Berechnen Sie eine Regression dazu.
+9. Gibt es einen statistischen *Zusammenhang* von *Modul*/Lehrveranstaltung und *Verweildauer*?
+9. Gibt es einen statistischen *Zusammenhang* von *Modul*/Lehrveranstaltung und *der Anzahl der Visits*?
 
 
 Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline). Rendern Sie den Bericht im Format `typst`.
@@ -20,4 +22,4 @@ Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline). Rendern Sie den
 Hinweise:
 
 - Bitte beachten Sie Hinweise zum [Programmieren](https://hinweisbuch.netlify.app/109-hinweise-programmieren).
-- Bei Fragen, die eine Verteilung als Antwort haben, sollten Sie die Verteilung mit statistischen Methoden beschreiben. Beispiel: "Was ist die typische Verweildauer?" - Antwort: "Die mittlere Verweildauer beträgt 3 Minuten, mit einer Standardabweichung von 2 Minuten. Die Verteilung ist rechtsschief." Eine Visualisierung der Verteilung bietet sich an (z.B. mit einem Histogramm).
+- Bei Fragen, die eine *statistische Verteilung* als Antwort haben, sollten Sie die Verteilung mit statistischen Methoden beschreiben. Beispiel: "Was ist die typische Verweildauer?" - Beispielhafte Antwort: "Die mittlere Verweildauer beträgt 3 Minuten, mit einer Standardabweichung von 2 Minuten. Die Verteilung ist rechtsschief." Eine Visualisierung der Verteilung ist geboten (z.B. mit einem Histogramm).

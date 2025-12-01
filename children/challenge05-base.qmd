@@ -5,32 +5,35 @@
 
 Arbeiten Sie mit Ihrer Pipeline weiter:
 
-1. Importieren Sie alle *zusätzlichen Daten*; lassen Sie die Pipeline auf dieser Basis neu durchlaufen. 
-2. Gab es *Probleme* beim Importieren? Wenn ja, welche? Wie haben Sie diese gelöst?
+1. Importieren Sie alle *eingestellten Daten*; lassen Sie die Pipeline auf dieser Basis neu durchlaufen. 
+2. Gab es *Probleme* beim Importieren? Wenn ja, welche? Wie haben Sie diese gelöst? Beschreiben Sie.
 3. Wie viel *Rechenzeit* hat die Pipeline beansprucht?
-2. Stellen Sie sicher, dass die *Spaltennamen einheitlich* und im Tidyverse-Stil benannt sind.
-4. Im Quarto-Bericht schreiben Sie, *wie viele Visits* Ihr Datensatz umfasst.
-6. Berechnen Sie die *Anzahl der Aktionen pro Visit*.
-7. Berechnen Sie die Anzahl der Aktionen pro uniquen Besucher.
-5. Schreiben Sie außerdem im Quarto-Bericht, *wie viele Aktionen pro Visit* stattfinden. Berichten Sie dazu relevante Statistiken und visualisieren Sie die Daten.
-6. Welche Betriebsysteme und Browser werden von den Besuchern verwendet? Visualisieren Sie die Daten.
-7. Visualisieren Sie die Anzahl der Tage seit dem letzten Besuch (insgesamt).
-8. Visualisieren Sie die Anzahl der Tage seit dem letzten Besuch (pro Modul).
-9. Visualisieren Sie die Anzahl der Besuche im Zeitverlauf.
+4. Stellen Sie sicher, dass die *Spaltennamen einheitlich* und im Tidyverse-Stil benannt sind.
+5.  Berechnen Sie die *wie viele Visits* Ihr Datensatz umfasst.
+6. Berechnen Sie die *Anzahl der Aktionen pro Visit*. 
+7. Berechnen Sie die *Anzahl* der *Aktionen* pro *uniquen* *Besucher.*
+8. Berechnen Sie außerdem , *wie viele Aktionen pro Visit* und pro *uniqen Besucher* stattfanden. 
+6. Welche *Betriebsysteme* (Name und Version) und *Browser* werden von den Besuchern verwendet? 
+7. Berechnen Sie die *Anzahl* der *Tage* seit *dem letzten Besuch* (pro Visit und pro uniquen Besucher).
+8. Berechnen Sie die *Anzahl* der *Tage* seit *dem letzten Besuch *pro *Modul/Lehrveranstaltung* (pro Visit und pro uniquen Besucher).
+9. Für alle in dieser Challenge berechneten Statistiken: *Visualisieren* Sie diese (mit ggplot), aber nicht in der Targets-Pipeline, sondern in einem *Quarto*-Dokument. Dieses Dokument können Sie als Target der Pipeline darstellen oder unabhängig von der Pipeline definieren. In jedem Fall aber greifen Sie auf die Objekte zurück, die Sie in der Pipeline berechnet haben.
+11. Fügen Sie zu Ihrem Quarto-Dokument auch eine *"Selbstvergewisserung des Programmierers*" hinzu: Visualisieren Sie das Targets-Netzwerk; berichten Sie die verwendeten R-Pakete und Ihr Betriebsystem.
 
 
 
 
 
-Tipps: 
+Hinweise: 
 
 - `fread` aus `data.table` ist ähnlich zu `read.csv`, aber schneller.
 - Bei Problemen während des Importieren kann es zu Problemen kommen, wenn die Spaltentypen der CSV-Dateien als unterschiedlich erkannt werden. Ein Workaround ist es, alle Spalten auf Typ "`character`" zu setzen. Funktionen wie `fread` und `read_csv` bieten dafür einen Parameter.
 - `rbindlist` aus `data.table` ist ähnlich zu `rbind`, was von `map_dfr` aufgerufen wird, aber schneller und weniger streng,
 produziert also weniger Fehlermeldungen (was von Vorteil, aber auch von Nachteil sein kann).
 - Wenn Sie beim Importieren keinen Erfolg haben, dann überspringen Sie diesen Schritt und arbeiten Sie mit den Daten, die Sie bereits haben (als zweitbeste Lösung).
-- Wenn Sie Probleme mit der Performance haben, dann können Sie die Datenmenge reduzieren, indem Sie nur die ersten paar Dateien importieren. Kleinere Datenmengen sind auch für das Debuggen nützlich.
-
+- Wenn Sie Probleme mit der *Performance* haben, dann reduzieren Sie zunächst die Datenmenge, indem Sie nur die ersten paar Dateien importieren. Kleinere Datenmengen sind auch für das Debuggen nützlich. Später erhöhen Sie dann wieder die Datenmenge.
+- Mit einer "sessioninfo" kann man die im Durchlauf verwendeten R-Pakete und weitere Spezifika des verwendeten Computers (wie R-Version und Betriebsystem) angeben.
+- Ein "visit" bezeichner auf Deutsch als "Besuch (der Webseite)". 
+- Die Verteilung der Visits ist möglicherweise zensiert ("abgeschnitten"). Diskutieren Sie diesen Sachverhalt (im Quarto-Bericht).
 
 
 Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).

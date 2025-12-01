@@ -3,7 +3,7 @@
 
 1. Schreiben Sie Ihre Analyse-Pipeline als Targets-Pipeline. Beginnen Sie mit dem Auflisten der Datendateien (wie in Challenge 02), gefolgt vom Einlesen, etc. Anders gesagt: Übertragen Sie Ihre Lösungen von Challenges 02 und 03 in die Targets-Pipeline.
 2. *Pivotieren* Sie dieses Mal *wie folgt*: Entfernen Sie alle Spalten *außer*  den ID-Variablen `id_visit` und `fingerprint` sowie allen Spalten, die `actionDetails` enthalten. Pivotieren Sie dann *nur* Spalten mit dem Namen vom Typ `actionDetails`; d.h. Sie pivotieren nur diese genannten Spaltentypen. Es sollen also vier Spalten resultieren: `idvisit`, `fingerprint` `name` und `value`.
-2. 
+3. *Optional*: Schreiben Sie ein Target, um den Datensatz am Ende der Pipeline als Excel-Datei zu exportieren. 
 2. Diskutieren Sie Vor- und Nachteile der Targets-Pipeline.
 
 
