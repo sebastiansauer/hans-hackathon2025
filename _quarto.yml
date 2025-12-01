@@ -11,6 +11,7 @@ project:
     - challenge01-solution.qmd
     - challenge02-solution.qmd
     - challenge03-solution.qmd
+    - challenge04-solution.qmd
 
 
 editor: source

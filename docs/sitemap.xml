@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sebastiansauer.github.io/hans-hackathon2025/challenge03-solution.html</loc>
-    <lastmod>2025-12-01T05:19:02.756Z</lastmod>
+    <loc>https://sebastiansauer.github.io/hans-hackathon2025/challenge04-solution.html</loc>
+    <lastmod>2025-12-01T05:26:57.889Z</lastmod>
   </url>
   <url>
-    <loc>https://sebastiansauer.github.io/hans-hackathon2025/challenge01-solution.html</loc>
-    <lastmod>2025-11-24T12:45:22.323Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html</loc>
-    <lastmod>2025-12-01T05:19:54.135Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sebastiansauer.github.io/hans-hackathon2025/einstieg.html</loc>
-    <lastmod>2025-11-24T12:45:22.350Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sebastiansauer.github.io/hans-hackathon2025/index.html</loc>
-    <lastmod>2025-12-01T05:25:04.596Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sebastiansauer.github.io/hans-hackathon2025/projektmanagement.html</loc>
-    <lastmod>2025-11-24T12:45:22.464Z</lastmod>
+    <loc>https://sebastiansauer.github.io/hans-hackathon2025/challenge02-solution.html</loc>
+    <lastmod>2025-12-01T05:26:47.511Z</lastmod>
   </url>
   <url>
     <loc>https://sebastiansauer.github.io/hans-hackathon2025/challenges.html</loc>
     <lastmod>2025-11-29T07:22:39.439Z</lastmod>
   </url>
   <url>
-    <loc>https://sebastiansauer.github.io/hans-hackathon2025/challenge02-solution.html</loc>
-    <lastmod>2025-12-01T05:17:23.358Z</lastmod>
+    <loc>https://sebastiansauer.github.io/hans-hackathon2025/projektmanagement.html</loc>
+    <lastmod>2025-11-24T12:45:22.464Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebastiansauer.github.io/hans-hackathon2025/index.html</loc>
+    <lastmod>2025-12-01T05:25:04.596Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebastiansauer.github.io/hans-hackathon2025/einstieg.html</loc>
+    <lastmod>2025-11-24T12:45:22.350Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html</loc>
+    <lastmod>2025-12-01T05:19:54.135Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebastiansauer.github.io/hans-hackathon2025/challenge01-solution.html</loc>
+    <lastmod>2025-12-01T05:26:46.149Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebastiansauer.github.io/hans-hackathon2025/challenge03-solution.html</loc>
+    <lastmod>2025-12-01T05:26:48.830Z</lastmod>
   </url>
 </urlset>
