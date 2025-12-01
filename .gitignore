@@ -11,8 +11,8 @@ data*/
 
 # solutions:
 challenges-solutions/
-challegens-solutions_*/
-_targets.R
+SOlUTIONS-dev/
+#_targets.R
 funs/hidden/
 challenges-submissions/
 
@@ -25,8 +25,8 @@ _targets.R
 _freeze/
 _extensions/
 *_cache/
-#_site/
-#*_files/
+_site/
+*_files/
 .quarto/
 Icon?
 icon\r
