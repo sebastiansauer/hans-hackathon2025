@@ -252,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">26. November 2025</p>
+      <p class="date">1. Dezember 2025</p>
     </div>
   </div>
   
@@ -287,20 +287,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="st">"csv$"</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">recursive =</span> <span class="cn">TRUE</span>, </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>datafiles_list</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "/home/sebastian-sauer/Dokumente/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-07.csv"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [2] "/home/sebastian-sauer/Dokumente/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-08.csv"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] "/home/sebastian-sauer/Dokumente/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-09.csv"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [4] "/home/sebastian-sauer/Dokumente/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-10.csv"</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [5] "/home/sebastian-sauer/Dokumente/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-11.csv"</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [6] "/home/sebastian-sauer/Dokumente/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-12.csv"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [7] "/home/sebastian-sauer/Dokumente/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-13.csv"</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [8] "/home/sebastian-sauer/Dokumente/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-14.csv"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>datafiles_list</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Wie viele Tage, d.h. Dateinamen, sind das?</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(datafiles_list)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 8</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(datafiles_list)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Und dann importieren wir die CSV-Dateien und “binden” sie “zeilenweise” in einen großen, Gesamt-Data-Frame:</p>
 <div class="cell" data-layout-align="center">
@@ -308,8 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>datafiles_list <span class="sc">|&gt;</span> </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfr</span>(read.csv, <span class="at">.id =</span> <span class="st">"file_id"</span>)  <span class="co"># dauert etwas ...</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 15.231 sec elapsed</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Über die Performanz sollte man sich noch Gedanken machen …</p>
 <p>Mit <code>.id</code> bekommt man eine laufende Nummer für jede eingehende CSV-Datei.</p>
@@ -330,14 +320,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read_csv</span>(.x, <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">.default =</span> <span class="st">"c"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  },</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">"quelle_datei"</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Error: Objekt 'dateien' nicht gefunden</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Die Tilde ist also nur eine Abkürzung für eine Formel.</p>
 <p>Wie groß ist der resultierende Datensatz?</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  387 8184</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Check:</p>
 <div class="cell" data-layout-align="center">
@@ -345,59 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">|&gt;</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>d_small <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Rows: 387</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Columns: 50</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## $ file_id                                  &lt;chr&gt; "1", "1", "1", "1", "1", "1",…</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="do">## $ idSite                                   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="do">## $ idVisit                                  &lt;int&gt; 3294, 3292, 3293, 3291, 3290,…</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="do">## $ visitIp                                  &lt;chr&gt; "172.19.0.0", "172.19.0.0", "…</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="do">## $ visitorId                                &lt;chr&gt; "abeec7042ede4400", "317089ef…</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="do">## $ fingerprint                              &lt;chr&gt; "b60fd403ef2a6ad5", "f1f2268d…</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_type                     &lt;chr&gt; "action", "action", "action",…</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_url                      &lt;chr&gt; "https://hswt.de&amp;password=&lt;lj…</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageTitle                &lt;chr&gt; "HAnS", "HAnS", "HAnS", "HAnS…</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageIdAction             &lt;int&gt; 1451, 1022, 460, 1451, 2197, …</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_idpageview               &lt;chr&gt; "zWvzh3", "0vsChW", "6juxFJ",…</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_serverTimePretty         &lt;chr&gt; "Jul 7, 2025 23:16:05", "Jul …</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageId                   &lt;int&gt; 315085, 314586, 314741, 31457…</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageLoadTime             &lt;chr&gt; "13.14s", "0.53s", "0.45s", "…</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_timeSpent                &lt;int&gt; 5, 2, 10, 4, NA, 3, 13, 4, 9,…</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_timeSpentPretty          &lt;chr&gt; "5s", "2s", "10s", "4s", "", …</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageLoadTimeMilliseconds &lt;int&gt; 13141, 528, 446, 5668, NA, 46…</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageviewPosition         &lt;int&gt; 1, 1, 1, 1, NA, 1, 1, 1, 1, 1…</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_title                    &lt;chr&gt; "HAnS", "HAnS", "HAnS", "HAnS…</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_subtitle                 &lt;chr&gt; "https://hswt.de&amp;password=&lt;lj…</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_icon                     &lt;chr&gt; "", "", "", "", "plugins/Morp…</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_iconSVG                  &lt;chr&gt; "plugins/Morpheus/images/acti…</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_timestamp                &lt;int&gt; 1751930165, 1751926022, 17519…</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_type                     &lt;chr&gt; "event", "event", "event", "a…</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_url                      &lt;chr&gt; "https://hswt.de&amp;password=&lt;lj…</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_pageIdAction             &lt;int&gt; 1486, 1023, 571, 460, 2197, 1…</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_idpageview               &lt;chr&gt; "zWvzh3", "0vsChW", "6juxFJ",…</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_serverTimePretty         &lt;chr&gt; "Jul 7, 2025 23:16:10", "Jul …</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_pageId                   &lt;int&gt; 315086, 314587, 314742, 31457…</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_eventCategory            &lt;chr&gt; "login", "login", "login", ""…</span></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_eventAction              &lt;chr&gt; "success", "success", "succes…</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_pageviewPosition         &lt;int&gt; 1, 1, 1, 2, NA, 1, 1, 1, 2, 2…</span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_timestamp                &lt;int&gt; 1751930170, 1751926024, 17519…</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_icon                     &lt;chr&gt; "plugins/Morpheus/images/even…</span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_iconSVG                  &lt;chr&gt; "plugins/Morpheus/images/even…</span></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_title                    &lt;chr&gt; "Event", "Event", "Event", "H…</span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_subtitle                 &lt;chr&gt; "Category: \"login', Action: …</span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_type                     &lt;chr&gt; "action", "action", "action",…</span></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_url                      &lt;chr&gt; "https://hswt.de&amp;password=&lt;lj…</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_pageTitle                &lt;chr&gt; "HAnS", "HAnS", "HAnS", "", "…</span></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_pageIdAction             &lt;int&gt; 458, 219, 458, 571, 2197, 219…</span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_idpageview               &lt;chr&gt; "3kiOYW", "WN6prU", "S8znuR",…</span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_serverTimePretty         &lt;chr&gt; "Jul 7, 2025 23:16:10", "Jul …</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_pageId                   &lt;int&gt; 315087, 314588, 314743, 31458…</span></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_timeSpent                &lt;int&gt; 35, 8, 6, NA, NA, 9, 34, 1, 3…</span></span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_timeSpentPretty          &lt;chr&gt; "35s", "8s", "6s", "", "", "9…</span></span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_pageviewPosition         &lt;int&gt; 2, 2, 2, 2, NA, 2, 2, 2, 3, 3…</span></span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_title                    &lt;chr&gt; "HAnS", "HAnS", "HAnS", "Even…</span></span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_subtitle                 &lt;chr&gt; "https://hswt.de&amp;password=&lt;lj…</span></span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_icon                     &lt;chr&gt; "", "", "", "plugins/Morpheus…</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>d_small <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Scheint zu passen.</p>
 <p>Alternativ kann man den Namen der Datei hinzufügen:</p>
@@ -407,8 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>datafiles_list <span class="sc">|&gt;</span> </span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfr</span>(<span class="sc">~</span> <span class="fu">read.csv</span>(.x) <span class="sc">|&gt;</span> </span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">filename =</span> <span class="fu">basename</span>(.x)))  <span class="co"># dauert etwas ...</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 19.317 sec elapsed</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Die Tilde-Notation <code>~</code> ist eine Kurzschreibweise für eine Funktion. Man könnte also auch schreiben:</p>
 <div class="cell" data-layout-align="center">
@@ -424,30 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Exkurs: Noch etwas Erklärung zu <code>map</code>. <code>map</code> ist eine Art von “Schleife”: Die darauf bezogene Funktion wird für jedes Element der Liste ausgeführt. Im folgenden Beispiel wird die Funktion <code>basename</code> auf jedes Element der Liste <code>datafiles_list</code> angewendet, also der Dateiname ohne Pfad zurückgegeben.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>datafiles_list <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(basename)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [[1]]</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "matomo_export_2025-07-07.csv"</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [[2]]</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "matomo_export_2025-07-08.csv"</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [[3]]</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "matomo_export_2025-07-09.csv"</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [[4]]</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "matomo_export_2025-07-10.csv"</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [[5]]</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "matomo_export_2025-07-11.csv"</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [[6]]</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "matomo_export_2025-07-12.csv"</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="do">## [[7]]</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "matomo_export_2025-07-13.csv"</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [[8]]</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "matomo_export_2025-07-14.csv"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(basename)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Check:</p>
 <div class="cell" data-layout-align="center">
@@ -456,73 +368,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(filename, <span class="fu">everything</span>()) <span class="sc">|&gt;</span>  <span class="co"># `filename` nach vorne ziehen</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>d_small <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()  <span class="co"># Blick reinwerfen</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Rows: 387</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Columns: 50</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="do">## $ filename                                 &lt;chr&gt; "matomo_export_2025-07-07.csv…</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">## $ idSite                                   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="do">## $ idVisit                                  &lt;int&gt; 3294, 3292, 3293, 3291, 3290,…</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="do">## $ visitIp                                  &lt;chr&gt; "172.19.0.0", "172.19.0.0", "…</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="do">## $ visitorId                                &lt;chr&gt; "abeec7042ede4400", "317089ef…</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="do">## $ fingerprint                              &lt;chr&gt; "b60fd403ef2a6ad5", "f1f2268d…</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_type                     &lt;chr&gt; "action", "action", "action",…</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_url                      &lt;chr&gt; "https://hswt.de&amp;password=&lt;lj…</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageTitle                &lt;chr&gt; "HAnS", "HAnS", "HAnS", "HAnS…</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageIdAction             &lt;int&gt; 1451, 1022, 460, 1451, 2197, …</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_idpageview               &lt;chr&gt; "zWvzh3", "0vsChW", "6juxFJ",…</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_serverTimePretty         &lt;chr&gt; "Jul 7, 2025 23:16:05", "Jul …</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageId                   &lt;int&gt; 315085, 314586, 314741, 31457…</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageLoadTime             &lt;chr&gt; "13.14s", "0.53s", "0.45s", "…</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_timeSpent                &lt;int&gt; 5, 2, 10, 4, NA, 3, 13, 4, 9,…</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_timeSpentPretty          &lt;chr&gt; "5s", "2s", "10s", "4s", "", …</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageLoadTimeMilliseconds &lt;int&gt; 13141, 528, 446, 5668, NA, 46…</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_pageviewPosition         &lt;int&gt; 1, 1, 1, 1, NA, 1, 1, 1, 1, 1…</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_title                    &lt;chr&gt; "HAnS", "HAnS", "HAnS", "HAnS…</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_subtitle                 &lt;chr&gt; "https://hswt.de&amp;password=&lt;lj…</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_icon                     &lt;chr&gt; "", "", "", "", "plugins/Morp…</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_iconSVG                  &lt;chr&gt; "plugins/Morpheus/images/acti…</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_0_timestamp                &lt;int&gt; 1751930165, 1751926022, 17519…</span></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_type                     &lt;chr&gt; "event", "event", "event", "a…</span></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_url                      &lt;chr&gt; "https://hswt.de&amp;password=&lt;lj…</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_pageIdAction             &lt;int&gt; 1486, 1023, 571, 460, 2197, 1…</span></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_idpageview               &lt;chr&gt; "zWvzh3", "0vsChW", "6juxFJ",…</span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_serverTimePretty         &lt;chr&gt; "Jul 7, 2025 23:16:10", "Jul …</span></span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_pageId                   &lt;int&gt; 315086, 314587, 314742, 31457…</span></span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_eventCategory            &lt;chr&gt; "login", "login", "login", ""…</span></span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_eventAction              &lt;chr&gt; "success", "success", "succes…</span></span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_pageviewPosition         &lt;int&gt; 1, 1, 1, 2, NA, 1, 1, 1, 2, 2…</span></span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_timestamp                &lt;int&gt; 1751930170, 1751926024, 17519…</span></span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_icon                     &lt;chr&gt; "plugins/Morpheus/images/even…</span></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_iconSVG                  &lt;chr&gt; "plugins/Morpheus/images/even…</span></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_title                    &lt;chr&gt; "Event", "Event", "Event", "H…</span></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_1_subtitle                 &lt;chr&gt; "Category: \"login', Action: …</span></span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_type                     &lt;chr&gt; "action", "action", "action",…</span></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_url                      &lt;chr&gt; "https://hswt.de&amp;password=&lt;lj…</span></span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_pageTitle                &lt;chr&gt; "HAnS", "HAnS", "HAnS", "", "…</span></span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_pageIdAction             &lt;int&gt; 458, 219, 458, 571, 2197, 219…</span></span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_idpageview               &lt;chr&gt; "3kiOYW", "WN6prU", "S8znuR",…</span></span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_serverTimePretty         &lt;chr&gt; "Jul 7, 2025 23:16:10", "Jul …</span></span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_pageId                   &lt;int&gt; 315087, 314588, 314743, 31458…</span></span>
-<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_timeSpent                &lt;int&gt; 35, 8, 6, NA, NA, 9, 34, 1, 3…</span></span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_timeSpentPretty          &lt;chr&gt; "35s", "8s", "6s", "", "", "9…</span></span>
-<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_pageviewPosition         &lt;int&gt; 2, 2, 2, 2, NA, 2, 2, 2, 3, 3…</span></span>
-<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_title                    &lt;chr&gt; "HAnS", "HAnS", "HAnS", "Even…</span></span>
-<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_subtitle                 &lt;chr&gt; "https://hswt.de&amp;password=&lt;lj…</span></span>
-<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="do">## $ actionDetails_2_icon                     &lt;chr&gt; "", "", "", "plugins/Morpheus…</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>d_small <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()  <span class="co"># Blick reinwerfen</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="leere-strings-in-nas-umwandeln" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="leere-strings-in-nas-umwandeln"><span class="header-section-number">1.2.2</span> Leere Strings in NAs umwandeln</h3>
 <p>Anteil NAs:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(d))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.3255224</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(d))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Verduetlichung:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>leerer_string <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">""</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>leerer_string</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] ""</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>leerer_string</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Echte NAs:</p>
 <div class="cell" data-layout-align="center">
@@ -537,8 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Setze <code>NA</code> wenn der Wert in der jeweiligen Zelle <code>""</code> ist, also ein leerer Text</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(d_with_true_nas))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.8702823</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(d_with_true_nas))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Puh! Das ist ein großer Anteil.</p>
 <p>Prüfen wir das lieber noch einmal.</p>
@@ -549,13 +406,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_dat</span>(d_with_true_nas_small)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="challenge02-solution_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
-</figure>
-</div>
-</div>
 </div>
 <p>Hm, sieht ja gar nicht nach so vielen NAs aus…</p>
 <p>Vielleicht kommen die NAs erst weiter hinten?</p>
@@ -566,13 +416,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_dat</span>(d_with_true_nas_small)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="challenge02-solution_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
-</figure>
-</div>
-</div>
 </div>
 <p>Tatsächlich!</p>
 <p>Was sagt uns dieser Befund?</p>
@@ -586,18 +429,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Alternativ:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>daten_lang_ohne_Na <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;</span> <span class="dv">1</span>))</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Error: Objekt 'daten_lang_ohne_Na' nicht gefunden</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>d_no_empty_cols_no_empty_rows <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;</span> <span class="dv">1</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Check:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_with_true_nas)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  387 8184</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_with_true_nas)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_no_empty_cols_no_empty_rows)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  387 8127</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_no_empty_cols_no_empty_rows)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ein paar Spalten haben wir eingespart.</p>
 <p>Es würde Sinn machen, sich diese komplett leeren Spalten näher anzuschauen. Warum sind sie überhaupt enthalten?</p>
@@ -627,107 +467,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="irrelevante-spalten-identifizieren" class="level3" data-number="1.2.6">
 <h3 data-number="1.2.6" class="anchored" data-anchor-id="irrelevante-spalten-identifizieren"><span class="header-section-number">1.2.6</span> Irrelevante Spalten identifizieren</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">100</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] "idSite"                                  </span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   [2] "idVisit"                                 </span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   [3] "visitIp"                                 </span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   [4] "visitorId"                               </span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   [5] "fingerprint"                             </span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   [6] "actionDetails_0_type"                    </span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   [7] "actionDetails_0_url"                     </span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   [8] "actionDetails_0_pageTitle"               </span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   [9] "actionDetails_0_pageIdAction"            </span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  [10] "actionDetails_0_idpageview"              </span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  [11] "actionDetails_0_serverTimePretty"        </span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [12] "actionDetails_0_pageId"                  </span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  [13] "actionDetails_0_pageLoadTime"            </span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  [14] "actionDetails_0_timeSpent"               </span></span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  [15] "actionDetails_0_timeSpentPretty"         </span></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  [16] "actionDetails_0_pageLoadTimeMilliseconds"</span></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  [17] "actionDetails_0_pageviewPosition"        </span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  [18] "actionDetails_0_title"                   </span></span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  [19] "actionDetails_0_subtitle"                </span></span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  [20] "actionDetails_0_icon"                    </span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  [21] "actionDetails_0_iconSVG"                 </span></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  [22] "actionDetails_0_timestamp"               </span></span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  [23] "actionDetails_1_type"                    </span></span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  [24] "actionDetails_1_url"                     </span></span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  [25] "actionDetails_1_pageIdAction"            </span></span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  [26] "actionDetails_1_idpageview"              </span></span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  [27] "actionDetails_1_serverTimePretty"        </span></span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  [28] "actionDetails_1_pageId"                  </span></span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a><span class="do">##  [29] "actionDetails_1_eventCategory"           </span></span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a><span class="do">##  [30] "actionDetails_1_eventAction"             </span></span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  [31] "actionDetails_1_pageviewPosition"        </span></span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  [32] "actionDetails_1_timestamp"               </span></span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a><span class="do">##  [33] "actionDetails_1_icon"                    </span></span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a><span class="do">##  [34] "actionDetails_1_iconSVG"                 </span></span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a><span class="do">##  [35] "actionDetails_1_title"                   </span></span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a><span class="do">##  [36] "actionDetails_1_subtitle"                </span></span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a><span class="do">##  [37] "actionDetails_2_type"                    </span></span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] "actionDetails_2_url"                     </span></span>
-<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a><span class="do">##  [39] "actionDetails_2_pageTitle"               </span></span>
-<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a><span class="do">##  [40] "actionDetails_2_pageIdAction"            </span></span>
-<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a><span class="do">##  [41] "actionDetails_2_idpageview"              </span></span>
-<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a><span class="do">##  [42] "actionDetails_2_serverTimePretty"        </span></span>
-<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a><span class="do">##  [43] "actionDetails_2_pageId"                  </span></span>
-<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a><span class="do">##  [44] "actionDetails_2_timeSpent"               </span></span>
-<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a><span class="do">##  [45] "actionDetails_2_timeSpentPretty"         </span></span>
-<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a><span class="do">##  [46] "actionDetails_2_pageviewPosition"        </span></span>
-<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a><span class="do">##  [47] "actionDetails_2_title"                   </span></span>
-<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a><span class="do">##  [48] "actionDetails_2_subtitle"                </span></span>
-<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a><span class="do">##  [49] "actionDetails_2_icon"                    </span></span>
-<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a><span class="do">##  [50] "actionDetails_2_iconSVG"                 </span></span>
-<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a><span class="do">##  [51] "actionDetails_2_timestamp"               </span></span>
-<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a><span class="do">##  [52] "actionDetails_3_type"                    </span></span>
-<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a><span class="do">##  [53] "actionDetails_3_url"                     </span></span>
-<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a><span class="do">##  [54] "actionDetails_3_pageIdAction"            </span></span>
-<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a><span class="do">##  [55] "actionDetails_3_idpageview"              </span></span>
-<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a><span class="do">##  [56] "actionDetails_3_serverTimePretty"        </span></span>
-<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a><span class="do">##  [57] "actionDetails_3_pageId"                  </span></span>
-<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a><span class="do">##  [58] "actionDetails_3_eventCategory"           </span></span>
-<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a><span class="do">##  [59] "actionDetails_3_eventAction"             </span></span>
-<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a><span class="do">##  [60] "actionDetails_3_pageviewPosition"        </span></span>
-<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a><span class="do">##  [61] "actionDetails_3_timestamp"               </span></span>
-<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a><span class="do">##  [62] "actionDetails_3_icon"                    </span></span>
-<span id="cb28-64"><a href="#cb28-64" aria-hidden="true" tabindex="-1"></a><span class="do">##  [63] "actionDetails_3_iconSVG"                 </span></span>
-<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a><span class="do">##  [64] "actionDetails_3_title"                   </span></span>
-<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a><span class="do">##  [65] "actionDetails_3_subtitle"                </span></span>
-<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a><span class="do">##  [66] "actionDetails_4_type"                    </span></span>
-<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a><span class="do">##  [67] "actionDetails_4_url"                     </span></span>
-<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a><span class="do">##  [68] "actionDetails_4_pageIdAction"            </span></span>
-<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a><span class="do">##  [69] "actionDetails_4_idpageview"              </span></span>
-<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a><span class="do">##  [70] "actionDetails_4_serverTimePretty"        </span></span>
-<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a><span class="do">##  [71] "actionDetails_4_pageId"                  </span></span>
-<span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a><span class="do">##  [72] "actionDetails_4_eventCategory"           </span></span>
-<span id="cb28-74"><a href="#cb28-74" aria-hidden="true" tabindex="-1"></a><span class="do">##  [73] "actionDetails_4_eventAction"             </span></span>
-<span id="cb28-75"><a href="#cb28-75" aria-hidden="true" tabindex="-1"></a><span class="do">##  [74] "actionDetails_4_pageviewPosition"        </span></span>
-<span id="cb28-76"><a href="#cb28-76" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] "actionDetails_4_timestamp"               </span></span>
-<span id="cb28-77"><a href="#cb28-77" aria-hidden="true" tabindex="-1"></a><span class="do">##  [76] "actionDetails_4_icon"                    </span></span>
-<span id="cb28-78"><a href="#cb28-78" aria-hidden="true" tabindex="-1"></a><span class="do">##  [77] "actionDetails_4_iconSVG"                 </span></span>
-<span id="cb28-79"><a href="#cb28-79" aria-hidden="true" tabindex="-1"></a><span class="do">##  [78] "actionDetails_4_title"                   </span></span>
-<span id="cb28-80"><a href="#cb28-80" aria-hidden="true" tabindex="-1"></a><span class="do">##  [79] "actionDetails_4_subtitle"                </span></span>
-<span id="cb28-81"><a href="#cb28-81" aria-hidden="true" tabindex="-1"></a><span class="do">##  [80] "actionDetails_5_type"                    </span></span>
-<span id="cb28-82"><a href="#cb28-82" aria-hidden="true" tabindex="-1"></a><span class="do">##  [81] "actionDetails_5_url"                     </span></span>
-<span id="cb28-83"><a href="#cb28-83" aria-hidden="true" tabindex="-1"></a><span class="do">##  [82] "actionDetails_5_pageIdAction"            </span></span>
-<span id="cb28-84"><a href="#cb28-84" aria-hidden="true" tabindex="-1"></a><span class="do">##  [83] "actionDetails_5_idpageview"              </span></span>
-<span id="cb28-85"><a href="#cb28-85" aria-hidden="true" tabindex="-1"></a><span class="do">##  [84] "actionDetails_5_serverTimePretty"        </span></span>
-<span id="cb28-86"><a href="#cb28-86" aria-hidden="true" tabindex="-1"></a><span class="do">##  [85] "actionDetails_5_pageId"                  </span></span>
-<span id="cb28-87"><a href="#cb28-87" aria-hidden="true" tabindex="-1"></a><span class="do">##  [86] "actionDetails_5_siteSearchKeyword"       </span></span>
-<span id="cb28-88"><a href="#cb28-88" aria-hidden="true" tabindex="-1"></a><span class="do">##  [87] "actionDetails_5_siteSearchCategory"      </span></span>
-<span id="cb28-89"><a href="#cb28-89" aria-hidden="true" tabindex="-1"></a><span class="do">##  [88] "actionDetails_5_siteSearchCount"         </span></span>
-<span id="cb28-90"><a href="#cb28-90" aria-hidden="true" tabindex="-1"></a><span class="do">##  [89] "actionDetails_5_pageviewPosition"        </span></span>
-<span id="cb28-91"><a href="#cb28-91" aria-hidden="true" tabindex="-1"></a><span class="do">##  [90] "actionDetails_5_icon"                    </span></span>
-<span id="cb28-92"><a href="#cb28-92" aria-hidden="true" tabindex="-1"></a><span class="do">##  [91] "actionDetails_5_iconSVG"                 </span></span>
-<span id="cb28-93"><a href="#cb28-93" aria-hidden="true" tabindex="-1"></a><span class="do">##  [92] "actionDetails_5_title"                   </span></span>
-<span id="cb28-94"><a href="#cb28-94" aria-hidden="true" tabindex="-1"></a><span class="do">##  [93] "actionDetails_5_subtitle"                </span></span>
-<span id="cb28-95"><a href="#cb28-95" aria-hidden="true" tabindex="-1"></a><span class="do">##  [94] "actionDetails_5_timestamp"               </span></span>
-<span id="cb28-96"><a href="#cb28-96" aria-hidden="true" tabindex="-1"></a><span class="do">##  [95] "actionDetails_6_type"                    </span></span>
-<span id="cb28-97"><a href="#cb28-97" aria-hidden="true" tabindex="-1"></a><span class="do">##  [96] "actionDetails_6_url"                     </span></span>
-<span id="cb28-98"><a href="#cb28-98" aria-hidden="true" tabindex="-1"></a><span class="do">##  [97] "actionDetails_6_pageTitle"               </span></span>
-<span id="cb28-99"><a href="#cb28-99" aria-hidden="true" tabindex="-1"></a><span class="do">##  [98] "actionDetails_6_pageIdAction"            </span></span>
-<span id="cb28-100"><a href="#cb28-100" aria-hidden="true" tabindex="-1"></a><span class="do">##  [99] "actionDetails_6_idpageview"              </span></span>
-<span id="cb28-101"><a href="#cb28-101" aria-hidden="true" tabindex="-1"></a><span class="do">## [100] "actionDetails_6_serverTimePretty"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">100</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>file_id</li>
@@ -771,8 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Check:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_no_irrelevant_cols)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  387 5198</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_no_irrelevant_cols)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ok, das sind weniger.</p>
 </section>
@@ -794,8 +533,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Check:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_few_cols)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]  387 1005</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_few_cols)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="datum-reparieren" class="level3" data-number="1.2.9">
@@ -810,13 +548,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"timestamp"</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["actionDetails_0_timestamp"],"name":[1],"type":["dttm"],"align":["right"]},{"label":["actionDetails_1_timestamp"],"name":[2],"type":["dttm"],"align":["right"]},{"label":["actionDetails_2_timestamp"],"name":[3],"type":["dttm"],"align":["right"]},{"label":["actionDetails_3_timestamp"],"name":[4],"type":["dttm"],"align":["right"]},{"label":["actionDetails_4_timestamp"],"name":[5],"type":["dttm"],"align":["right"]},{"label":["actionDetails_5_timestamp"],"name":[6],"type":["dttm"],"align":["right"]},{"label":["actionDetails_6_timestamp"],"name":[7],"type":["dttm"],"align":["right"]},{"label":["actionDetails_7_timestamp"],"name":[8],"type":["dttm"],"align":["right"]},{"label":["actionDetails_8_timestamp"],"name":[9],"type":["dttm"],"align":["right"]},{"label":["actionDetails_9_timestamp"],"name":[10],"type":["dttm"],"align":["right"]}],"data":[{"1":"2025-07-07 23:16:05","2":"2025-07-07 23:16:10","3":"2025-07-07 23:16:10","4":"2025-07-07 23:16:25","5":"2025-07-07 23:16:25","6":"2025-07-07 23:16:35","7":"2025-07-07 23:16:35","8":"2025-07-07 23:16:57","9":"2025-07-07 23:17:02","10":"2025-07-07 23:17:07","_rn_":"1"},{"1":"2025-07-07 22:07:02","2":"2025-07-07 22:07:04","3":"2025-07-07 22:07:04","4":"2025-07-07 22:07:12","5":"2025-07-07 22:07:12","6":"2025-07-07 22:07:14","7":"2025-07-07 22:07:14","8":"2025-07-07 22:07:14","9":"2025-07-07 22:07:36","10":"2025-07-07 22:07:36","_rn_":"2"},{"1":"2025-07-07 22:25:37","2":"2025-07-07 22:25:46","3":"2025-07-07 22:25:47","4":"2025-07-07 22:25:53","5":"2025-07-07 22:25:53","6":"2025-07-07 22:25:53","7":"2025-07-07 22:26:14","8":"2025-07-07 22:26:18","9":"2025-07-07 22:26:18","10":"2025-07-07 22:26:18","_rn_":"3"},{"1":"2025-07-07 22:04:20","2":"2025-07-07 22:04:24","3":"2025-07-07 22:04:26","4":"2025-07-07 22:04:26","5":"2025-07-07 22:04:41","6":"2025-07-07 22:04:44","7":"2025-07-07 22:04:47","8":"2025-07-07 22:05:28","9":"2025-07-07 22:07:18","10":"2025-07-07 22:07:19","_rn_":"4"},{"1":"2025-07-07 20:36:08","2":"2025-07-07 20:37:07","3":"2025-07-07 20:46:32","4":"2025-07-07 20:46:32","5":"2025-07-07 20:51:48","6":"2025-07-07 20:57:15","7":"2025-07-07 21:00:20","8":"2025-07-07 21:00:20","9":"2025-07-07 21:01:15","10":"2025-07-07 21:02:03","_rn_":"5"},{"1":"2025-07-07 20:29:27","2":"2025-07-07 20:29:30","3":"2025-07-07 20:29:30","4":"2025-07-07 20:29:38","5":"2025-07-07 20:29:39","6":"2025-07-07 20:29:40","7":"2025-07-07 20:29:40","8":"2025-07-07 20:29:40","9":"2025-07-07 20:29:42","10":"2025-07-07 20:29:43","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
 </div>
 </section>
 <section id="bildspalten-entfernen" class="level3" data-number="1.2.10">
@@ -834,9 +565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Check:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>d_students_only <span class="sc">|&gt;</span> <span class="fu">nrow</span>()</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 376</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>d_repair_dates <span class="sc">|&gt;</span> <span class="fu">nrow</span>()</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 387</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>d_repair_dates <span class="sc">|&gt;</span> <span class="fu">nrow</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -853,13 +582,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>MIT</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Zitat</h2><div><div class="quarto-appendix-secondary-label">Mit BibTeX zitieren:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{sauer2025,
   author = {Sauer, Sebastian},
   title = {Challenge 02: Daten einlesen und Aufbereiten -\/- Lösung},
-  date = {2025-11-26},
-  url = {https://sebastiansauer.github.io/hans-hackathon2025/challenge02-solution.html},
+  date = {2025-12-01},
   langid = {de-DE}
 }
 </code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Bitte zitieren Sie diese Arbeit als:</div><div id="ref-sauer2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Sauer, Sebastian. 2025. <span>“Challenge 02: Daten einlesen und
-Aufbereiten -- Lösung.”</span> November 26, 2025. <a href="https://sebastiansauer.github.io/hans-hackathon2025/challenge02-solution.html">https://sebastiansauer.github.io/hans-hackathon2025/challenge02-solution.html</a>.
+Aufbereiten -- Lösung.”</span> December 1, 2025.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -933,7 +661,7 @@ Aufbereiten -- Lösung.”</span> November 26, 2025. <a href="https://sebastians
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/sebastiansauer\.github\.io\/hans-hackathon2025\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

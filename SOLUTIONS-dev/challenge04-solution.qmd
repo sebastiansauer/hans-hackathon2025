@@ -8,4 +8,6 @@ toc: true
 ---
 
 
-Betrachten Sie dazu die Targets-Datei.
+Betrachten Sie dazu die [Targets-Datei auf Github](https://github.com/sebastiansauer/hans-hackathon2025/blob/main/challenge04-solution.R).
+
+

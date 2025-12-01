@@ -138,6 +138,7 @@ Ergebnisse bitte in Form eines Dokuments ein,
 -   das *kommentiert* ist,
 -   das wohl *gegliedert* ist
 -   das *durchläuft*, ohne Fehler zu werfen.
+-   das alle Inhalte (Syntax, Diagramme und sonstigen Ouput) enthält.
 
 #### R
 
@@ -149,6 +150,14 @@ Code bitte in Form eines R-Skripts ein,
 -   *durchläuft*, ohne Fehler zu werfen
 -   *kommentiert* ist
 -   wohl *gegliedert* ist
+
+
+### Musterlösungen
+
+Nach Ablauf der Bearbeitungszeit jeder Challenge werden die Musterlösungen auf [Github](https://github.com/sebastiansauer/hans-hackathon2025) veröffentlicht, z.B. <https://github.com/sebastiansauer/hans-hackathon2025/blob/main/challenge01-solution.qmd>.
+
+
+
 
 ## Teil 2: Fachgespräch
 
