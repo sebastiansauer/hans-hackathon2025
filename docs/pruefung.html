@@ -155,6 +155,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Lösung 03</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./challenge04-solution.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lösung 04</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -414,10 +420,11 @@ for (i in 1:length(datafiles_list)) {
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>MIT</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Zitat</h2><div><div class="quarto-appendix-secondary-label">Mit BibTeX zitieren:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{untitled,
   author = {},
+  url = {https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html},
   langid = {de-DE}
 }
 </code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Bitte zitieren Sie diese Arbeit als:</div><div id="ref-untitled" class="csl-entry quarto-appendix-citeas" role="listitem">
-n.d.
+n.d. <a href="https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html">https://sebastiansauer.github.io/hans-hackathon2025/pruefung.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -491,7 +498,7 @@ n.d.
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sebastiansauer\.github\.io\/hans-hackathon2025\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
