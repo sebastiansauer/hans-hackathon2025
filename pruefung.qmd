@@ -150,6 +150,8 @@ Code bitte in Form eines R-Skripts ein,
 -   *durchläuft*, ohne Fehler zu werfen
 -   *kommentiert* ist
 -   wohl *gegliedert* ist
+-   reichen Sie auch alle *R-Funktionen* und sonstigen Code ein, den Sie selber geschrieben haben. Dazu bietet sich ein Zip-Archiv mit allen relevanten Quelldateien an (R-Code im Format `file.R`).
+
 
 
 ### Musterlösungen

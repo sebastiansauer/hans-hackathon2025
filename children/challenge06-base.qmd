@@ -18,6 +18,8 @@ Für alle folgenden Aufgaben dieser Challenge:  Berichten Sie zentrale deskripti
 
 
 Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline). Rendern Sie den Bericht im Format `typst`.
+Reichen Sie auch etwaigen ausgelagerten R-Code ein (etwa Funktionen, die Sie `source`n).
+
 
 Hinweise:
 

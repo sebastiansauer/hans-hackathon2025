@@ -37,4 +37,6 @@ produziert also weniger Fehlermeldungen (was von Vorteil, aber auch von Nachteil
 
 
 Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).
+Reichen Sie auch etwaigen ausgelagerten R-Code ein (etwa Funktionen, die Sie `source`n).
+
 
