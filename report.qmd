@@ -257,7 +257,7 @@ course_and_uni_per_visit |>
     title = "TH Nürnberg hosts the most courses on HaNS by far.",
     y = "University"
   )
-```
+# <!-- ``` -->
 
 ## Berechnen Sie die Anzahl der Tage seit dem letzten Besuch pro Modul/Lehrveranstaltung (pro Visit und pro uniquen Besucher).
 
