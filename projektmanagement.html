@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -68,6 +103,8 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Suchen"
   }
 }</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -171,7 +208,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Auf dieser Seite</h2>
    
   <ul>
-  <li><a href="#den-überblick-behalten-mit-pipeline-tools" id="toc-den-überblick-behalten-mit-pipeline-tools" class="nav-link active" data-scroll-target="#den-überblick-behalten-mit-pipeline-tools"><span class="header-section-number">1</span> Den Überblick behalten mit Pipeline-Tools</a></li>
+  <li><a href="#den-überblick-behalten-mit-pipeline-tools" id="toc-den-überblick-behalten-mit-pipeline-tools" class="nav-link active" data-scroll-target="#den-überblick-behalten-mit-pipeline-tools"><span class="header-section-number">1</span> Den Überblick behalten mit Pipeline-Tools</a>
+  <ul class="collapse">
+  <li><a href="#targets" id="toc-targets" class="nav-link" data-scroll-target="#targets"><span class="header-section-number">1.1</span> Targets</a></li>
+  <li><a href="#tipps" id="toc-tipps" class="nav-link" data-scroll-target="#tipps"><span class="header-section-number">1.2</span> Tipps</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/sebastiansauer/hans-hackathon/blob/main/projektmanagement.qmd" class="toc-action"><i class="bi bi-github"></i>Quellcode anzeigen</a></li><li><a href="https://github.com/sebastiansauer/hans-hackathon/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
     </div>
@@ -183,13 +224,60 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="den-überblick-behalten-mit-pipeline-tools" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Den Überblick behalten mit Pipeline-Tools</h1>
+<section id="targets" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="targets"><span class="header-section-number">1.1</span> Targets</h2>
 <p>Eine Analyse mit vielen Schritten kann leicht unübersichtlich werden. Ein anderes Problem ist, dass man viele Objekte erzeugt, als Ergebnisse der Zwischenschritte. Ändert man einen Zwischenschritt, so ändert sich der Input für alle darauf folgende Analyseschritte. Man muss also diese neu berechnen. Gefährlich wäre, würde man vergessen, diese Objekte neu zu berechnen: Man würde mit einem “veralteten” also falschen Objekt weiterarbeiten, was zwangsläufig zu falschen Ergebnissen führten würde.</p>
 <p>Wäre es nicht schön, wenn es ein Tool gäbe, das für Sie den Überblick behält und dafür sorgt, dass die veralteten Objekte (und nur die) bei Bedarf neu berechnet werden?</p>
 <p>Solche Tools gibt es. Wir schauen uns dazu das Tool <a href="https://books.ropensci.org/targets/">targets</a> an.</p>
 <p><a href="https://books.ropensci.org/targets/walkthrough.html">Hier ist ein erstes Beispiel</a>, und <a href="https://carpentries-incubator.github.io/targets-workshop/aio.html">hier</a> ist eine weitere Einführung in Targets.</p>
 <p>Diese <a href="https://wlandau.github.io/targets-tutorial/#1">Präsentation</a> führt in Targets ein mit einer Data-Science-Anwendung.</p>
+<p><img src="img/use-targets.png" class="img-fluid"></p>
+</section>
+<section id="tipps" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="tipps"><span class="header-section-number">1.2</span> Tipps</h2>
+<p>Anstelle von:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># 12 — Pivot fingerprint</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    df_long_fingerprint,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tic</span>()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> df_char <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">cols =</span> <span class="sc">-</span><span class="fu">any_of</span>(<span class="st">"fingerprint"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"name"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">toc</span>()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      tmp</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  ),</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>besser eine Funktion definieren für das jeweilige Target:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pivot_longer_hardcoded <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tic</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> df_char <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span><span class="fu">any_of</span>(<span class="st">"fingerprint"</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"name"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">toc</span>()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  tmp</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>und ann ein kürzeres Target definieren mit der selbstgeschriebenen Funktion:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># 12 — Pivot fingerprint</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    df_long_fingerprint,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer_hardcoded</span>()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  ),</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>MIT</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Zitat</h2><div><div class="quarto-appendix-secondary-label">Mit BibTeX zitieren:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{untitled,
