@@ -1,17 +1,20 @@
 
-**Verweildauer**
+**Zeiten und Verweildauer**
 
 
-Für alle folgenden Aufgaben dieser Challenge:  Berichten Sie zentrale deskriptive Statistiken zu Lage und Streuung. Visualisieren Sie deren Verteilung. 
+Für alle folgenden Aufgaben dieser Challenge:  Berichten Sie zentrale deskriptive Statistiken zu Lage und Streuung. Visualisieren Sie deren Verteilung.
 
 
-1. Berechnen Sie die Verweildauer: Wieviel Zeit verbringen die Nutzer pro Visit?
+1. Berechnen Sie die *Verweildauer*: Wieviel Zeit verbringen die Nutzer pro Visit?
+1. Berechnen Sie die *Verweildauer* pro Nutzer. Berichten Sie die Verteilung.
 2. Berechnen Sie die *Anzahl* der *Besuche* im *Zeitverlauf* (pro Woche).
 2. An welchen *Tagen* und zu welcher *Zeit* kommen die Besucher zu HaNS?
 4. An welchen *Wochentagen* wird die Seite bevorzugt besucht?
 5. Zu welchen *Uhrzeiten* wird die Seite bevorzugt besucht?
 6. Geben Sie den *Zeitraum der Nutzung* an (von <Datum des ersten Visits> bis <Datum des letzten Visits>). Hier geht es um insgesamte erste (bzw. letzte) Nutzung *über alle User* hinweg. Gefragt ist der älteste und neueste Time Stamp, den der Server insgesamt/überhaupt protokolliert hat.
-7. Geben Sie den *Zeitraum seit der letzten Nutzung* an (pro User) und die Verteilung inkl. zentraler Statistiken (wie Mittelwert).
+7. Wie ist die *Verteilung* der Visits?
+8. Brechen Sie die Verteilung der Visits auf nach folgenden Untergruppen: Module und Hochschule.
+9. Unterscheiden sich die Anzahl der Visits zwischen *Vorlesungszeit* und *Semesterferien*?
 8. Verändert sich die *Verweildauer* im *Zeitverlauf* (nimmt sie zu oder ab?)? Analysebasis: Woche. Berechnen Sie eine Regression dazu.
 9. Gibt es einen statistischen *Zusammenhang* von *Modul*/Lehrveranstaltung und *Verweildauer*?
 9. Gibt es einen statistischen *Zusammenhang* von *Modul*/Lehrveranstaltung und *der Anzahl der Visits*?

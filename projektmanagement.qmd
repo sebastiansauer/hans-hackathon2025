@@ -1,9 +1,11 @@
 # Den Überblick behalten mit Pipeline-Tools
 
 
+## Targets
+
 Eine Analyse mit vielen Schritten kann leicht unübersichtlich werden.
 Ein anderes Problem ist, dass man viele Objekte erzeugt, als Ergebnisse der Zwischenschritte.
-Ändert man einen Zwischenschritt, so ändert sich der Input für alle darauf folgende 
+Ändert man einen Zwischenschritt, so ändert sich der Input für alle darauf folgende
 Analyseschritte. Man muss also diese neu berechnen.
 Gefährlich wäre, würde man vergessen, diese Objekte neu zu berechnen:
 Man würde mit einem "veralteten" also falschen Objekt weiterarbeiten,
@@ -17,3 +19,62 @@ Solche Tools gibt es. Wir schauen uns dazu das Tool [targets](https://books.rope
 [Hier ist ein erstes Beispiel](https://books.ropensci.org/targets/walkthrough.html), und [hier](https://carpentries-incubator.github.io/targets-workshop/aio.html) ist eine weitere Einführung in Targets.
 
 Diese [Präsentation](https://wlandau.github.io/targets-tutorial/#1) führt in Targets ein mit einer Data-Science-Anwendung.
+
+
+![](img/use-targets.png)
+
+
+## Tipps
+
+
+Anstelle von:
+
+```{r}
+#| eval: false
+ # 12 — Pivot fingerprint
+  tar_target(
+    df_long_fingerprint,
+    {
+      tic()
+      tmp <- df_char %>% pivot_longer(
+        cols = -any_of("fingerprint"),
+        names_to = "name",
+        values_to = "value"
+      )
+      toc()
+      tmp
+    }
+  ),
+```
+
+
+besser eine Funktion definieren für das jeweilige Target:
+
+```{r}
+#| eval: false
+pivot_longer_hardcoded <- function(){
+  tic()
+  tmp <- df_char %>% pivot_longer(
+    cols = -any_of("fingerprint"),
+    names_to = "name",
+    values_to = "value"
+  )
+  toc()
+  tmp
+}
+```
+
+
+und ann ein kürzeres Target definieren mit der selbstgeschriebenen Funktion:
+
+
+```{r}
+#| eval: false
+ # 12 — Pivot fingerprint
+  tar_target(
+    df_long_fingerprint,
+
+    pivot_longer_hardcoded()
+
+  ),
+```
