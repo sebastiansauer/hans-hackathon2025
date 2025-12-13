@@ -278,6 +278,11 @@ d_time_repaired |>
     `daten_clean %>% summarise(across(everything(), ~ mean(is.na(.))))`.
 20. ? `sum(str_detect(names(matomo_day1), "^actionDetails_"))`
 21. ? `grep("id|ID|Ip|ip|fingerprint", names(matomo_day1), value = TRUE)`
+22. Erklären Sie den Unterschied zwischen `select(contains("action.")` und `select(matches("action.").
+23. ? `mutate(
+        days_since_last_visit = as.numeric(server_date - lag(server_date))
+      )`
+
 
 
 ## Sonstiges

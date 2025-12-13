@@ -35,8 +35,10 @@ library(tictoc)  # Zeit messen
 
 /Users/sebastiansaueruser/github-repos/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14
 ```{r datafile-name}
-datafile_name <- paste0(here(),"/", "data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-07.csv")
+datafile_name <- paste0(here(),"/", "data/data-processed/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-07.csv")
 datafile_name
+
+stopifnot(file.exists(datafile_name))
 ```
 
 Wie lange dauer das Laden der Daten?
@@ -47,6 +49,7 @@ d_matomo1 <- read.csv(datafile_name)
 toc()
 ```
 
+`load data: 3.067 sec elapsed`
 
 Oder so, mit `read_csv` aus dem `readr`-Paket (Teil des Tidyverse):
 
@@ -98,8 +101,20 @@ names(d_matomo1) |> tail(50)
 
 Es gibt Spalten mit einer fortlaufenden Nummer und Spalten ohne.
 
+Es gibt aber noch eine Reihe interessanter anderer Variablen, außer `actionDetails`:
+
+
+```{r}
+d_matomo1_names <- names(d_matomo1)
+d_matomo1_names |> head(10)
+
+d_matomo1_names[!str_detect(d_matomo1_names, "actionDetails")]
+```
+
+
 
 ### 3 Unique Spaltennamen
+
 Welche verschiedenen Spaltennamen gibt es, wenn man die Zahlen (fortlaufenden Nummern in den Spaltennamen) außer Acht lässt? Wie heißen diese (uniquen) Spalten?
 
 Ignoriert man die fortlaufende Nummer, gibt es nicht (mehr so) viele verschiedene Werte (Ausprägungen) an Spaltennamen.
