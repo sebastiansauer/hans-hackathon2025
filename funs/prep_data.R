@@ -28,5 +28,6 @@ prep_data <- function(d) {
     ) |>
     # assign own IDs, as the original ID are *not* unique:
     mutate(idvisit_old = idvisit, idvisit = 1:n()) |>
-    select(idvisit, everything())
+    select(idvisit, everything()) |>
+    janitor::clean_names()
 }

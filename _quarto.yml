@@ -8,11 +8,12 @@ project:
     - projektmanagement.qmd
     - pruefung.qmd
     - challenges.qmd
-    - challenge01-solution.qmd
-    - challenge02-solution.qmd
-    - challenge03-solution.qmd
-    - challenge04-solution.qmd
-    - challenge05-solution.qmd
+    # - challenge01-solution.qmd
+    # - challenge02-solution.qmd
+    # - challenge03-solution.qmd
+    # - challenge04-solution.qmd
+    # - challenge05-solution.qmd
+    - ./challenge0?-solution.qmd
 
 
 editor: source
@@ -55,6 +56,8 @@ website:
         text: Lösung 04
       - href: challenge05-solution.qmd
         text: Lösung 05
+      - href: challenge06-solution.qmd
+        text: Lösung 06
       # - href: challenge03-solution.qmd
       #   text: Lösung 03
       # - href: challenge04-solution.qmd

@@ -2,9 +2,20 @@
 
 **Interaktion mit dem LLM**
 
-1. Wie oft wird (pro Monat) ein AI Transkript angefordert? (Tipp: Suche nach `click_transcript_word`.)
-2. Wie oft wird (pro Monat) mit dem LLM interagiert (Tipp: `llm`)?
-3. Welcher Anteil der Visits (`id_visit`) interagiert mit dem LLM?
+
+1. Auf welche Art und wie oft wird mit dem LLM interagiert? Suchen Sie dafür nach `eventcategory` `"llm"` -- zählen Sie die Werte der verschiedenen Kategorien.
+2. Wie viele Nachrichten werden an das LLM gesendet von den Besuchern? (Tipp: `"message_to_llm"`).
+3. Wie groß ist der Anteil der Besucher, die mit dem LLM interagieren? (Tipp: Suchen Sie nach `"llm"` in den Aktionen eines Besuchers).
+4. Wie groß ist der Anteil der  Besucher, die mit dem LLM interagieren, pro Kunde (Hochschule)? 
+4. Verändert sich der Anteil der Besucher, die mit dem LLM interagieren, im Zeitverlauf?
+5. Die Länge der Prompts an das LLM ist wichtig zu wissen (da potenziell teuer). Werten Sie die Länge der Prompts an das LLM pro Visit aus. Messen Sie die Länge der Prompts in Tokens. (Tipp: R-Paket `tokenizers`)
+6. Unterscheidet sich die Token-Länge zwischen den Kunden (d.h. Hochschulen)?
+7. Unterscheidet sich die Token-Länge zwischen den Modulen?
+8. Unterscheidet sich die Token-Länge im Zeitverlauf?
+1. Wie oft wird wird auf ein Wort im LLM-Transkript geklickt (Tipp: Suche nach `click_transcript_word`.)
+10. Wie verändert sich dieser Wert im Zeitverlauf?
+11. Wie lang ist der Output des LLMs (in Tokens)? 
+12. Gruppieren Sie die Länge des Outputs des LLMs nach Kunden (Hochschulen).
 
 
 Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).
@@ -14,4 +25,7 @@ Hinweise:
 
 - Nutzen Sie *Typst* als Ausgabeformat.
 - Bitte beachten Sie Hinweise zum [Programmieren](https://hinweisbuch.netlify.app/109-hinweise-programmieren).
+- Wenn Sie Statistiken berichten, geben Sie Hinweise nicht zur zu Lagemaßen, sondern auch zur Streuung. Wählen Sie robuste Statistiken. Visualisieren Sie wo sinnvoll.
+
+
 

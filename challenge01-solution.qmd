@@ -112,6 +112,16 @@ d_matomo1_names[!str_detect(d_matomo1_names, "actionDetails")]
 ```
 
 
+Alternativ könnte man einen negativen Look-Ahead in Regex nutzen:
+
+```{r}
+d_matomo1_names |> 
+  str_extract("^(?!.*actionDetails).+") |> 
+  na.omit()
+```
+
+
+
 
 ### 3 Unique Spaltennamen
 

@@ -1,0 +1,298 @@
+---
+title: "Challenge 05 -- Solution"
+format: html
+author: Sebastian Sauer
+date: today
+number-sections: true
+toc: true
+---
+
+
+Betrachten Sie dazu die [Targets-Datei auf Github](https://github.com/sebastiansauer/hans-hackathon2025/blob/main/challenge05-solution.R).
+
+
+
+
+# Setup
+
+## Libs
+```{r load-libs}
+#| include: false
+library(tidyverse)
+library(lubridate)
+library(gt)
+library(visdat)
+# library(data.table)
+# library(collapse)
+library(targets)
+library(ggstatsplot)
+library(easystats)
+library(scales)
+library(gt)
+```
+
+
+## Other setup
+
+```{r}
+source("_common.r")
+list.files("funs", full.names = TRUE) |>
+  purrr::walk(source)
+
+options(digits = 3)
+options(tinytable_tt_digits = 2)
+```
+
+
+## Load Targets
+
+```{r load-targets}
+tar_load(c(data_prepped, time_spent, course_and_uni_per_visit))
+```
+
+
+# Challenge 6
+
+```{r data_prepped}
+n_actions_searches_interactions <-
+  data_prepped |>
+  select(
+    idvisit,
+    fingerprint,
+    any_of(c(
+      "searches",
+      "actions",
+      "interactions",
+      "referrertype",
+      "referrername",
+      "language",
+      "devicetype",
+      "devicemodel",
+      "operatingsystem",
+      "browsername"
+    ))
+  )
+
+```
+
+## Berechnen Sie die Anzahl der Aktionen pro Visit und pro fingerprint
+
+
+
+### idvisit und fingerprint jeweils unique
+
+```{r n_actions_searches_interactions-summary}
+n_actions_searches_interactions |>
+  as.data.frame() |>
+  summarise(
+    idvisit_n = length(unique(idvisit)),
+    fingerprint_n = length(unique(fingerprint)),
+    actions_mean = mean(as.integer(actions), na.rm = TRUE),
+    searches_mean = mean(as.integer(searches), na.rm = TRUE)
+  ) |>
+  gt()
+```
+
+### Actions pro idvisit und pro fingerprint
+
+
+```{r}
+n_actions_searches_interactions_summarized <-
+n_actions_searches_interactions |>
+  group_by(idvisit) |>
+  summarise(actions_mean = mean(as.integer(actions), na.rm = TRUE))
+
+n_actions_searches_interactions_summarized |>
+  gghistostats(x = actions_mean)
+```
+
+<https://indrajeetpatil.github.io/ggstatsplot/reference/gghistostats.html>
+
+
+```{r}
+n_actions_searches_interactions_summarized |>
+  plot_hist_descriptive(actions_mean)
+```
+
+
+:::{.callout-note}
+Es gibt etwa doppelt so viele Besucher wie unique Nutzer.
+:::
+
+
+## User Specs
+
+### Referrer Type pro Visit
+
+```{r}
+#| error: true
+n_actions_searches_interactions |>
+  count(referrertype, sort = TRUE)
+```
+
+
+### Referrer Type Name pro Visit
+
+```{r}
+#| error: true
+n_actions_searches_interactions |>
+  count(referrername, sort = TRUE) |>
+  knitr::kable()
+```
+
+### devicemodel
+
+
+
+```{r}
+#| error: true
+n_actions_searches_interactions |>
+  count(devicemodel, sort = TRUE) |>
+  slice_head(n = 10)
+```
+
+### operatingsystem
+
+```{r}
+#| error: true
+n_actions_searches_interactions |>
+  count(operatingsystem, sort = TRUE) |>
+  slice_head(n = 10) |>
+  tinytable::tt()
+```
+
+### browsername
+
+
+```{r}
+#| error: true
+n_actions_searches_interactions |>
+  count(browsername, sort = TRUE) |>
+  slice_head(n = 10) |>
+  tinytable::tt()
+```
+
+
+Die Mac-User scheinen besonders aktiv zu sein auf HaNS.
+
+
+
+
+## Berechnen Sie die Anzahl der Tage seit dem letzten Besuch (pro Visit und pro uniquen Besucher)
+
+
+
+```{r}
+data_prepped |>
+  select(matches("days")) |>
+  mutate(across(everything(), ~ as.integer(.))) |>
+  describe_distribution() |>
+  tinytable::tt()
+```
+
+
+
+
+```{r}
+data_prepped |>
+  select(matches("days")) |>
+  mutate(across(everything(), as.integer)) |>
+  imap(~ plot_hist_descriptive(tibble(value = .x), var = value, title = .y))
+```
+
+
+
+## Anzahl von Unis und Kursen
+
+
+```{r}
+course_and_uni_per_visit |>
+  count(university) |>
+  tinytable::tt()
+```
+
+
+```{r}
+course_and_uni_per_visit |>
+  count(university) |>
+  drop_na() |>
+  ggplot(aes(y = reorder(university, n), x = n)) +
+  geom_col() +
+  theme_minimal() +
+  labs(
+    title = "TH Nürnberg hosts the most courses on HaNS by far.",
+    y = "University"
+  )
+```
+
+
+```{r}
+course_and_uni_per_visit |>
+  distinct(fingerprint, .keep_all = TRUE) |>
+  count(university) |>
+  ggplot(aes(y = reorder(university, n), x = n)) +
+  geom_col() +
+  theme_minimal() +
+  labs(
+    title = "TH Nürnberg hosts the most courses on HaNS by far.",
+    y = "University"
+  )
+```
+
+## Berechnen Sie die Anzahl der Tage seit dem letzten Besuch pro Modul/Lehrveranstaltung (pro Visit und pro uniquen Besucher).
+
+Pro idvisit:
+
+```{r course_and_uni_per_visit_dayssincelastvisit}
+course_and_uni_per_visit_dayssincelastvisit <-
+course_and_uni_per_visit |>
+  select(idvisit, course, university) |>
+  mutate(idvisit = as.integer(idvisit)) |>
+  left_join(data_prepped |> select(idvisit, dayssincelastvisit), by = "idvisit") |>
+  mutate(dayssincelastvisit = as.integer(dayssincelastvisit))
+```
+
+
+```{r}
+course_and_uni_per_visit_dayssincelastvisit |>
+  group_by(course) |>
+  describe_distribution(dayssincelastvisit) |>
+  print_md()
+```
+
+Pro fingerprint: analog.
+
+# Debrief
+
+## Targets-Objekte
+
+
+```{r tar-obs}
+targets::tar_manifest() |>
+  select(name) |>
+  #print(n = Inf) |>
+  knitr::kable()
+```
+
+## Pipeline-Graph
+
+
+```{r}
+#| dpi: 300
+tar_visnetwork(targets_only = TRUE,
+               outdated = TRUE)
+```
+
+
+
+```{r}
+tar_glimpse()
+```
+
+
+
+## sessionInfo
+
+```{r}
+sessioninfo::session_info()
+```
