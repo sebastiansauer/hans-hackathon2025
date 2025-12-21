@@ -1,16 +1,23 @@
 
 
-**Was machen die User?**
+**Videonutzung**
 
 
-1. Stellen Sie die *Namen der ersten 100 Spalten* im Bericht dar.
-1. Werten Sie die *Top-10-Tätigkeiten* aus, die die Besucher auf der Website durchführen, z.B. Videos anschauen. Zählen Sie dafür, welche Werte wie oft bei `subtitle` stehen.
-3. Berechnen Sie die "*Glotzdauer*", d.h. wie lange die Besucher sich Videos anschauen. Berichten Sie relevante Statistiken.
-4. Untersuchen und visualisieren Sie, ob sich die Anzahl der Nutzer oder die Verweildauer auf der Website *verändert hat im Laufe der Zeit* (Wochen und Monate).
-5. Untersuchen und visualisieren Sie, ob sich das Verhalten in Bezug auf die Videos *verändert hat im Laufe der Zeit* (Wochen und Monate), v.a. im Hinblick auf die Glotzdauer.
+1. Werten Sie die *Top-10-Tätigkeiten* aus, die die Besucher (`idvisit`) auf der Website durchführen. Tipp: Zählen Sie dafür, welche Werte wie oft bei `subtitle` stehen. Auf welchem Platz steht Videonutzung?
+2. Berechnen Sie die *Videonutzung* ("Glotzdauer"), d.h. die Zeit, wie lange die Besucher (`idvisit`) sich Videos anschauen. Tipp: Die Videodauer lässt sich mit Hilfe von `eventaction` und dazu `play` (Beginn Video schauen) bzw. `pause` (Ende) annähernd berechnen. Allerdings darf man auf diese Werte keine exakten Lösungen erwarten.
+3. Untersuchen und visualisieren Sie, ob sich das Verhalten in Bezug auf die Videos *verändert hat im Laufe der Zeit* (Wochen und Monate) im Hinblick auf die Glotzdauer.
+4. Berechnen Sie die Videonutzung pro Kunde (Hochschule).
+5. Zum Quarto-Bericht:
+  a) Wie kann man die Größe eines Diagramms in Quarto einstellen?
+  b) Wie kann man Diagramme referenzieren (z.B. "Diagramm <3> zeigt blabla", wobei "Diagramm 3" verlinkt ist zum Diagramm).
+  c) Wie kann man eine Gliederung zum Quarto-Bericht hinzufügen.
+  d) Welche Code-Chunk-Optionen gibt es in Quarto? Nennen Sie zumindest 3. Wie ist die Syntax aufgebaut?
+  e) Beschreiben Sie das Ausgabeformat "Typst" (ca. 5 Sätze)
 
 
+Hinweise: 
 
-Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).Reichen Sie auch etwaigen ausgelagerten R-Code ein (etwa Funktionen, die Sie `source`n).
-
-Bitte beachten Sie Hinweise zum [Programmieren](https://hinweisbuch.netlify.app/109-hinweise-programmieren).
+- Ausgabeformat: Quarto-Dokument (Bericht) und R-Syntax (Targets-Pipeline).
+- Reichen Sie immer auch etwaigen ausgelagerten R-Code ein (etwa Funktionen, die Sie `source`n).
+- Berichten Sie relevante Statistiken. Visualisieren Sie die Statistiken.
+- Bitte beachten Sie Hinweise zum [Programmieren](https://hinweisbuch.netlify.app/109-hinweise-programmieren).

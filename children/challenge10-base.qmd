@@ -1,3 +1,25 @@
 
-offen
+**Reflexion**
+
+
+Reflektieren Sie Ihr Vorgehen, Ihre Schwierigkeiten und Ihren Lernerfolg:
+
+
+1. Wählen Sie *3 Aufgaben *aus dem Hackathon, die für Sie besonders herausfordernd waren und *reflektieren* Sie: Erläutern Sie jeweils Ihre Schwierigkeiten, Ihr Vorgehen, was Sie beim nächsten Mal anders machen würden und was Sie dabei gelernt haben. (ca. 3 Mal 3 Sätze)
+2. Dieses Modul ist ein *angewandtes Projekt* in dem Sinne, dass es wenig Theorie gab. Der Fokus lag stattdessen auf Problemlösung mit Kompetenzorientierung. Damit ist der didaktische Fokus ganz anders als in anderen Modulen, z.B. in QM2. Diskutieren Sie das Für und Wider von einer *Didaktik* wie in diesem Modul. Diskutieren Sie auch den *Anspruch* des Moduls mit Blick auf *Zeitaufwand* und (intellektueller) *Schwierigkeit*. Berücksichtigen Sie, dass es sich um 10-ECTS-Modul handelt. (ca. 10 Sätze)
+3. Dieses Modul verlangt höhere R- bzw. Datenanalyse- bzw. *Programmierkompetenz* als in den anderen Fächern Ihres Studiengangs. Stimmen Sie zu? Vergleichen Sie den Anspruch in diesem Modul mit anderen Modulen und diskutieren Sie Ihren Kompetenzzuwachs in Programmiertechniken. (ca. 10 Sätze)
+4. Einige Aufgaben dieses Hackathons waren *mehrdeutig* in dem Sinne, dass mehrere Lösungsansätze denkbar sind. Wie sind Sie damit umgegangen? (ca. 5 Sätze)
+5. Auf welche Art kann Ihnen das *Gelernte* in der Zukunft *nützlich* sein? (ca. 5 Sätze)
+6. An welchen Aspekten im Bereich Datenanalyse und Programmieren würden Sie gerne weiterarbeiten bzw. Sehen Sie Nutzen für sich, wenn Sie sich dort *weiterentwickeln*? (ca. 5-10 Sätze)
+7. Suchen Sie ein Beispiel für einen R-Code heraus, den man als "*schön*" (ästhetisch ansprechend) bezeichnen kann. "Schön" als Attribut für Software kann man als ambiguen Begriff betrachten. Auf der anderen Seite wird dieses Attribut auch für mathematische Formeln verwendet. Wenn Sie möchten, interpretieren Sie "schön" z.B. als "prägnant" oder "hoch abstrakt" oder "gute Balance zwischen abstrakt und konkret". Diskutieren Sie, inwiefern Ihr Code-Beispiel als "schön" zu betrachten ist. (ca. 10 Sätze)
+8. Diskutieren Sie, welche Kompetenzen *Arbeitgeber* von Berufseinsteigern erwarten und inwieweit Sie diese Kompetenzen aus diesem Modul schöpfen können.  (ca. 10 Sätze)
+9. Erläutern Sie, wie Sie *KI* in diesem Modul genutzt haben. Gehen Sie auch darauf ein, welche Kompetenz eine Arbeitskraft im Bereich Datenanalyse haben muss (Stand heute), um einen Mehrwert gegenüber einer KI zu bieten (bzw. einer KI, die von einer menschlichen Arbeitskraft ohne Kenntnisse in Datenanalyse und Programmierung gesteuert wird). (ca. 5 Sätze)
+10. Fassen Sie die (für Sie) *wichtigste Erkenntnis* des Moduls in einem einzelnen *Satz* zusammen.
+
+
+Hinweise:
+
+- Reichen Sie eine PDF-Datei ein, die Sie mit Quarto im Typst-Format erstellt haben.
+- Nutzen Sie folgende Markdown-Features: Überschriften, Aufzählungen, Code-Chunks, Links, Gliederung, Author- und Datum-Angabe.
+
 
