@@ -18,10 +18,6 @@ project:
 
 editor: source
 
-  # image: img/statistik1_icon.png
-  # description:  "Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools 'HaNS'"
-
-
 website:
   title: "hans-hackathon"
   search: true
@@ -81,6 +77,9 @@ website:
 
 
 format:
+  # typst:
+  #   toc: true
+  #   number-sections: true
   html:
     theme: cosmo
     css: styles.css
@@ -99,7 +98,7 @@ lang: de-DE
 citation: true
 #google-scholar: true
 description: |
- "Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools 'HaNS'"
+ "Eine Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools 'HaNS'"
 license: "MIT" 
 
 
