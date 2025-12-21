@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sebastian Sauer">
-<meta name="description" content="“Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools ‘HaNS’”">
+<meta name="description" content="“Eine Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools ‘HaNS’”">
 
 <title>Challenges im Überblick – hans-hackathon</title>
 <style>
@@ -256,7 +256,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    <p>“Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools ‘HaNS’”</p>
+    <p>“Eine Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools ‘HaNS’”</p>
   </div>
 </div>
 
@@ -273,7 +273,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">15. Dezember 2025</p>
+      <p class="date">21. Dezember 2025</p>
     </div>
   </div>
   
@@ -434,7 +434,7 @@ window.Quarto = {
 <li>Unterscheidet sich die Token-Länge zwischen den Kunden (d.h. Hochschulen)?</li>
 <li>Unterscheidet sich die Token-Länge zwischen den Modulen?</li>
 <li>Unterscheidet sich die Token-Länge im Zeitverlauf?</li>
-<li>Wie oft wird wird auf ein Wort im LLM-Transkript geklickt (Tipp: Suche nach <code>click_transcript_word</code>.)</li>
+<li>Wie oft wird wird auf ein Wort im LLM-Transkript geklickt? (Tipp: Suche nach <code>click_transcript_word</code>.)</li>
 <li>Wie verändert sich dieser Wert im Zeitverlauf?</li>
 <li>Wie lang ist der Output des LLMs (in Tokens)?</li>
 <li>Gruppieren Sie die Länge des Outputs des LLMs nach Kunden (Hochschulen).</li>
@@ -449,31 +449,81 @@ window.Quarto = {
 </section>
 <section id="challenge-8" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="challenge-8"><span class="header-section-number">8</span> Challenge 8</h2>
-<p><strong>Was machen die User?</strong></p>
+<p><strong>Videonutzung</strong></p>
 <ol type="1">
-<li>Stellen Sie die <em>Namen der ersten 100 Spalten</em> im Bericht dar.</li>
-<li>Werten Sie die <em>Top-10-Tätigkeiten</em> aus, die die Besucher auf der Website durchführen, z.B. Videos anschauen. Zählen Sie dafür, welche Werte wie oft bei <code>subtitle</code> stehen.</li>
-<li>Berechnen Sie die “<em>Glotzdauer</em>”, d.h. wie lange die Besucher sich Videos anschauen. Berichten Sie relevante Statistiken.</li>
-<li>Untersuchen und visualisieren Sie, ob sich die Anzahl der Nutzer oder die Verweildauer auf der Website <em>verändert hat im Laufe der Zeit</em> (Wochen und Monate).</li>
-<li>Untersuchen und visualisieren Sie, ob sich das Verhalten in Bezug auf die Videos <em>verändert hat im Laufe der Zeit</em> (Wochen und Monate), v.a. im Hinblick auf die Glotzdauer.</li>
+<li>Werten Sie die <em>Top-10-Tätigkeiten</em> aus, die die Besucher (<code>idvisit</code>) auf der Website durchführen. Tipp: Zählen Sie dafür, welche Werte wie oft bei <code>subtitle</code> stehen. Auf welchem Platz steht Videonutzung?</li>
+<li>Berechnen Sie die <em>Videonutzung</em> (“Glotzdauer”), d.h. die Zeit, wie lange die Besucher (<code>idvisit</code>) sich Videos anschauen. Tipp: Die Videodauer lässt sich mit Hilfe von <code>eventaction</code> und dazu <code>play</code> (Beginn Video schauen) bzw. <code>pause</code> (Ende) annähernd berechnen. Allerdings darf man auf diese Werte keine exakten Lösungen erwarten.</li>
+<li>Untersuchen und visualisieren Sie, ob sich das Verhalten in Bezug auf die Videos <em>verändert hat im Laufe der Zeit</em> (Wochen und Monate) im Hinblick auf die Glotzdauer.</li>
+<li>Berechnen Sie die Videonutzung pro Kunde (Hochschule).</li>
+<li>Zum Quarto-Bericht:</li>
 </ol>
-<p>Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline).Reichen Sie auch etwaigen ausgelagerten R-Code ein (etwa Funktionen, die Sie <code>source</code>n).</p>
-<p>Bitte beachten Sie Hinweise zum <a href="https://hinweisbuch.netlify.app/109-hinweise-programmieren">Programmieren</a>.</p>
+<ol type="a">
+<li>Wie kann man die Größe eines Diagramms in Quarto einstellen?</li>
+<li>Wie kann man Diagramme referenzieren (z.B. “Diagramm &lt;3&gt; zeigt blabla”, wobei “Diagramm 3” verlinkt ist zum Diagramm).</li>
+<li>Wie kann man eine Gliederung zum Quarto-Bericht hinzufügen.</li>
+<li>Welche Code-Chunk-Optionen gibt es in Quarto? Nennen Sie zumindest 3. Wie ist die Syntax aufgebaut?</li>
+<li>Beschreiben Sie das Ausgabeformat “Typst” (ca. 5 Sätze)</li>
+</ol>
+<p>Hinweise:</p>
+<ul>
+<li>Ausgabeformat: Quarto-Dokument (Bericht) und R-Syntax (Targets-Pipeline).</li>
+<li>Reichen Sie immer auch etwaigen ausgelagerten R-Code ein (etwa Funktionen, die Sie <code>source</code>n).</li>
+<li>Berichten Sie relevante Statistiken. Visualisieren Sie die Statistiken.</li>
+<li>Bitte beachten Sie Hinweise zum <a href="https://hinweisbuch.netlify.app/109-hinweise-programmieren">Programmieren</a>.</li>
+</ul>
 </section>
 <section id="challenge-9" class="level2" data-number="9">
 <h2 data-number="9" class="anchored" data-anchor-id="challenge-9"><span class="header-section-number">9</span> Challenge 9</h2>
 <p><strong>Optimierung</strong></p>
 <ol type="1">
-<li><em>Optimieren</em> Sie Ihre Analyse-Pipeline (der letzten Challenge) mit Blick auf <em>Geschwindigkeit</em> (des Durchlaufs der Pipeline). Berichten Sie die Laufzeit vor und nach der Optimierung.</li>
-<li>Optimieren Sie Ihre Analyse-Pipeline mit Blick auf <em>Robustheit.</em> Begründen Sie Ihre Entscheidungen.</li>
-<li>Optimieren Sie Ihre Analyse-Pipeline mit Blick auf <em>Allgemeinheit</em> und <em>Flexibilität.</em> Begründen Sie Ihre Entscheidungen.</li>
+<li><em>Optimieren</em> Sie Ihre Analyse-Pipeline (mit Blick auf alle Aufgaben des Hackathon) mit Blick auf <em>Geschwindigkeit</em> (des Durchlaufs der Pipeline). Berichten Sie die Laufzeit vor und nach der Optimierung. (ca. 3 Punkte mit jeweils 5 Sätzen)</li>
+<li>Optimieren Sie Ihre Analyse-Pipeline mit Blick auf <em>Robustheit.</em> (ca. 3 Punkte mit jeweils 5 Sätzen)</li>
+<li>Optimieren Sie Ihre Analyse-Pipeline mit Blick auf <em>Allgemeinheit</em> und <em>Flexibilität.</em> (ca. 3 Punkte mit jeweils 5 Sätzen)</li>
+<li>Diskutieren Sie Pro und Contra der <em>Versionierungssoftware</em> <code>git</code>. (ca. 5 Sätze)</li>
+<li>Diskutieren Sie Pro und Contra der <em>Notizen</em>-Software <a href="https://obsidian.md/"><code>Obsidian</code></a>. (ca. 5 Sätze)</li>
+<li>Erläutern Sie Ihre <em>Datensicherheit</em> und Backup-Strategie während des Projekts. Wie schützen Sie sich vor Datenverlust? (ca. 5 Sätze)</li>
+<li>Welche <em>“Life-Hacks”</em> haben Ihnen geholfen, sich während des Projekts zu strukturieren und effizient zu arbeiten? (ca. 5 Sätze)</li>
+<li>Welchen <em>Text</em>-Editor bzw. Programmier-Oberfläche haben Sie benutzt und warum? Welche anderen Optionen ziehen Sie in Erwägung? (ca. 5 Sätze)</li>
+<li>Angenommen, Sie könnten nicht R und Quarto verwenden. Mit welchen <em>Alternativen</em> und wie würden Sie dann arbeiten? (ca. 5 Sätze)</li>
+<li>Vergleichen Sie Ihre Lösung mit dieser Musterlösung: <a href="https://sebastiansauer.github.io/hans/" class="uri">https://sebastiansauer.github.io/hans/</a>. Berichten Sie einen Aspekt, den Sie von dieser Lösung lernen können und einen Aspekt, den Sie besser umgesetzt haben als in der Musterlösung.</li>
 </ol>
-<p>Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline). Reichen Sie auch etwaigen ausgelagerten R-Code ein (etwa Funktionen, die Sie <code>source</code>n).</p>
-<p>Bitte beachten Sie Hinweise zum <a href="https://hinweisbuch.netlify.app/109-hinweise-programmieren">Programmieren</a>.</p>
+<p>Hinweise:</p>
+<ul>
+<li>Erläutern und Begründen Sie jeweils Ihr Vorgehen.</li>
+<li>Hier finden Sie Hinweise zu <em>Obsidian</em>:
+<ul>
+<li>https://www.hannaliebl.com/blog/using-obsidian-for-software-development-notes/</li>
+<li>https://www.faesel.com/blog/why-every-developer-needs-to-use-obsidian</li>
+<li>https://www.samjulien.com/get-started-with-obsidian-as-a-developer/</li>
+<li><a href="https://www.youtube.com/watch?v=DbsAQSIKQXk">No Boilerplate - Obsidian Part 1</a></li>
+</ul></li>
+<li>Ausgabeformat: Quarto (Bericht) und R-Syntax (Targets-Pipeline). Nutzen Sie den Quarto-Bericht, um Ihr Vorgehen der Optimierung zu erläutern und begründen.</li>
+<li>Reichen Sie auch etwaigen ausgelagerten R-Code ein (etwa Funktionen, die Sie <code>source</code>n).</li>
+<li>Bitte beachten Sie Hinweise zum <a href="https://hinweisbuch.netlify.app/109-hinweise-programmieren">Programmieren</a>.</li>
+<li>Um mehrere Dateien einzureichen (z.B. mehrere Funktionen in mehreren Dateien), bietet es sich an, diese Dateien zu zippen.</li>
+</ul>
 </section>
 <section id="challenge-10" class="level2" data-number="10">
 <h2 data-number="10" class="anchored" data-anchor-id="challenge-10"><span class="header-section-number">10</span> Challenge 10</h2>
-<p>offen</p>
+<p><strong>Reflexion</strong></p>
+<p>Reflektieren Sie Ihr Vorgehen, Ihre Schwierigkeiten und Ihren Lernerfolg:</p>
+<ol type="1">
+<li>Wählen Sie <em>3 Aufgaben </em>aus dem Hackathon, die für Sie besonders herausfordernd waren und <em>reflektieren</em> Sie: Erläutern Sie jeweils Ihre Schwierigkeiten, Ihr Vorgehen, was Sie beim nächsten Mal anders machen würden und was Sie dabei gelernt haben. (ca. 3 Mal 3 Sätze)</li>
+<li>Dieses Modul ist ein <em>angewandtes Projekt</em> in dem Sinne, dass es wenig Theorie gab. Der Fokus lag stattdessen auf Problemlösung mit Kompetenzorientierung. Damit ist der didaktische Fokus ganz anders als in anderen Modulen, z.B. in QM2. Diskutieren Sie das Für und Wider von einer <em>Didaktik</em> wie in diesem Modul. Diskutieren Sie auch den <em>Anspruch</em> des Moduls mit Blick auf <em>Zeitaufwand</em> und (intellektueller) <em>Schwierigkeit</em>. Berücksichtigen Sie, dass es sich um 10-ECTS-Modul handelt. (ca. 10 Sätze)</li>
+<li>Dieses Modul verlangt höhere R- bzw. Datenanalyse- bzw. <em>Programmierkompetenz</em> als in den anderen Fächern Ihres Studiengangs. Stimmen Sie zu? Vergleichen Sie den Anspruch in diesem Modul mit anderen Modulen und diskutieren Sie Ihren Kompetenzzuwachs in Programmiertechniken. (ca. 10 Sätze)</li>
+<li>Einige Aufgaben dieses Hackathons waren <em>mehrdeutig</em> in dem Sinne, dass mehrere Lösungsansätze denkbar sind. Wie sind Sie damit umgegangen? (ca. 5 Sätze)</li>
+<li>Auf welche Art kann Ihnen das <em>Gelernte</em> in der Zukunft <em>nützlich</em> sein? (ca. 5 Sätze)</li>
+<li>An welchen Aspekten im Bereich Datenanalyse und Programmieren würden Sie gerne weiterarbeiten bzw. Sehen Sie Nutzen für sich, wenn Sie sich dort <em>weiterentwickeln</em>? (ca. 5-10 Sätze)</li>
+<li>Suchen Sie ein Beispiel für einen R-Code heraus, den man als “<em>schön</em>” (ästhetisch ansprechend) bezeichnen kann. “Schön” als Attribut für Software kann man als ambiguen Begriff betrachten. Auf der anderen Seite wird dieses Attribut auch für mathematische Formeln verwendet. Wenn Sie möchten, interpretieren Sie “schön” z.B. als “prägnant” oder “hoch abstrakt” oder “gute Balance zwischen abstrakt und konkret”. Diskutieren Sie, inwiefern Ihr Code-Beispiel als “schön” zu betrachten ist. (ca. 10 Sätze)</li>
+<li>Diskutieren Sie, welche Kompetenzen <em>Arbeitgeber</em> von Berufseinsteigern erwarten und inwieweit Sie diese Kompetenzen aus diesem Modul schöpfen können. (ca. 10 Sätze)</li>
+<li>Erläutern Sie, wie Sie <em>KI</em> in diesem Modul genutzt haben. Gehen Sie auch darauf ein, welche Kompetenz eine Arbeitskraft im Bereich Datenanalyse haben muss (Stand heute), um einen Mehrwert gegenüber einer KI zu bieten (bzw. einer KI, die von einer menschlichen Arbeitskraft ohne Kenntnisse in Datenanalyse und Programmierung gesteuert wird). (ca. 5 Sätze)</li>
+<li>Fassen Sie die (für Sie) <em>wichtigste Erkenntnis</em> des Moduls in einem einzelnen <em>Satz</em> zusammen.</li>
+</ol>
+<p>Hinweise:</p>
+<ul>
+<li>Reichen Sie eine PDF-Datei ein, die Sie mit Quarto im Typst-Format erstellt haben.</li>
+<li>Nutzen Sie folgende Markdown-Features: Überschriften, Aufzählungen, Code-Chunks, Links, Gliederung, Author- und Datum-Angabe.</li>
+</ul>
 
 
 
@@ -486,12 +536,13 @@ Wickham, Hadley, Mine Çetinkaya-Rundel, und Garrett Grolemund. 2023. <em>R for 
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Wiederverwendung</h2><div class="quarto-appendix-contents"><div>MIT</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Zitat</h2><div><div class="quarto-appendix-secondary-label">Mit BibTeX zitieren:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{sauer2025,
   author = {Sauer, Sebastian},
   title = {Challenges im Überblick},
-  date = {2025-12-15},
+  date = {2025-12-21},
+  url = {https://sebastiansauer.github.io/hans-hackathon2025/challenges.html},
   langid = {de-DE}
 }
 </code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Bitte zitieren Sie diese Arbeit als:</div><div id="ref-sauer2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Sauer, Sebastian. 2025. <span>“Challenges im Überblick.”</span> December
-15, 2025.
+21, 2025. <a href="https://sebastiansauer.github.io/hans-hackathon2025/challenges.html">https://sebastiansauer.github.io/hans-hackathon2025/challenges.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -565,7 +616,7 @@ Sauer, Sebastian. 2025. <span>“Challenges im Überblick.”</span> December
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sebastiansauer\.github\.io\/hans-hackathon2025\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
