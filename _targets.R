@@ -26,6 +26,7 @@ tar_source("funs")
 
 ## import data -------------------------------------------------------------
 list(
+  # DATA IS EXPECTED TO RESIDE IN THIS FOLDER: "data/data-raw/SoSe25"
   tar_target(config_file, "config.yaml", format = "file"),
   tar_target(config, read_yaml(config_file), packages = "yaml"),
   tar_target(data_files_list, find_data_files(config), format = "file"),
@@ -44,10 +45,10 @@ list(
   ),
   tar_target(data_all_fct,
     data_prepped |>
-      mutate(across(everything(), as.factor)),
+      mutate(across(everything(), as.factor)), # refactor into previous step
     packages = "collapse"
   ),
-  tar_target(
+  tar_target( # refactor into previous step
     visitduration,
     data_prepped |>
       select(visitduration, idvisit, fingerprint) |>
@@ -57,10 +58,12 @@ list(
     test_unique_idvisit,
     check_unique_ids(data_prepped)
   ),
+  # select only id cols plus "actiondetails:"
   tar_target(
     data_wide_slim,
     data_all_fct |> extract_cols()
   ),
+  # add uni and course to wide data:
   tar_target(
     course_and_uni_per_visit,
     data_wide_slim |> extract_course_role_university_of_visit()
@@ -81,7 +84,13 @@ list(
     data_separated |>
       filter_column_type()
   ),
-
+  tar_target(
+    data_separated_filtered_date_uni_course,
+    add_date_uni_course_to_long_data(
+      data_separated_filtered,
+      course_and_uni_per_visit
+    )
+  ),
   # compute how much time was spent per visit:
   tar_target(
     time_spent,
@@ -102,6 +111,25 @@ list(
     when_visited_fingerprint(data = data_separated_filtered)
   ),
 
+
+  # compute how much time was spent per course/per university and date:
+  # one row is one visit
+  tar_target(
+    time_spent_w_course_university,
+    compute_time_per_course_uni(
+      data = time_spent,
+      course_and_uni = course_and_uni_per_visit,
+      idvar = idvisit
+    )
+  ),
+  tar_target(
+    time_spent_w_course_university_fingerprint,
+    compute_time_per_course_uni(
+      data = time_spent_fingerprint,
+      course_and_uni = course_and_uni_per_visit,
+      idvar = fingerprint
+    )
+  ),
 
   # count number of actions per visit and adds date of visit:
   tar_target(
@@ -143,6 +171,42 @@ list(
     n_action_lt_500_fingerprint,
     n_action_fingerprint |>
       filter(nr_max != 499)
+  ),
+
+
+  # Challenge 07
+  ## prompt length ----------------------------------------------------------
+  # compute prompt length in tokens:
+  # token itself is not saved, only length
+  tar_target(
+    prompt_length,
+    data_separated_filtered |>
+      compute_prompt_length(),
+    packages = c("tokenizers", "stringr")
+  ),
+  tar_target(
+    prompt_length_date_uni_course,
+    time_spent_w_course_university |>
+      mutate(idvisit = as.integer(idvisit)) |>
+      left_join(prompt_length, by = "idvisit") |>
+      select(-any_of(c("type", "value"))),
+    packages = c("dplyr", "lubridate")
+  ),
+  tar_target(
+    prompts_texts_date_course_uni,
+    data_separated_filtered |>
+      compute_prompt_length(no_prompt_text = FALSE) |>
+      left_join(time_spent_w_course_university |> mutate(idvisit = as.integer(idvisit)),
+        by = "idvisit"
+      ),
+    packages = c("tokenizers", "stringr")
+  ),
+  tar_target(
+    n_interactions_w_llm_course_date_course_uni,
+    count_llm_interactions_add_context(
+      data_separated_filtered,
+      time_spent_w_course_university
+    )
   )
 
 
