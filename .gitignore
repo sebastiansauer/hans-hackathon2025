@@ -14,6 +14,8 @@ SOLUTIONS-dev/
 #_targets.R
 funs/hidden/
 challenges-submissions/
+challenges-solutions/
+challenges-solutions-dev/
 
 
 # targets files:
