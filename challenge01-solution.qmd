@@ -35,7 +35,7 @@ library(tictoc)  # Zeit messen
 
 /Users/sebastiansaueruser/github-repos/hans-hackathon2025/data-processed/matomo_export_2025-07-07_to_2025-07-14
 ```{r datafile-name}
-datafile_name <- paste0(here(),"/", "data/SoSe25/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-07.csv")
+datafile_name <- paste0(here(),"/", "data/data-raw/SoSe25/matomo_export_2025-07-07_to_2025-07-14/matomo_export_2025-07-07.csv")
 datafile_name
 
 stopifnot(file.exists(datafile_name))

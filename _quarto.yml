@@ -13,7 +13,7 @@ project:
     # - challenge03-solution.qmd
     # - challenge04-solution.qmd
     # - challenge05-solution.qmd
-    - ./challenge0?-solution.qmd
+    - ./challenge0?-solution.qmd  # alle Challenges
 
 
 editor: source
