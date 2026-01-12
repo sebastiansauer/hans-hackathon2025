@@ -17,7 +17,7 @@ extract_course_role_university_of_visit <- function(d) {
       )
     ) |>
     mutate(
-      university = str_extract(actiondetails_0_url, "(?<=%40)[a-z0-9-]+")
+      university = str_extract(actiondetails_0_url, "(?<=%40)[a-z0-9-]+")  #%40 --> AT
     ) |>
     mutate(role = str_extract(actiondetails_0_url, "(?<=role=)[a-z]+")) |>
     mutate(actiondetails_0_timestamp = ymd_hms(actiondetails_0_timestamp)) |>

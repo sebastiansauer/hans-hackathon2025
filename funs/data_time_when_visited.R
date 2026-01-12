@@ -1,4 +1,4 @@
-when_visited <- function(data, idvar) {
+when_visited <- function(data, idvar = idvisit) {
   data |>
     dplyr::filter(type == "timestamp") |>
     dplyr::group_by({{ idvar }}) |>
