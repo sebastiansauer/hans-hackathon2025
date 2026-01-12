@@ -1,5 +1,175 @@
 [
   {
+    "objectID": "challenge09-solution.html",
+    "href": "challenge09-solution.html",
+    "title": "Challenge 09 – Solution",
+    "section": "",
+    "text": "Betrachten Sie dazu die Targets-Datei auf Github.",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#libs",
+    "href": "challenge09-solution.html#libs",
+    "title": "Challenge 09 – Solution",
+    "section": "1.1 Libs",
+    "text": "1.1 Libs\n\nlibrary(bench)\nlibrary(tidyverse)\nlibrary(data.table)\nlibrary(targets)\nlibrary(tictoc)\nlibrary(stringr)\nlibrary(tokenizers)",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#other-setup",
+    "href": "challenge09-solution.html#other-setup",
+    "title": "Challenge 09 – Solution",
+    "section": "1.2 Other setup",
+    "text": "1.2 Other setup\n\nsource(\"_common.r\")\nlist.files(\"funs\", full.names = TRUE) |&gt;\n  purrr::walk(source)\n\noptions(digits = 3)\noptions(tinytable_tt_digits = 2)\nSys.setenv(\"VROOM_CONNECTION_SIZE\" = 131072 * 4)",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#load-targets",
+    "href": "challenge09-solution.html#load-targets",
+    "title": "Challenge 09 – Solution",
+    "section": "1.3 Load Targets",
+    "text": "1.3 Load Targets\n\ntar_load(c(\n  data_files_list,\n  data_all_fct,\n  data_separated_filtered,\n  course_and_uni_per_visit,\n  n_action_type,\n  time_spent_w_course_university\n))",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#optimieren-sie-ihre-analyse-pipeline",
+    "href": "challenge09-solution.html#optimieren-sie-ihre-analyse-pipeline",
+    "title": "Challenge 09 – Solution",
+    "section": "2.1 Optimieren Sie Ihre Analyse-Pipeline",
+    "text": "2.1 Optimieren Sie Ihre Analyse-Pipeline\n… (mit Blick auf alle Aufgaben des Hackathon) mit Blick auf Geschwindigkeit (des Durchlaufs der Pipeline). Berichten Sie die Laufzeit vor und nach der Optimierung. (ca. 3 Punkte mit jeweils 5 Sätzen)\n\n2.1.1 CSV-Dateien schneller einlesen\n\n2.1.1.1 Testdaten\n\nd &lt;- data_files_list[1:10]\n\n\n\n2.1.1.2 Funktionen definieren\n\nimport_data1 &lt;-\n  function(d) {\n  d |&gt;\n    map(~ read_csv(., show_col_types = FALSE)) |&gt;\n    rbindlist(fill = TRUE)\n  }\n\nimport_data2 &lt;-\n  function(d) {\n  rbindlist(\n    lapply(d, fread, fill = TRUE, colClasses = \"factor\"),\n    fill = TRUE\n  )\n  }\n\n\nimport_data3 &lt;-\n  function(d) {\n  rbindlist(\n    lapply(d, fread, fill = TRUE, colClasses = \"character\"),\n    fill = TRUE\n  )\n}\n\n\nimport_data4 &lt;- function(d) {\n  rbindlist(\n    lapply(d, fread, fill = TRUE, colClasses = \"character\", nThread = 4),\n    fill = TRUE\n  )\n}\n\n\nimport_data4 &lt;-\n  function(d) {\n  d |&gt;\n    map(~ data.table::fread(.x, fill = TRUE, colClasses = \"factor\", nThread = 4)) |&gt;\n    rbindlist(fill = TRUE)\n  }\n\nimport_data5 &lt;- function(d) {\n  # Build shell command: concatenate all files\n  cmd &lt;- paste(\"cat\", paste(shQuote(d), collapse = \" \"))\n\n  # fread reads all files in one go (much faster than per-file lapply)\n  DT &lt;- fread(\n    cmd = cmd,\n    fill = TRUE,\n    colClasses = \"character\",\n    showProgress = FALSE\n  )\n}\n\n\n\n2.1.1.3 Funktionen testen\n\ntest1 &lt;- import_data1(d)\ntest2 &lt;- import_data2(d)\ntest3 &lt;- import_data3(d)\ntest4 &lt;- import_data4(d)\ntest5 &lt;- import_data5(d)\n\n\n\n2.1.1.4 Effizienzvergleich\n\ntic()\nbm1 &lt;- \nbench::mark(\n  import_data1(d),\n  import_data2(d),\n  import_data3(d),\n  import_data4(d),\n  import_data5(d),\n  check = FALSE,\n  iterations = 1e1\n)\ntoc()\n## 61.169 sec elapsed\n\nErgebnisse im Überblick:\n\nbm1 |&gt; \n  dplyr::select(expression:n_gc) %&gt;%\n  knitr::kable(digits = 2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nexpression\nmin\nmedian\nitr/sec\nmem_alloc\ngc/sec\nn_itr\nn_gc\n\n\n\n\nimport_data1(d)\n1.52s\n1.63s\n0.60\n23.82MB\n2.63\n10\n44\n\n\nimport_data2(d)\n983.36ms\n1.06s\n0.93\n5.44MB\n5.09\n10\n55\n\n\nimport_data3(d)\n74.72ms\n79.06ms\n12.19\n7.25MB\n1.22\n10\n1\n\n\nimport_data4(d)\n963.85ms\n1.23s\n0.84\n5.44MB\n4.94\n10\n59\n\n\nimport_data5(d)\n50.46ms\n52.57ms\n18.56\n4.82MB\n0.00\n10\n0\n\n\n\n\n\nVisualisierung:\n\n## plot\nplot_bm &lt;- function(bm) {\n\nbm$expression &lt;- factor(bm$expression, levels = rev(bm$expression))\nbench:::autoplot.bench_mark(bm, shape = 21, size = 2.5, color = \"#333333aa\") +\n  ggplot2::aes(fill = expression) +\n#  dataviz::theme_mwk() +\n  ggplot2::theme(legend.position = \"none\",\n    plot.caption = ggplot2::element_text(family = \"Roboto Condensed\")) +\n  ggplot2::labs(x = NULL, y = \"Time (mean task completion)\")\n}\n\n\nplot_bm(bm1)",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#daten-schneller-pivotieren",
+    "href": "challenge09-solution.html#daten-schneller-pivotieren",
+    "title": "Challenge 09 – Solution",
+    "section": "2.2 Daten schneller pivotieren",
+    "text": "2.2 Daten schneller pivotieren\n\n2.2.1 Testdaten\n\nd_wide &lt;- data_all_fct[, 1:1000]\n\n\n\n2.2.2 Funktionen definieren\n\npivot1 &lt;- function(d) {\n  d |&gt;\n    select(idvisit, fingerprint, contains(\"actiondetails_\")) |&gt;\n    mutate(across(everything(), as.character)) |&gt;\n    pivot_longer(-c(idvisit, fingerprint))\n}\n\n\npivot2 &lt;- function(d) {\n  d_melt &lt;- melt(\n    as.data.table(d),\n    id.vars = c(\"idvisit\", \"fingerprint\"),\n    measure.vars = patterns(\"actiondetails_\"),\n    variable.name = \"action_count\",\n    value.name = \"value\"\n  )\n}\n\n\npivot3 &lt;-  function(d) {\n  vars_to_pivot &lt;- grep(\"actiondetails_\", names(d), value = TRUE)\n\n  if (!is.data.table(d)) DT &lt;- as.data.table(d) else DT &lt;- d\n  \n  vars_idx &lt;- grep(\"actiondetails_\", names(DT)) \n  \n  out &lt;- melt(DT,\n            id.vars = c(\"idvisit\", \"fingerprint\"),\n            measure.vars = vars_idx,\n            variable.name = \"variable\",\n            value.name = \"value\")\n}\n\n\n\n2.2.3 Funktionen testen\n\ntest_pivot1 &lt;- pivot1(d_wide)\ntest_pivot2 &lt;- pivot2(d_wide)\ntest_pivot3 &lt;- pivot3(d_wide)\n\n\n\n2.2.4 Effizienzvergleich\n\ntic()\nbm_pivot &lt;- \nbench::mark(\n pivot1(d_wide),\n pivot2(d_wide),\n pivot3(d_wide),\n check = FALSE,\n  iterations = 1e2\n)\ntoc()\n## 62.991 sec elapsed\n\nErgebnisse im Überblick:\n\nbm_pivot |&gt; \n  dplyr::select(expression:n_gc) %&gt;%\n  knitr::kable(digits = 2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nexpression\nmin\nmedian\nitr/sec\nmem_alloc\ngc/sec\nn_itr\nn_gc\n\n\n\n\npivot1(d_wide)\n330.8ms\n402.1ms\n2.46\n159.3MB\n1.94\n56\n44\n\n\npivot2(d_wide)\n79.3ms\n81.4ms\n11.82\n85.2MB\n3.33\n78\n22\n\n\npivot3(d_wide)\n73.9ms\n74.8ms\n12.88\n71.7MB\n2.45\n84\n16\n\n\n\n\n\n\nplot_bm(bm_pivot)",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#daten-schneller-joinen",
+    "href": "challenge09-solution.html#daten-schneller-joinen",
+    "title": "Challenge 09 – Solution",
+    "section": "2.3 Daten schneller joinen",
+    "text": "2.3 Daten schneller joinen\n\n2.3.1 Testdaten\n\nd_long &lt;- data_separated_filtered \nd_date &lt;- course_and_uni_per_visit\n\n\n\n2.3.2 Funktionen definieren\n\njoin1 &lt;- function(d_long, d_date) {\n  setDT(d_long)\n  setDT(d_date)\n  setkey(d_date, \"idvisit\")\n\n  # 1. Convert the factor column (x.idvisit) to an integer.\n  # Factors store underlying values as integers, so we must first convert it to character\n  # to avoid getting the factor level index, and then to integer.\n  d_long[, idvisit := as.integer(as.character(idvisit))]\n  d_date[, idvisit := as.integer(idvisit)]\n  d_date[, fingerprint := NULL]\n\n  # Join: [i, j]\n  # DT[i] means join DT with i.\n  # Left join syntax: A[B] where B is the \"lookup\" table (with the key set)\n\n  # This performs the join:\n  data_joined &lt;- d_date[\n    d_long,\n    on = \"idvisit\"\n  ]\n}\n\njoin2 &lt;- function(d_long, d_date) {\n  \n  d_date |&gt; \n    mutate(idvisit = as.integer(as.character(idvisit))) |&gt; \n    left_join(d_long)\n\n}\n\n\n\n2.3.3 Funktionen testen\n\nd_join1 &lt;- join1(d_long, d_date)\nd_join2 &lt;- join2(d_long, d_date)\n\n\n\n2.3.4 Effizienzvergleich\n\nbm_join &lt;-\n  mark(\n    join1,\n    join2,\n    check = FALSE,\n    iterations = 1e2\n  )\n\n\nplot_bm(bm_join)",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#optimieren-sie-ihre-analyse-pipeline-mit-blick-auf-robustheit.",
+    "href": "challenge09-solution.html#optimieren-sie-ihre-analyse-pipeline-mit-blick-auf-robustheit.",
+    "title": "Challenge 09 – Solution",
+    "section": "2.4 Optimieren Sie Ihre Analyse-Pipeline mit Blick auf Robustheit.",
+    "text": "2.4 Optimieren Sie Ihre Analyse-Pipeline mit Blick auf Robustheit.\n(ca. 3 Punkte mit jeweils 5 Sätzen)\n\n2.4.1 Robusteres Pivotieren\n\npivot3_ribzst &lt;-  function(d) {\n  vars_to_pivot &lt;- grep(\"actiondetails_\", names(d), value = TRUE)\n\n  if (!is.data.table(d)) DT &lt;- as.data.table(d) else DT &lt;- d\n  \n  ### Prüfen, ob benötigte Spalten vorhanden sind:\n  # Check required id columns\n  required_ids &lt;- c(\"idvisit\", \"fingerprint\")\n  missing_ids &lt;- setdiff(required_ids, names(DT))\n  if (length(missing_ids) &gt; 0) {\n    stop(\"Missing required id columns: \", paste(missing_ids, collapse = \", \"))\n  }\n  \n  \n  vars_idx &lt;- grep(\"actiondetails_\", names(DT)) \n  \n  out &lt;- melt(DT,\n            id.vars = c(\"idvisit\", \"fingerprint\"),\n            measure.vars = vars_idx,\n            variable.name = \"variable\",\n            value.name = \"value\")\n}\n\n\n\n2.4.2 Robusteres Importieren\n\nimport_data5 &lt;- function(d) {\n  # Build shell command: concatenate all files\n  cmd &lt;- paste(\"cat\", paste(shQuote(d), collapse = \" \"))\n\n  # fread reads all files in one go (much faster than per-file lapply)\n  DT &lt;- fread(\n    cmd = cmd,\n    fill = TRUE,\n    colClasses = \"character\",\n    showProgress = FALSE\n  )\n}\n\n\nimport_data5_robust &lt;- function(d) {\n  \n  # Check input\n  if (length(d) == 0) {\n    warning(\"No files provided. Returning empty data.table.\")\n    return(data.table())\n  }\n  \n  # Check: Ensure all files exist\n  missing_files &lt;- d[!file.exists(d)]\n  if (length(missing_files) &gt; 0) {\n    stop(\"The following files do not exist: \", paste(missing_files, collapse = \", \"))\n  }\n  \n  # Build safe shell command\n  cmd &lt;- paste(\"cat\", paste(shQuote(d), collapse = \" \"))\n  \n  # fread reads all files in one go\n  DT &lt;- fread(\n    cmd = cmd,\n    fill = TRUE,\n    colClasses = \"character\",\n    showProgress = FALSE\n  )\n  \n\n  # Check: Warn if column counts vary across files (optional)\n  if (length(unique(ncol(DT))) &gt; 1) {\n    warning(\"Column counts vary across files. Some columns may have been filled with NA.\")\n  }\n  \n  # Explicitly Return the data.table\n  return(DT)\n}\n\n\n\n2.4.3 Robusteres Berechnen der Promptlänge\nUrsprüngliche Funktion:\n\ncompute_prompt_length &lt;- function(data, no_prompt_text = TRUE) {\n  #' Compute the length of a prompt in characters\n  #' This function computes the length of a given prompt in terms of number of characters.\n  #' It takes a single argument 'prompt', which is expected to be a string.\n\n  # if (!is.character(data$value)) {\n    # stop(\"Input must be a character string.\")\n  # }\n\n  llm_interactions &lt;-\n    data |&gt; \n    select(type, value, idvisit) |&gt; \n    filter(type == \"subtitle\") |&gt; \n    mutate(value = as.character(value)) |&gt;\n    filter(str_detect(value, \"message_to_llm\"))\n\n  prompts &lt;-\n    llm_interactions |&gt;\n    mutate(prompt = str_extract(value, '(?&lt;=Action: \\\\\"\\\").*?(?=\\\\\"\\\\\")')) |&gt;\n    mutate(token_length = lengths(tokenize_words(prompt))) \n  \n\n  if (no_prompt_text) {\n    prompts &lt;- prompts |&gt; select(-prompt)\n  }\n\n  return(prompts)\n}\n\n# str_match(txt, '\"\"([^\"]+)\"\"')\n# txt\n\nRobustere Version:\n\ncompute_prompt_length_robust &lt;- function(data, no_prompt_text = TRUE) {\n  \n  # Input validation:\n  if (!is.data.frame(data)) {\n    stop(\"Input 'data' must be a data.frame or tibble.\")\n  }\n  \n  # Check required cols:\n  required_cols &lt;- c(\"type\", \"value\", \"idvisit\")\n  missing_cols &lt;- setdiff(required_cols, names(data))\n  if (length(missing_cols) &gt; 0) {\n    stop(\"Missing required columns: \", paste(missing_cols, collapse = \", \"))\n  }\n  \n  # Filter only subtitle rows with \"message_to_llm\"\n  llm_interactions &lt;- data %&gt;%\n    select(all_of(required_cols)) %&gt;%\n    filter(type == \"subtitle\") %&gt;%\n    mutate(value = as.character(value)) %&gt;%\n    filter(str_detect(value, \"message_to_llm\"))\n  \n  if (nrow(llm_interactions) == 0) {\n    warning(\"No subtitle rows containing 'message_to_llm' found.\")\n    return(tibble::tibble())\n  }\n  \n  # Extract prompt safely\n  prompts &lt;- llm_interactions %&gt;%\n    mutate(\n      prompt = str_extract(value, '(?&lt;=Action: \\\\\"\\\").*?(?=\\\\\"\\\\\")')\n    )\n  \n  # Compute token length, handling NA prompts:\n  prompts &lt;- prompts %&gt;%\n    mutate(\n      token_length = ifelse(\n        is.na(prompt) | prompt == \"\",\n        0L,\n        lengths(tokenize_words(prompt))\n      )\n    )\n  \n  # Optionally remove the prompt column\n  if (no_prompt_text && \"prompt\" %in% names(prompts)) {\n    prompts &lt;- prompts %&gt;% select(-prompt)\n  }\n  \n  prompts\n}",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#optimieren-sie-ihre-analyse-pipeline-mit-blick-auf-allgemeinheit-und-flexibilität",
+    "href": "challenge09-solution.html#optimieren-sie-ihre-analyse-pipeline-mit-blick-auf-allgemeinheit-und-flexibilität",
+    "title": "Challenge 09 – Solution",
+    "section": "2.5 Optimieren Sie Ihre Analyse-Pipeline mit Blick auf Allgemeinheit und Flexibilität",
+    "text": "2.5 Optimieren Sie Ihre Analyse-Pipeline mit Blick auf Allgemeinheit und Flexibilität\n\n2.5.1 Explizites return-Statement\nAm Ende einer Funktion kann man explizit schreiben, welches Objekt die Funktion zurückgibt:\n\n\nimport_data5_with_return &lt;- function(d) {\n  # Build shell command: concatenate all files\n  cmd &lt;- paste(\"cat\", paste(shQuote(d), collapse = \" \"))\n\n  # fread reads all files in one go (much faster than per-file lapply)\n  DT &lt;- fread(\n    cmd = cmd,\n    fill = TRUE,\n    colClasses = \"character\",\n    showProgress = FALSE\n  )\n  # Achtung, mit return:\n  return(DT)\n}\n\n\n\n2.5.2 idvisit vs. id_visit\nTja, hat meine ID-Variable jetzt einen Unterstrich oder nicht?\nIst doch egal, unser Code akzeptiert beide Varianten!\n\nd1 &lt;- tibble(idvisit = c(1,2,3),\n             var = c(\"a\", \"b\", \"c\"),\n             value = c(10, 20, 30))\n\nd2 &lt;- tibble(id_visit = c(1,2,3),\n             var = c(\"a\", \"b\", \"c\"),\n             value = c(10, 20, 30))\n\n\nidvar &lt;- c(\"id_visit\", \"idvisit\") \n\nd1 |&gt; select(any_of(idvar))\n\n\n\n\n\nidvisit\n\n\n\n\n1\n\n\n2\n\n\n3\n\n\n\n\n\nd2 |&gt; select(any_of(idvar))\n\n\n\n\n\nid_visit\n\n\n\n\n1\n\n\n2\n\n\n3\n\n\n\n\n\n\nVielleicht noch besser: An einer Stelle in der Pipeline (eher zu Beginn) den Namen auf einen Standard bringen, z.B. idvisit.\n\n\n2.5.3 Funktionen nicht hart-verdrahten\nUrsprüngliche Funktion:\n\nadd_dates_to_n_action_type &lt;- function(data, data_time) {\n\n  data_time$idvisit &lt;- as.integer(data_time$idvisit)\n\n  n_action_type_per_month &lt;-\n    data |&gt;\n    select(nr, idvisit, category) |&gt;\n    ungroup() |&gt;\n    left_join(data_time) \n    #select(-c(dow, hour, nr)) |&gt;\n    #drop_na() |&gt;\n    #mutate(month_start = floor_date(date_time, \"month\")) |&gt;\n    #count(month_start, category)\n}\n\nAllgemeinere Funktion:\n\nadd_dates_to_n_action_type_more_general &lt;- function(data, data_time, idvar = \"idvisit\") {\n\n  # Convert join variable to integer in both data frames\n  data[[idvar]] &lt;- as.integer(data[[idvar]])\n  data_time[[idvar]] &lt;- as.integer(as.character(data_time[[idvar]]))\n\n  n_action_type_per_month &lt;- data |&gt;\n    select(nr, all_of(idvar), category) |&gt;\n    left_join(data_time, by = idvar)\n\n  return(n_action_type_per_month)\n}\n\nTest:\n\nd_not_so_general &lt;- add_dates_to_n_action_type(\n    data = n_action_type,\n    data_time = time_spent_w_course_university)\n\nd_more_general &lt;- add_dates_to_n_action_type_more_general(\n  data = n_action_type, \n  data_time = time_spent_w_course_university)\n\n\nidentical(d_not_so_general, d_more_general)\n## [1] TRUE\n\n\n\n2.5.4 Rechtecke, um Semester und Ferien optisch zu unterscheiden\n\n\"funs/comp_semester_rects.R\"\n## [1] \"funs/comp_semester_rects.R\"\n\n\n\n2.5.5 Frage die KI\nAlle Funktionen in eine KI hochladen und nach Optimierungspotenzial fragen.\nZ.B. in “Google Notebook LM” muss man die R-Dateien vorher in Txt-Dateien umwandeln: rename 's/\\.R$/.txt/' *.R",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#diskutieren-sie-pro-und-contra-der-versionierungssoftware-git.",
+    "href": "challenge09-solution.html#diskutieren-sie-pro-und-contra-der-versionierungssoftware-git.",
+    "title": "Challenge 09 – Solution",
+    "section": "2.6 Diskutieren Sie Pro und Contra der Versionierungssoftware git.",
+    "text": "2.6 Diskutieren Sie Pro und Contra der Versionierungssoftware git.\nGit: git push origin master.",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#diskutieren-sie-pro-und-contra-der-notizen-software-obsidian.",
+    "href": "challenge09-solution.html#diskutieren-sie-pro-und-contra-der-notizen-software-obsidian.",
+    "title": "Challenge 09 – Solution",
+    "section": "2.7 Diskutieren Sie Pro und Contra der Notizen-Software Obsidian.",
+    "text": "2.7 Diskutieren Sie Pro und Contra der Notizen-Software Obsidian.\nVideo von No Boilerplate und [Folien]/https://www.namtao.com/obsidian-for-learning/\n\n2.7.1 Pro\n\nPlain text\nMarkdown\nLokale Dateien\nE2EE\nTags, Links\nOpen source\nViele Plugins\noffline und online\nalle Plattformen\nschnell\nkein Lock-in",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#contra",
+    "href": "challenge09-solution.html#contra",
+    "title": "Challenge 09 – Solution",
+    "section": "2.8 Contra",
+    "text": "2.8 Contra\n\nNicht so gut für gemeinsames Arbeiten",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#erläutern-sie-ihre-datensicherheit-und-backup-strategie-während-des-projekts.-wie-schützen-sie-sich-vor-datenverlust",
+    "href": "challenge09-solution.html#erläutern-sie-ihre-datensicherheit-und-backup-strategie-während-des-projekts.-wie-schützen-sie-sich-vor-datenverlust",
+    "title": "Challenge 09 – Solution",
+    "section": "2.9 Erläutern Sie Ihre Datensicherheit und Backup-Strategie während des Projekts. Wie schützen Sie sich vor Datenverlust?",
+    "text": "2.9 Erläutern Sie Ihre Datensicherheit und Backup-Strategie während des Projekts. Wie schützen Sie sich vor Datenverlust?\n\n2.9.1 Backup\n\nGithub\nLokale Backups\n\n\n\n2.9.2 Datensicherheit\n\nCryptomator\nKeepassXC",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#life-hacks",
+    "href": "challenge09-solution.html#life-hacks",
+    "title": "Challenge 09 – Solution",
+    "section": "2.10 Life Hacks",
+    "text": "2.10 Life Hacks\n\nNicht zu spät anfangen :-)\nSchreibtisch frei räumen\nLange Zeitblöcke einplanen\nObsidian für Notizen\nWochenende frei halten\nDen Sinn sehen",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#text-editoren",
+    "href": "challenge09-solution.html#text-editoren",
+    "title": "Challenge 09 – Solution",
+    "section": "2.11 Text-Editoren",
+    "text": "2.11 Text-Editoren\n\nRStudio\nPositron (Outline feature is broken)\nVIM\nNeoVIM",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#ohne-r",
+    "href": "challenge09-solution.html#ohne-r",
+    "title": "Challenge 09 – Solution",
+    "section": "2.12 Ohne R",
+    "text": "2.12 Ohne R\n\nPython\nPositron\nJupyter Notebooks",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
+    "objectID": "challenge09-solution.html#sessioninfo",
+    "href": "challenge09-solution.html#sessioninfo",
+    "title": "Challenge 09 – Solution",
+    "section": "2.13 sessionInfo",
+    "text": "2.13 sessionInfo\n\nsessioninfo::session_info()\n## ─ Session info ───────────────────────────────────────────────────────────────\n##  setting  value\n##  version  R version 4.5.1 (2025-06-13)\n##  os       Ubuntu 25.10\n##  system   x86_64, linux-gnu\n##  ui       X11\n##  language (EN)\n##  collate  de_DE.UTF-8\n##  ctype    de_DE.UTF-8\n##  tz       Europe/Berlin\n##  date     2026-01-09\n##  pandoc   3.6.3 @ /usr/lib/rstudio/resources/app/bin/quarto/bin/tools/x86_64/ (via rmarkdown)\n##  quarto   1.8.25 @ /usr/lib/rstudio/resources/app/bin/quarto/bin/quarto\n## \n## ─ Packages ───────────────────────────────────────────────────────────────────\n##  package      * version date (UTC) lib source\n##  backports      1.5.0   2024-05-23 [3] CRAN (R 4.4.1)\n##  base64url      1.4     2018-05-14 [3] CRAN (R 4.0.1)\n##  beeswarm       0.4.0   2021-06-01 [3] CRAN (R 4.1.1)\n##  bench        * 1.1.4   2025-01-16 [3] CRAN (R 4.4.3)\n##  bit            4.6.0   2025-03-06 [3] CRAN (R 4.4.3)\n##  bit64          4.6.0-1 2025-01-16 [3] CRAN (R 4.5.0)\n##  callr          3.7.6   2024-03-25 [3] CRAN (R 4.4.0)\n##  cli            3.6.5   2025-04-23 [1] CRAN (R 4.5.1)\n##  codetools      0.2-20  2024-03-31 [4] CRAN (R 4.3.3)\n##  crayon         1.5.3   2024-06-20 [3] CRAN (R 4.4.2)\n##  data.table   * 1.17.8  2025-07-10 [1] RSPM (R 4.5.1)\n##  dichromat      2.0-0.1 2022-05-02 [3] CRAN (R 4.2.0)\n##  digest         0.6.39  2025-11-19 [1] CRAN (R 4.5.1)\n##  dplyr        * 1.1.4   2023-11-17 [3] CRAN (R 4.4.2)\n##  evaluate       1.0.5   2025-08-27 [1] CRAN (R 4.5.1)\n##  farver         2.1.2   2024-05-13 [3] CRAN (R 4.4.1)\n##  fastmap        1.2.0   2024-05-15 [3] CRAN (R 4.4.1)\n##  forcats      * 1.0.0   2023-01-29 [3] CRAN (R 4.2.2)\n##  generics       0.1.4   2025-05-09 [1] CRAN (R 4.5.1)\n##  ggbeeswarm     0.7.2   2023-04-29 [3] CRAN (R 4.3.1)\n##  ggplot2      * 4.0.1   2025-11-14 [1] RSPM (R 4.5.1)\n##  glue           1.8.0   2024-09-30 [3] CRAN (R 4.4.2)\n##  gtable         0.3.6   2024-10-25 [3] CRAN (R 4.4.2)\n##  hms            1.1.3   2023-03-21 [3] CRAN (R 4.3.1)\n##  htmltools      0.5.8.1 2024-04-04 [3] CRAN (R 4.4.0)\n##  htmlwidgets    1.6.4   2023-12-06 [3] CRAN (R 4.3.2)\n##  igraph         2.1.4   2025-01-23 [3] CRAN (R 4.5.0)\n##  jsonlite       2.0.0   2025-03-27 [1] CRAN (R 4.5.1)\n##  knitr          1.50    2025-03-16 [3] CRAN (R 4.4.3)\n##  lifecycle      1.0.4   2023-11-07 [3] CRAN (R 4.3.2)\n##  lubridate    * 1.9.4   2024-12-08 [3] CRAN (R 4.4.2)\n##  magrittr       2.0.4   2025-09-12 [1] CRAN (R 4.5.1)\n##  pillar         1.11.1  2025-09-17 [1] CRAN (R 4.5.1)\n##  pkgconfig      2.0.3   2019-09-22 [3] CRAN (R 4.0.1)\n##  prettyunits    1.2.0   2023-09-24 [3] CRAN (R 4.3.1)\n##  processx       3.8.6   2025-02-21 [3] CRAN (R 4.4.3)\n##  profmem        0.6.0   2020-12-13 [3] CRAN (R 4.0.3)\n##  ps             1.9.0   2025-02-18 [3] CRAN (R 4.4.3)\n##  purrr        * 1.2.0   2025-11-04 [1] RSPM (R 4.5.1)\n##  R6             2.6.1   2025-02-15 [3] CRAN (R 4.4.3)\n##  RColorBrewer   1.1-3   2022-04-03 [3] CRAN (R 4.2.0)\n##  Rcpp           1.1.0   2025-07-02 [3] CRAN (R 4.5.1)\n##  readr        * 2.1.6   2025-11-14 [1] RSPM\n##  rlang          1.1.6   2025-04-11 [1] CRAN (R 4.5.1)\n##  rmarkdown      2.30    2025-09-28 [1] RSPM (R 4.5.1)\n##  rstudioapi     0.17.1  2024-10-22 [3] CRAN (R 4.4.1)\n##  S7             0.2.1   2025-11-14 [1] RSPM (R 4.5.1)\n##  scales         1.4.0   2025-04-24 [1] RSPM (R 4.5.1)\n##  secretbase     1.0.5   2025-03-04 [1] RSPM\n##  sessioninfo    1.2.3   2025-02-05 [3] CRAN (R 4.4.3)\n##  SnowballC      0.7.1   2023-04-25 [1] RSPM\n##  stringi        1.8.7   2025-03-27 [1] CRAN (R 4.5.1)\n##  stringr      * 1.6.0   2025-11-04 [1] CRAN (R 4.5.1)\n##  targets      * 1.11.4  2025-09-13 [1] RSPM\n##  tibble       * 3.3.0   2025-06-08 [1] CRAN (R 4.5.1)\n##  tictoc       * 1.2.1   2024-03-18 [1] RSPM\n##  tidyr        * 1.3.1   2024-01-24 [3] CRAN (R 4.3.2)\n##  tidyselect     1.2.1   2024-03-11 [3] CRAN (R 4.4.0)\n##  tidyverse    * 2.0.0   2023-02-22 [3] CRAN (R 4.4.2)\n##  timechange     0.3.0   2024-01-18 [3] CRAN (R 4.4.3)\n##  tokenizers   * 0.3.0   2022-12-22 [1] RSPM\n##  tzdb           0.5.0   2025-03-15 [3] CRAN (R 4.4.3)\n##  vctrs          0.6.5   2023-12-01 [3] CRAN (R 4.3.2)\n##  vipor          0.4.7   2023-12-18 [3] CRAN (R 4.3.2)\n##  vroom          1.6.5   2023-12-05 [3] CRAN (R 4.3.2)\n##  withr          3.0.2   2024-10-28 [3] CRAN (R 4.4.1)\n##  xfun           0.54    2025-10-30 [1] CRAN (R 4.5.1)\n##  yaml           2.3.10  2024-07-26 [3] CRAN (R 4.4.1)\n## \n##  [1] /home/sebastian-sauer/R/x86_64-pc-linux-gnu-library/4.5\n##  [2] /usr/local/lib/R/site-library\n##  [3] /usr/lib/R/site-library\n##  [4] /usr/lib/R/library\n##  * ── Packages attached to the search path.\n## \n## ──────────────────────────────────────────────────────────────────────────────",
+    "crumbs": [
+      "Lösung 09"
+    ]
+  },
+  {
     "objectID": "challenge07-solution.html",
     "href": "challenge07-solution.html",
     "title": "Challenge 07 – Solution",
@@ -814,7 +984,7 @@
     "href": "challenge04-solution.html",
     "title": "Challenge 04 – Solution",
     "section": "",
-    "text": "Betrachten Sie dazu die Targets-Datei auf Github.\n\n\n\nWiederverwendungMITZitatMit BibTeX zitieren:@online{sauer2026,\n  author = {Sauer, Sebastian},\n  title = {Challenge 04 -\\/- Solution},\n  date = {2026-01-09},\n  url = {https://sebastiansauer.github.io/hans-hackathon2025/challenge04-solution.html},\n  langid = {de-DE}\n}\nBitte zitieren Sie diese Arbeit als:\nSauer, Sebastian. 2026. “Challenge 04 -- Solution.” January\n9, 2026. https://sebastiansauer.github.io/hans-hackathon2025/challenge04-solution.html.",
+    "text": "Betrachten Sie dazu die Targets-Datei auf Github.\n\n\n\nWiederverwendungMITZitatMit BibTeX zitieren:@online{sauer2026,\n  author = {Sauer, Sebastian},\n  title = {Challenge 04 -\\/- Solution},\n  date = {2026-01-12},\n  url = {https://sebastiansauer.github.io/hans-hackathon2025/challenge04-solution.html},\n  langid = {de-DE}\n}\nBitte zitieren Sie diese Arbeit als:\nSauer, Sebastian. 2026. “Challenge 04 -- Solution.” January\n12, 2026. https://sebastiansauer.github.io/hans-hackathon2025/challenge04-solution.html.",
     "crumbs": [
       "Lösung 04"
     ]
@@ -1027,6 +1197,106 @@
     "text": "3.3 sessionInfo\n\nsessioninfo::session_info()\n## ─ Session info ───────────────────────────────────────────────────────────────\n##  setting  value\n##  version  R version 4.5.1 (2025-06-13)\n##  os       Ubuntu 25.10\n##  system   x86_64, linux-gnu\n##  ui       X11\n##  language (EN)\n##  collate  de_DE.UTF-8\n##  ctype    de_DE.UTF-8\n##  tz       Europe/Berlin\n##  date     2025-12-15\n##  pandoc   3.6.3 @ /snap/rstudio/25/resources/app/bin/quarto/bin/tools/x86_64/ (via rmarkdown)\n##  quarto   1.7.32 @ /snap/rstudio/25/resources/app/bin/quarto/bin/quarto\n## \n## ─ Packages ───────────────────────────────────────────────────────────────────\n##  package          * version  date (UTC) lib source\n##  abind              1.4-8    2024-09-12 [3] CRAN (R 4.4.1)\n##  backports          1.5.0    2024-05-23 [3] CRAN (R 4.4.1)\n##  base64url          1.4      2018-05-14 [3] CRAN (R 4.0.1)\n##  bayestestR       * 0.17.0   2025-08-29 [1] RSPM (R 4.5.1)\n##  broom              1.0.10   2025-09-13 [1] RSPM\n##  callr              3.7.6    2024-03-25 [3] CRAN (R 4.4.0)\n##  car                3.1-3    2024-09-27 [3] CRAN (R 4.4.1)\n##  carData            3.0-5    2022-01-06 [3] CRAN (R 4.1.2)\n##  cli                3.6.5    2025-04-23 [1] CRAN (R 4.5.1)\n##  coda               0.19-4.1 2024-01-31 [1] RSPM\n##  codetools          0.2-20   2024-03-31 [4] CRAN (R 4.3.3)\n##  correlation      * 0.8.8    2025-07-08 [1] RSPM (R 4.5.1)\n##  data.table         1.17.8   2025-07-10 [1] RSPM (R 4.5.1)\n##  datawizard       * 1.3.0    2025-10-11 [1] RSPM (R 4.5.1)\n##  dichromat          2.0-0.1  2022-05-02 [3] CRAN (R 4.2.0)\n##  digest             0.6.39   2025-11-19 [1] CRAN (R 4.5.1)\n##  dplyr            * 1.1.4    2023-11-17 [3] CRAN (R 4.4.2)\n##  easystats        * 0.7.5    2025-07-11 [1] RSPM (R 4.5.1)\n##  effectsize       * 1.0.1    2025-05-27 [1] RSPM (R 4.5.1)\n##  emmeans            1.10.7   2025-01-31 [3] CRAN (R 4.4.2)\n##  estimability       1.5.1    2024-05-12 [3] CRAN (R 4.4.2)\n##  evaluate           1.0.5    2025-08-27 [1] CRAN (R 4.5.1)\n##  farver             2.1.2    2024-05-13 [3] CRAN (R 4.4.1)\n##  fastmap            1.2.0    2024-05-15 [3] CRAN (R 4.4.1)\n##  forcats          * 1.0.0    2023-01-29 [3] CRAN (R 4.2.2)\n##  Formula            1.2-5    2023-02-24 [3] CRAN (R 4.2.2)\n##  fs                 1.6.6    2025-04-12 [1] CRAN (R 4.5.1)\n##  generics           0.1.4    2025-05-09 [1] CRAN (R 4.5.1)\n##  ggplot2          * 4.0.1    2025-11-14 [1] RSPM (R 4.5.1)\n##  ggpubr           * 0.6.2    2025-10-17 [1] RSPM\n##  ggsignif           0.6.4    2022-10-13 [3] CRAN (R 4.2.2)\n##  ggstatsplot      * 0.13.3   2025-10-05 [1] RSPM\n##  glue               1.8.0    2024-09-30 [3] CRAN (R 4.4.2)\n##  gt               * 1.1.0    2025-09-23 [1] RSPM (R 4.5.1)\n##  gtable             0.3.6    2024-10-25 [3] CRAN (R 4.4.2)\n##  hms                1.1.3    2023-03-21 [3] CRAN (R 4.3.1)\n##  htmltools          0.5.8.1  2024-04-04 [3] CRAN (R 4.4.0)\n##  htmlwidgets        1.6.4    2023-12-06 [3] CRAN (R 4.3.2)\n##  igraph             2.1.4    2025-01-23 [3] CRAN (R 4.5.0)\n##  insight          * 1.4.2    2025-09-02 [1] RSPM (R 4.5.1)\n##  jsonlite           2.0.0    2025-03-27 [1] CRAN (R 4.5.1)\n##  knitr              1.50     2025-03-16 [3] CRAN (R 4.4.3)\n##  labeling           0.4.3    2023-08-29 [3] CRAN (R 4.3.1)\n##  lattice            0.22-7   2025-04-02 [4] CRAN (R 4.4.3)\n##  lifecycle          1.0.4    2023-11-07 [3] CRAN (R 4.3.2)\n##  lubridate        * 1.9.4    2024-12-08 [3] CRAN (R 4.4.2)\n##  magrittr           2.0.4    2025-09-12 [1] CRAN (R 4.5.1)\n##  MASS               7.3-65   2025-02-28 [4] CRAN (R 4.4.3)\n##  Matrix             1.7-3    2025-03-11 [4] CRAN (R 4.4.3)\n##  mgcv               1.9-3    2025-04-04 [4] CRAN (R 4.4.3)\n##  modelbased       * 0.13.0   2025-08-30 [1] RSPM (R 4.5.1)\n##  multcomp           1.4-28   2025-01-29 [3] CRAN (R 4.4.2)\n##  mvtnorm            1.3-3    2025-01-10 [1] RSPM\n##  nlme               3.1-168  2025-03-31 [4] CRAN (R 4.4.3)\n##  paletteer          1.6.0    2024-01-21 [1] RSPM\n##  parameters       * 0.28.2   2025-09-10 [1] RSPM (R 4.5.1)\n##  patchwork          1.3.2    2025-08-25 [1] RSPM (R 4.5.1)\n##  performance      * 0.15.2   2025-10-06 [1] RSPM (R 4.5.1)\n##  pillar             1.11.1   2025-09-17 [1] CRAN (R 4.5.1)\n##  pkgconfig          2.0.3    2019-09-22 [3] CRAN (R 4.0.1)\n##  prettyunits        1.2.0    2023-09-24 [3] CRAN (R 4.3.1)\n##  processx           3.8.6    2025-02-21 [3] CRAN (R 4.4.3)\n##  ps                 1.9.0    2025-02-18 [3] CRAN (R 4.4.3)\n##  purrr            * 1.2.0    2025-11-04 [1] RSPM (R 4.5.1)\n##  R6                 2.6.1    2025-02-15 [3] CRAN (R 4.4.3)\n##  RColorBrewer       1.1-3    2022-04-03 [3] CRAN (R 4.2.0)\n##  RcppParallel       5.1.7    2023-02-27 [3] CRAN (R 4.5.0)\n##  readr            * 2.1.6    2025-11-14 [1] RSPM\n##  rematch2           2.1.2    2020-05-01 [3] CRAN (R 4.0.1)\n##  report           * 0.6.2    2025-11-03 [1] RSPM (R 4.5.1)\n##  rlang              1.1.6    2025-04-11 [1] CRAN (R 4.5.1)\n##  rmarkdown          2.30     2025-09-28 [1] RSPM (R 4.5.1)\n##  rstantools         2.4.0    2024-01-31 [3] CRAN (R 4.3.2)\n##  rstatix            0.7.2    2023-02-01 [3] CRAN (R 4.2.2)\n##  rstudioapi         0.17.1   2024-10-22 [3] CRAN (R 4.4.1)\n##  S7                 0.2.1    2025-11-14 [1] RSPM (R 4.5.1)\n##  sandwich           3.1-1    2024-09-15 [3] CRAN (R 4.4.1)\n##  sass               0.4.10   2025-04-11 [1] RSPM (R 4.5.1)\n##  scales           * 1.4.0    2025-04-24 [1] RSPM (R 4.5.1)\n##  secretbase         1.0.5    2025-03-04 [1] RSPM\n##  see              * 0.12.0   2025-09-14 [1] RSPM (R 4.5.1)\n##  sessioninfo        1.2.3    2025-02-05 [3] CRAN (R 4.4.3)\n##  statsExpressions   1.7.1    2025-07-27 [1] RSPM\n##  stringi            1.8.7    2025-03-27 [1] CRAN (R 4.5.1)\n##  stringr          * 1.6.0    2025-11-04 [1] CRAN (R 4.5.1)\n##  survival           3.8-3    2024-12-17 [4] CRAN (R 4.4.2)\n##  targets          * 1.11.4   2025-09-13 [1] RSPM\n##  TH.data            1.1-3    2025-01-17 [3] CRAN (R 4.4.2)\n##  tibble           * 3.3.0    2025-06-08 [1] CRAN (R 4.5.1)\n##  tidyr            * 1.3.1    2024-01-24 [3] CRAN (R 4.3.2)\n##  tidyselect         1.2.1    2024-03-11 [3] CRAN (R 4.4.0)\n##  tidyverse        * 2.0.0    2023-02-22 [3] CRAN (R 4.4.2)\n##  timechange         0.3.0    2024-01-18 [3] CRAN (R 4.4.3)\n##  tzdb               0.5.0    2025-03-15 [3] CRAN (R 4.4.3)\n##  vctrs              0.6.5    2023-12-01 [3] CRAN (R 4.3.2)\n##  viridisLite        0.4.2    2023-05-02 [3] CRAN (R 4.3.1)\n##  visdat           * 0.6.0    2023-02-02 [1] CRAN (R 4.5.1)\n##  visNetwork         2.1.2    2022-09-29 [3] CRAN (R 4.4.1)\n##  withr              3.0.2    2024-10-28 [3] CRAN (R 4.4.1)\n##  xfun               0.54     2025-10-30 [1] CRAN (R 4.5.1)\n##  xml2               1.5.0    2025-11-17 [1] CRAN (R 4.5.1)\n##  xtable             1.8-4    2019-04-21 [3] CRAN (R 4.0.1)\n##  yaml               2.3.10   2024-07-26 [3] CRAN (R 4.4.1)\n##  zeallot            0.2.0    2025-05-27 [1] RSPM\n##  zoo                1.8-14   2025-04-10 [3] CRAN (R 4.4.3)\n## \n##  [1] /home/sebastian-sauer/R/x86_64-pc-linux-gnu-library/4.5\n##  [2] /usr/local/lib/R/site-library\n##  [3] /usr/lib/R/site-library\n##  [4] /usr/lib/R/library\n##  * ── Packages attached to the search path.\n## \n## ──────────────────────────────────────────────────────────────────────────────",
     "crumbs": [
       "Lösung 06"
+    ]
+  },
+  {
+    "objectID": "challenge08-solution.html",
+    "href": "challenge08-solution.html",
+    "title": "Challenge 08 – Solution",
+    "section": "",
+    "text": "Betrachten Sie dazu die Targets-Datei auf Github.",
+    "crumbs": [
+      "Lösung 08"
+    ]
+  },
+  {
+    "objectID": "challenge08-solution.html#libs",
+    "href": "challenge08-solution.html#libs",
+    "title": "Challenge 08 – Solution",
+    "section": "1.1 Libs",
+    "text": "1.1 Libs",
+    "crumbs": [
+      "Lösung 08"
+    ]
+  },
+  {
+    "objectID": "challenge08-solution.html#other-setup",
+    "href": "challenge08-solution.html#other-setup",
+    "title": "Challenge 08 – Solution",
+    "section": "1.2 Other setup",
+    "text": "1.2 Other setup\n\nsource(\"_common.r\")\nlist.files(\"funs\", full.names = TRUE) |&gt;\n  purrr::walk(source)\n\noptions(digits = 3)\noptions(tinytable_tt_digits = 2)",
+    "crumbs": [
+      "Lösung 08"
+    ]
+  },
+  {
+    "objectID": "challenge08-solution.html#load-targets",
+    "href": "challenge08-solution.html#load-targets",
+    "title": "Challenge 08 – Solution",
+    "section": "1.3 Load Targets",
+    "text": "1.3 Load Targets\n\ntar_load(c(\n  n_action_type,\n  time_visit_wday,\n  data_separated_distinct_slice,\n  glotzdauer_prepped,\n  course_and_uni_per_visit\n))",
+    "crumbs": [
+      "Lösung 08"
+    ]
+  },
+  {
+    "objectID": "challenge08-solution.html#werten-sie-die-top-10-tätigkeiten-aus-die-die-besucher-idvisit-auf-der-website-durchführen.",
+    "href": "challenge08-solution.html#werten-sie-die-top-10-tätigkeiten-aus-die-die-besucher-idvisit-auf-der-website-durchführen.",
+    "title": "Challenge 08 – Solution",
+    "section": "2.1 Werten Sie die Top-10-Tätigkeiten aus, die die Besucher (idvisit) auf der Website durchführen.",
+    "text": "2.1 Werten Sie die Top-10-Tätigkeiten aus, die die Besucher (idvisit) auf der Website durchführen.\nTipp: Zählen Sie dafür, welche Werte wie oft bei subtitle stehen. Auf welchem Platz steht Videonutzung?\nVgl. auch https://sebastiansauer.github.io/hans/40-nutzungsarten.html?q=top#h%C3%A4ufigkeiten.\n\n2.1.1 Insgesamt\n\nn_action_type_counted &lt;-\n  n_action_type |&gt;\n  drop_na() |&gt;\n  count(category, sort = TRUE) |&gt;\n  mutate(prop = round(n / sum(n), 2)) |&gt; \n  mutate(position = row_number()) |&gt;\n  select(position, everything()) \n\nn_action_type_counted |&gt;\n  gt()\n\n\n\n\n\n\n\nposition\ncategory\nn\nprop\n\n\n\n\n1\nvideo\n188539\n0.88\n\n\n2\nvisit_page\n15002\n0.07\n\n\n3\nMedia item\n6439\n0.03\n\n\n4\nlogin\n2402\n0.01\n\n\n5\nGESOA\n387\n0.00\n\n\n6\nin_media_search\n378\n0.00\n\n\n7\nMedien\n287\n0.00\n\n\n8\nlogout\n212\n0.00\n\n\n9\nSearch Results Count\n188\n0.00\n\n\n10\nclick_channelcard\n187\n0.00\n\n\n11\nclick_topic\n176\n0.00\n\n\n12\nKanäle\n173\n0.00\n\n\n13\nEvaluation\n10\n0.00\n\n\n14\nData protection\n4\n0.00\n\n\n\n\n\n\n\nVideo steht auf Platz 1.\n\n\n2.1.2 Bonus: Veränderung der TOP-3-Tätigkeiten im Zeitverlauf\nTOP-3-Tätigkeiten:\n\ntop3 &lt;- \n  n_action_type_counted$category[1:3] \n\ntop3\n## [1] \"video\"      \"visit_page\" \"Media item\"\n\n\nn_action_type_per_month_top3 &lt;-\n  n_action_type |&gt;\n  select(nr, idvisit, category) |&gt;\n  ungroup() |&gt;\n  filter(category %in% top3) |&gt;\n  left_join(time_visit_wday |&gt; ungroup()) |&gt;\n  select(-c(dow, hour, nr)) |&gt;\n  drop_na() |&gt;\n  mutate(month_start = floor_date(date_time, \"month\")) |&gt;\n  count(month_start, category)\n\nn_action_type_per_month_top3 |&gt; \n  gt()\n\n\n\n\n\n\n\nmonth_start\ncategory\nn\n\n\n\n\n2025-03-01\nMedia item\n3198\n\n\n2025-03-01\nvideo\n33300\n\n\n2025-03-01\nvisit_page\n2902\n\n\n2025-04-01\nMedia item\n619\n\n\n2025-04-01\nvideo\n71493\n\n\n2025-04-01\nvisit_page\n5006\n\n\n2025-05-01\nMedia item\n780\n\n\n2025-05-01\nvideo\n34387\n\n\n2025-05-01\nvisit_page\n3088\n\n\n2025-06-01\nMedia item\n857\n\n\n2025-06-01\nvideo\n21794\n\n\n2025-06-01\nvisit_page\n1638\n\n\n2025-07-01\nMedia item\n985\n\n\n2025-07-01\nvideo\n27565\n\n\n2025-07-01\nvisit_page\n2368\n\n\n\n\n\n\n\nVis:\n\nn_action_type_per_month_top3 |&gt;\n  ggplot(aes(\n    x = month_start,\n    y = n,\n    fill = category # Changed from 'color' to 'fill'\n  )) +\n  # Use geom_area() and set position=\"fill\" to stack and normalize to 100%\n  geom_area(position = \"fill\") +\n\n  # Optional: Customize the y-axis to show percentages\n  scale_y_continuous(labels = scales::label_percent()) +\n\n  labs(\n    y = \"Proportion\",\n    fill = \"Category\"\n  )",
+    "crumbs": [
+      "Lösung 08"
+    ]
+  },
+  {
+    "objectID": "challenge08-solution.html#berechnen-sie-die-videonutzung-glotzdauer",
+    "href": "challenge08-solution.html#berechnen-sie-die-videonutzung-glotzdauer",
+    "title": "Challenge 08 – Solution",
+    "section": "2.2 Berechnen Sie die Videonutzung (“Glotzdauer”)",
+    "text": "2.2 Berechnen Sie die Videonutzung (“Glotzdauer”)\nBerechnen Sie die Videonutzung (“Glotzdauer”), d.h. die Zeit, wie lange die Besucher (idvisit) sich Videos anschauen. Tipp: Die Videodauer lässt sich mit Hilfe von eventaction und dazu play (Beginn Video schauen) bzw. pause (Ende) annähernd berechnen. Allerdings darf man auf diese Werte keine exakten Lösungen erwarten.\nAchtung: Die Videozeit ist schwierig auszuwerten: Die Nutzer beenden keine Videos, in dem sie auf “Pause” drücken, sondern indem sie andere Aktionen durchführen. Dies ist aber analytisch schwer abzubilden.\nVgl. die Definition des Targets glotzdauer in der Pipeline.\nKurz gesagt wird die Zeit-Differenz zwischen zwei aufeinander folgenden “Play” und “Pause” Aktionen berechnet.\nAllerdings hat dieses Vorgehen Schwierigkeiten: Nicht immer folgt auf einem “Play” ein “Pause”. Es ist schwer auszuwerten, wann die Betrachtung eines Videos endet. Daher ist diese Analyse nur vorsichtig zu interpretieren.\nDie Definition der Funktion glotzdauer.R ist online dokumentiert.\n\n2.2.1 Insgesamt\n\nas_tibble(data_separated_distinct_slice) |&gt;\n  drop_na() |&gt;\n  filter(first_play != Inf) |&gt;\n  head(30)\n\n\n\n\n\nidvisit\nfirst_play\nlast_pause\ntime_diff\n\n\n\n\n6\n2025-03-06 14:05:22\n2025-03-06 14:10:39\n317 secs\n\n\n8\n2025-03-06 14:05:50\n2025-03-06 14:07:07\n77 secs\n\n\n10\n2025-03-06 12:55:04\n2025-03-06 12:59:27\n263 secs\n\n\n15\n2025-03-12 07:50:27\n2025-03-12 07:52:27\n120 secs\n\n\n16\n2025-03-13 11:23:34\n2025-03-13 11:28:20\n286 secs\n\n\n18\n2025-03-14 14:25:51\n2025-03-14 14:41:52\n961 secs\n\n\n19\n2025-03-14 13:43:55\n2025-03-14 13:51:06\n431 secs\n\n\n21\n2025-03-17 21:35:40\n2025-03-17 21:46:24\n644 secs\n\n\n23\n2025-03-17 21:35:40\n2025-03-17 21:46:24\n644 secs\n\n\n26\n2025-03-18 20:45:16\n2025-03-18 20:54:26\n550 secs\n\n\n27\n2025-03-18 19:34:04\n2025-03-18 19:59:19\n1515 secs\n\n\n32\n2025-03-18 11:39:13\n2025-03-18 11:40:42\n89 secs\n\n\n35\n2025-03-19 21:46:44\n2025-03-19 22:00:06\n802 secs\n\n\n36\n2025-03-19 21:14:38\n2025-03-19 21:19:01\n263 secs\n\n\n41\n2025-03-19 15:37:15\n2025-03-19 16:05:20\n1685 secs\n\n\n47\n2025-03-20 22:24:33\n2025-03-20 23:58:32\n5639 secs\n\n\n49\n2025-03-20 23:03:38\n2025-03-20 23:25:33\n1315 secs\n\n\n50\n2025-03-20 21:27:20\n2025-03-20 21:55:31\n1691 secs\n\n\n51\n2025-03-20 20:22:23\n2025-03-20 21:46:19\n5036 secs\n\n\n53\n2025-03-20 17:59:06\n2025-03-20 18:55:32\n3386 secs\n\n\n54\n2025-03-20 18:21:45\n2025-03-20 18:27:09\n324 secs\n\n\n56\n2025-03-20 17:45:16\n2025-03-20 17:46:24\n68 secs\n\n\n58\n2025-03-20 15:50:08\n2025-03-20 16:25:45\n2137 secs\n\n\n60\n2025-03-20 13:13:26\n2025-03-20 14:24:50\n4284 secs\n\n\n61\n2025-03-20 12:02:49\n2025-03-20 12:05:28\n159 secs\n\n\n64\n2025-03-20 10:01:14\n2025-03-20 10:01:53\n39 secs\n\n\n65\n2025-03-20 09:57:28\n2025-03-20 10:00:09\n161 secs\n\n\n69\n2025-03-20 08:10:46\n2025-03-20 08:13:03\n137 secs\n\n\n73\n2025-03-20 04:36:48\n2025-03-20 04:56:42\n1194 secs\n\n\n76\n2025-03-21 22:06:46\n2025-03-21 22:10:28\n222 secs\n\n\n\n\n\n\n\ndata_separated_distinct_slice_summary &lt;-\n  data_separated_distinct_slice |&gt;\n  mutate(time_diff = abs(time_diff)) |&gt;\n  # without glotzdauer smaller than 10 minutes:\n  filter(time_diff &lt; 60 * 10) |&gt;\n  summarise(\n    time_diff_median = median(time_diff, na.rm = TRUE),\n    time_diff_median_hms = hms::as_hms(median(time_diff, na.rm = TRUE)),\n    time_diff_mean_hms = hms::as_hms(mean(time_diff, na.rm = TRUE)),\n    time_diff_mean = mean(time_diff, na.rm = TRUE),\n    time_diff_sd = sd(time_diff, na.rm = TRUE),\n    n = n()\n  )\n\ndata_separated_distinct_slice_summary |&gt; \n  kable(digits = 2)\n\n\n\n\n\n\n\n\n\n\n\n\ntime_diff_median\ntime_diff_median_hms\ntime_diff_mean_hms\ntime_diff_mean\ntime_diff_sd\nn\n\n\n\n\n148 secs\n00:02:28.5\n00:03:27.688889\n208 secs\n171\n630\n\n\n\n\n\nFür die folgende Darstellung wurden die absoluten Zeitwerte verwendet, d.h. ohne Vorzeichen.\n\ndata_separated_distinct_slice |&gt;\n  # we will assume that negative glotzdauer is the as positive glotzdauer:\n  mutate(time_diff = abs(time_diff)) |&gt;\n  # without glotzdauer smaller than 10 minutes:\n  filter(time_diff &lt; 60 * 10) |&gt;\n  ggplot(aes(x = time_diff)) +\n  geom_histogram() +\n  scale_x_time(breaks = pretty_breaks()) +\n  labs(\n    x = \"Time interval [h:m:s]\",\n    caption = \"Only time intervals less than 10 minutes. It is assumed that video time is positive only (no negative time intervals).\"\n  ) +\n  theme_minimal() +\n  geom_vline(xintercept = data_separated_distinct_slice_summary$time_diff_median, \n  linetype = \"dashed\", color = \"blue\") +\n  annotate(\"label\",\n    x = trunc(data_separated_distinct_slice_summary$time_diff_median_hms),\n    y = 0,\n    color = \"blue\",\n    label = data_separated_distinct_slice_summary$time_diff_median_hms, \n  )\n\n\n\n\n\n\n\n\n\nglotzdauer_tbl &lt;-\n  glotzdauer_prepped |&gt;\n  select(time_diff_abs_sec, time_diff_abs_min) |&gt;\n  describe_distribution()\n\nglotzdauer_tbl |&gt;\n  print_md()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVariable\nMean\nSD\nIQR\nRange\nSkewness\nKurtosis\nn\nn_Missing\n\n\n\n\ntime_diff_abs_sec\n207.69\n171.25\n268.25\n(0.00, 599.00)\n0.72\n-0.70\n630\n0\n\n\ntime_diff_abs_min\n3.46\n2.85\n4.47\n(0.00, 9.98)\n0.72\n-0.70\n630\n0\n\n\n\n\n\n\nglotzdauer_tbl |&gt;\n  mutate(across(where(is.numeric), ~ round(., 2))) |&gt;\n  ggpubr::ggtexttable()",
+    "crumbs": [
+      "Lösung 08"
+    ]
+  },
+  {
+    "objectID": "challenge08-solution.html#untersuchen-und-visualisieren-sie-ob-sich-das-verhalten-in-bezug-auf-die-videos-verändert-hat-im-laufe-der-zeit-wochen-und-monate-im-hinblick-auf-die-glotzdauer.",
+    "href": "challenge08-solution.html#untersuchen-und-visualisieren-sie-ob-sich-das-verhalten-in-bezug-auf-die-videos-verändert-hat-im-laufe-der-zeit-wochen-und-monate-im-hinblick-auf-die-glotzdauer.",
+    "title": "Challenge 08 – Solution",
+    "section": "2.3 Untersuchen und visualisieren Sie, ob sich das Verhalten in Bezug auf die Videos verändert hat im Laufe der Zeit (Wochen und Monate) im Hinblick auf die Glotzdauer.",
+    "text": "2.3 Untersuchen und visualisieren Sie, ob sich das Verhalten in Bezug auf die Videos verändert hat im Laufe der Zeit (Wochen und Monate) im Hinblick auf die Glotzdauer.\n\n2.3.1 Wochen\n\nglotzdauer_prepped_tbl_weeks &lt;-\n  glotzdauer_prepped |&gt;\n  mutate(first_of_month = floor_date(first_play, unit = \"week\")) |&gt;\n  group_by(first_of_month) |&gt;\n  summarise(time_diff_mean = mean(time_diff, na.rm = TRUE))\n\nglotzdauer_prepped_tbl_weeks\n\n\n\n\n\nfirst_of_month\ntime_diff_mean\n\n\n\n\n2025-03-03\n219 secs\n\n\n2025-03-10\n279 secs\n\n\n2025-03-17\n241 secs\n\n\n2025-03-24\n175 secs\n\n\n2025-03-31\n212 secs\n\n\n2025-04-07\n229 secs\n\n\n2025-04-14\n225 secs\n\n\n2025-04-21\n227 secs\n\n\n2025-04-28\n175 secs\n\n\n2025-05-05\n201 secs\n\n\n2025-05-12\n192 secs\n\n\n2025-05-19\n207 secs\n\n\n2025-05-26\n182 secs\n\n\n2025-06-02\n234 secs\n\n\n2025-06-09\n282 secs\n\n\n2025-06-16\n154 secs\n\n\n2025-06-23\n158 secs\n\n\n2025-06-30\n216 secs\n\n\n2025-07-07\n200 secs\n\n\n2025-07-14\n275 secs\n\n\n\n\n\n\n\nglotzdauer_prepped_tbl_weeks |&gt;\n  ggplot(aes(x = first_of_month, y = time_diff_mean)) +\n  geom_line() +\n  theme_minimal() +\n  geom_smooth(method = \"loess\", se = FALSE, color = \"blue\") +\n  labs(\n    x = \"Date\",\n    y = \"Average video watching time [s]\"\n  )\n\n\n\n\n\n\n\n\n\n\n2.3.2 Monate\n\nglotzdauer_prepped_tbl &lt;-\n  glotzdauer_prepped |&gt;\n  mutate(first_of_month = floor_date(first_play, unit = \"month\")) |&gt;\n  group_by(first_of_month) |&gt;\n  summarise(time_diff_mean = mean(time_diff, na.rm = TRUE))\n\nglotzdauer_prepped_tbl\n\n\n\n\n\nfirst_of_month\ntime_diff_mean\n\n\n\n\n2025-03-01\n198 secs\n\n\n2025-04-01\n221 secs\n\n\n2025-05-01\n195 secs\n\n\n2025-06-01\n192 secs\n\n\n2025-07-01\n218 secs\n\n\n\n\n\n\n\nglotzdauer_prepped_tbl |&gt;\n  ggplot(aes(x = first_of_month, y = time_diff_mean)) +\n  geom_line() +\n  theme_minimal() +\n  geom_smooth(method = \"loess\", se = FALSE, color = \"blue\") +\n  labs(\n    x = \"Date\",\n    y = \"Average video watching time [s]\"\n  )",
+    "crumbs": [
+      "Lösung 08"
+    ]
+  },
+  {
+    "objectID": "challenge08-solution.html#berechnen-sie-die-videonutzung-pro-kunde-hochschule.",
+    "href": "challenge08-solution.html#berechnen-sie-die-videonutzung-pro-kunde-hochschule.",
+    "title": "Challenge 08 – Solution",
+    "section": "2.4 Berechnen Sie die Videonutzung pro Kunde (Hochschule).",
+    "text": "2.4 Berechnen Sie die Videonutzung pro Kunde (Hochschule).\n\n\nglotzdauer_per_customer &lt;-\n  glotzdauer_prepped |&gt;\n  left_join(\n    course_and_uni_per_visit |&gt;\n      select(idvisit, university) |&gt;\n      distinct() |&gt; \n      mutate(idvisit = as.integer(idvisit)),\n  ) |&gt;\n  group_by(university) |&gt;\n  summarise(\n    time_diff_mean = mean(time_diff, na.rm = TRUE),\n    time_diff_median = median(time_diff, na.rm = TRUE),\n    n = n()\n  ) |&gt;\n  drop_na() |&gt; \n  arrange(desc(time_diff_mean))  \n\n\nglotzdauer_per_customer %&gt;%\n  mutate(\n    time_diff_mean = as.difftime(round(as.numeric(time_diff_mean), 0), units = \"secs\"),\n    time_diff_median = as.difftime(round(as.numeric(time_diff_median), 0), units = \"secs\")\n  ) |&gt; \n  gt()\n\n\n\n\n\n\n\nuniversity\ntime_diff_mean\ntime_diff_median\nn\n\n\n\n\nevhn\n465\n465\n1\n\n\nth-nuernberg\n217\n158\n150\n\n\nhswt\n209\n169\n236\n\n\nth-owl\n74\n74\n1",
+    "crumbs": [
+      "Lösung 08"
+    ]
+  },
+  {
+    "objectID": "challenge08-solution.html#zum-quarto-bericht",
+    "href": "challenge08-solution.html#zum-quarto-bericht",
+    "title": "Challenge 08 – Solution",
+    "section": "2.5 Zum Quarto-Bericht",
+    "text": "2.5 Zum Quarto-Bericht\n\n2.5.1 Wie kann man die Größe eines Diagramms in Quarto einstellen?\n\n\nhttps://quarto.org/docs/authoring/figures.html\n\n\nhttps://r4ds.had.co.nz/graphics-for-communication.html#figure-sizing\n\n\n\n\n2.5.2 Wie kann man Diagramme referenzieren (z.B. “Diagramm &lt;3&gt; zeigt blabla”, wobei “Diagramm 3” verlinkt ist zum Diagramm).\n\nhttps://quarto.org/docs/authoring/cross-references.html\n\n\n\n2.5.3 Wie kann man eine Gliederung zum Quarto-Bericht hinzufügen.\n\nhttps://quarto.org/docs/reference/formats/html.html\n\n\n\n2.5.4 Welche Code-Chunk-Optionen gibt es in Quarto? Nennen Sie zumindest 3. Wie ist die Syntax aufgebaut?\n\nhttps://quarto.org/docs/reference/cells/cells-knitr.html\n\n\n\n2.5.5 Beschreiben Sie das Ausgabeformat “Typst”\n\nhttps://typst.app/\nhttps://quarto.org/docs/output-formats/typst.html",
+    "crumbs": [
+      "Lösung 08"
+    ]
+  },
+  {
+    "objectID": "challenge08-solution.html#sessioninfo",
+    "href": "challenge08-solution.html#sessioninfo",
+    "title": "Challenge 08 – Solution",
+    "section": "2.6 sessionInfo",
+    "text": "2.6 sessionInfo\n\nsessioninfo::session_info()\n## ─ Session info ───────────────────────────────────────────────────────────────\n##  setting  value\n##  version  R version 4.5.1 (2025-06-13)\n##  os       Ubuntu 25.10\n##  system   x86_64, linux-gnu\n##  ui       X11\n##  language (EN)\n##  collate  de_DE.UTF-8\n##  ctype    de_DE.UTF-8\n##  tz       Europe/Berlin\n##  date     2026-01-09\n##  pandoc   3.6.3 @ /usr/lib/rstudio/resources/app/bin/quarto/bin/tools/x86_64/ (via rmarkdown)\n##  quarto   1.8.25 @ /usr/lib/rstudio/resources/app/bin/quarto/bin/quarto\n## \n## ─ Packages ───────────────────────────────────────────────────────────────────\n##  package      * version  date (UTC) lib source\n##  abind          1.4-8    2024-09-12 [3] CRAN (R 4.4.1)\n##  backports      1.5.0    2024-05-23 [3] CRAN (R 4.4.1)\n##  base64url      1.4      2018-05-14 [3] CRAN (R 4.0.1)\n##  bayestestR   * 0.17.0   2025-08-29 [1] RSPM (R 4.5.1)\n##  broom          1.0.10   2025-09-13 [1] RSPM\n##  callr          3.7.6    2024-03-25 [3] CRAN (R 4.4.0)\n##  car            3.1-3    2024-09-27 [3] CRAN (R 4.4.1)\n##  carData        3.0-5    2022-01-06 [3] CRAN (R 4.1.2)\n##  cli            3.6.5    2025-04-23 [1] CRAN (R 4.5.1)\n##  coda           0.19-4.1 2024-01-31 [1] RSPM\n##  codetools      0.2-20   2024-03-31 [4] CRAN (R 4.3.3)\n##  correlation  * 0.8.8    2025-07-08 [1] RSPM (R 4.5.1)\n##  cowplot        1.1.3    2024-01-22 [3] CRAN (R 4.3.2)\n##  data.table     1.17.8   2025-07-10 [1] RSPM (R 4.5.1)\n##  datawizard   * 1.3.0    2025-10-11 [1] RSPM (R 4.5.1)\n##  dichromat      2.0-0.1  2022-05-02 [3] CRAN (R 4.2.0)\n##  digest         0.6.39   2025-11-19 [1] CRAN (R 4.5.1)\n##  dplyr        * 1.1.4    2023-11-17 [3] CRAN (R 4.4.2)\n##  easystats    * 0.7.5    2025-07-11 [1] RSPM (R 4.5.1)\n##  effectsize   * 1.0.1    2025-05-27 [1] RSPM (R 4.5.1)\n##  emmeans        1.10.7   2025-01-31 [3] CRAN (R 4.4.2)\n##  estimability   1.5.1    2024-05-12 [3] CRAN (R 4.4.2)\n##  evaluate       1.0.5    2025-08-27 [1] CRAN (R 4.5.1)\n##  farver         2.1.2    2024-05-13 [3] CRAN (R 4.4.1)\n##  fastmap        1.2.0    2024-05-15 [3] CRAN (R 4.4.1)\n##  forcats      * 1.0.0    2023-01-29 [3] CRAN (R 4.2.2)\n##  Formula        1.2-5    2023-02-24 [3] CRAN (R 4.2.2)\n##  fs             1.6.6    2025-04-12 [1] CRAN (R 4.5.1)\n##  generics       0.1.4    2025-05-09 [1] CRAN (R 4.5.1)\n##  ggplot2      * 4.0.1    2025-11-14 [1] RSPM (R 4.5.1)\n##  ggpubr       * 0.6.2    2025-10-17 [1] RSPM\n##  ggsignif       0.6.4    2022-10-13 [3] CRAN (R 4.2.2)\n##  glue           1.8.0    2024-09-30 [3] CRAN (R 4.4.2)\n##  gridExtra      2.3      2017-09-09 [3] CRAN (R 4.0.1)\n##  gt           * 1.1.0    2025-09-23 [1] RSPM (R 4.5.1)\n##  gtable         0.3.6    2024-10-25 [3] CRAN (R 4.4.2)\n##  hms            1.1.3    2023-03-21 [3] CRAN (R 4.3.1)\n##  htmltools      0.5.8.1  2024-04-04 [3] CRAN (R 4.4.0)\n##  htmlwidgets    1.6.4    2023-12-06 [3] CRAN (R 4.3.2)\n##  igraph         2.1.4    2025-01-23 [3] CRAN (R 4.5.0)\n##  insight      * 1.4.2    2025-09-02 [1] RSPM (R 4.5.1)\n##  jsonlite       2.0.0    2025-03-27 [1] CRAN (R 4.5.1)\n##  knitr        * 1.50     2025-03-16 [3] CRAN (R 4.4.3)\n##  labeling       0.4.3    2023-08-29 [3] CRAN (R 4.3.1)\n##  lattice        0.22-7   2025-04-02 [4] CRAN (R 4.4.3)\n##  lifecycle      1.0.4    2023-11-07 [3] CRAN (R 4.3.2)\n##  lubridate    * 1.9.4    2024-12-08 [3] CRAN (R 4.4.2)\n##  magrittr       2.0.4    2025-09-12 [1] CRAN (R 4.5.1)\n##  MASS           7.3-65   2025-02-28 [4] CRAN (R 4.4.3)\n##  Matrix         1.7-3    2025-03-11 [4] CRAN (R 4.4.3)\n##  mgcv           1.9-3    2025-04-04 [4] CRAN (R 4.4.3)\n##  modelbased   * 0.13.0   2025-08-30 [1] RSPM (R 4.5.1)\n##  multcomp       1.4-28   2025-01-29 [3] CRAN (R 4.4.2)\n##  mvtnorm        1.3-3    2025-01-10 [1] RSPM\n##  nlme           3.1-168  2025-03-31 [4] CRAN (R 4.4.3)\n##  parameters   * 0.28.2   2025-09-10 [1] RSPM (R 4.5.1)\n##  performance  * 0.15.2   2025-10-06 [1] RSPM (R 4.5.1)\n##  pillar         1.11.1   2025-09-17 [1] CRAN (R 4.5.1)\n##  pkgconfig      2.0.3    2019-09-22 [3] CRAN (R 4.0.1)\n##  prettyunits    1.2.0    2023-09-24 [3] CRAN (R 4.3.1)\n##  processx       3.8.6    2025-02-21 [3] CRAN (R 4.4.3)\n##  ps             1.9.0    2025-02-18 [3] CRAN (R 4.4.3)\n##  purrr        * 1.2.0    2025-11-04 [1] RSPM (R 4.5.1)\n##  R6             2.6.1    2025-02-15 [3] CRAN (R 4.4.3)\n##  RColorBrewer   1.1-3    2022-04-03 [3] CRAN (R 4.2.0)\n##  readr        * 2.1.6    2025-11-14 [1] RSPM\n##  report       * 0.6.2    2025-11-03 [1] RSPM (R 4.5.1)\n##  rlang          1.1.6    2025-04-11 [1] CRAN (R 4.5.1)\n##  rmarkdown      2.30     2025-09-28 [1] RSPM (R 4.5.1)\n##  rstatix        0.7.2    2023-02-01 [3] CRAN (R 4.2.2)\n##  rstudioapi     0.17.1   2024-10-22 [3] CRAN (R 4.4.1)\n##  S7             0.2.1    2025-11-14 [1] RSPM (R 4.5.1)\n##  sandwich       3.1-1    2024-09-15 [3] CRAN (R 4.4.1)\n##  sass           0.4.10   2025-04-11 [1] RSPM (R 4.5.1)\n##  scales       * 1.4.0    2025-04-24 [1] RSPM (R 4.5.1)\n##  secretbase     1.0.5    2025-03-04 [1] RSPM\n##  see          * 0.12.0   2025-09-14 [1] RSPM (R 4.5.1)\n##  sessioninfo    1.2.3    2025-02-05 [3] CRAN (R 4.4.3)\n##  stringi        1.8.7    2025-03-27 [1] CRAN (R 4.5.1)\n##  stringr      * 1.6.0    2025-11-04 [1] CRAN (R 4.5.1)\n##  survival       3.8-3    2024-12-17 [4] CRAN (R 4.4.2)\n##  targets      * 1.11.4   2025-09-13 [1] RSPM\n##  TH.data        1.1-3    2025-01-17 [3] CRAN (R 4.4.2)\n##  tibble       * 3.3.0    2025-06-08 [1] CRAN (R 4.5.1)\n##  tidyr        * 1.3.1    2024-01-24 [3] CRAN (R 4.3.2)\n##  tidyselect     1.2.1    2024-03-11 [3] CRAN (R 4.4.0)\n##  tidyverse    * 2.0.0    2023-02-22 [3] CRAN (R 4.4.2)\n##  timechange     0.3.0    2024-01-18 [3] CRAN (R 4.4.3)\n##  tinytable    * 0.15.1   2025-11-02 [1] CRAN (R 4.5.1)\n##  tzdb           0.5.0    2025-03-15 [3] CRAN (R 4.4.3)\n##  vctrs          0.6.5    2023-12-01 [3] CRAN (R 4.3.2)\n##  withr          3.0.2    2024-10-28 [3] CRAN (R 4.4.1)\n##  xfun           0.54     2025-10-30 [1] CRAN (R 4.5.1)\n##  xml2           1.5.0    2025-11-17 [1] CRAN (R 4.5.1)\n##  xtable         1.8-4    2019-04-21 [3] CRAN (R 4.0.1)\n##  yaml           2.3.10   2024-07-26 [3] CRAN (R 4.4.1)\n##  zoo            1.8-14   2025-04-10 [3] CRAN (R 4.4.3)\n## \n##  [1] /home/sebastian-sauer/R/x86_64-pc-linux-gnu-library/4.5\n##  [2] /usr/local/lib/R/site-library\n##  [3] /usr/lib/R/site-library\n##  [4] /usr/lib/R/library\n##  * ── Packages attached to the search path.\n## \n## ──────────────────────────────────────────────────────────────────────────────",
+    "crumbs": [
+      "Lösung 08"
     ]
   }
 ]
