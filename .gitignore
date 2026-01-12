@@ -14,6 +14,8 @@ SOLUTIONS-dev/
 #_targets.R
 funs/hidden/
 challenges-submissions/
+challenges-solutions/
+challenges-solutions-dev/
 
 
 # targets files:
@@ -52,3 +54,5 @@ _archive/
 .httr-oauth
 .DS_Store
 .quarto
+
+**/*.quarto_ipynb

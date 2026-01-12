@@ -40,7 +40,7 @@ library(tictoc)
 Wir definieren die Liste der zu importierenden CSV-Dateien:
 
 ```{r}
-datafiles_list <- list.files(path = paste0(here(),"/", "data-processed"),
+datafiles_list <- list.files(path = paste0(here(),"/", "data/SoSe25"),
                              pattern = "csv$",
                              recursive = TRUE, 
                              full.names = TRUE)

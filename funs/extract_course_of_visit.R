@@ -1,9 +1,9 @@
 extract_course_role_university_of_visit <- function(d) {
-#' Extract course, role, and university from visit data
-  #' param d Data frame containing visit data with URLs
-  #' return Data frame with extracted course, role, and university information
+  #' Extracts course, role, and university from visit data
+  #' @param d Wide Data frame containing visit data with URLs.
+  #' @returns Wide Data frame with extracted course, role, and university information.
 
-  d |> # WIDE data such as "data_wide_slim"
+  d |>
     select(
       idvisit,
       fingerprint,
@@ -12,14 +12,19 @@ extract_course_role_university_of_visit <- function(d) {
     ) |>
     mutate(
       course = str_extract(
+        # Warning: subsequent actiondetails cols should also be checked!
+        # TODO
         actiondetails_0_url,
         "(?<=\\.student\\.)[a-zA-Z0-9]+"
       )
     ) |>
     mutate(
       university = str_extract(actiondetails_0_url, "(?<=%40)[a-z0-9-]+")  #%40 --> AT
+
     ) |>
-    mutate(role = str_extract(actiondetails_0_url, "(?<=role=)[a-z]+")) |>
+    mutate( # TODO
+      role = str_extract(actiondetails_0_url, "(?<=role=)[a-z]+")
+    ) |>
     mutate(actiondetails_0_timestamp = ymd_hms(actiondetails_0_timestamp)) |>
     select(-actiondetails_0_url)
 }

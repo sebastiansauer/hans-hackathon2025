@@ -13,14 +13,10 @@ project:
     # - challenge03-solution.qmd
     # - challenge04-solution.qmd
     # - challenge05-solution.qmd
-    - ./challenge0?-solution.qmd
+    - ./challenge0?-solution.qmd  # alle Challenges
 
 
 editor: source
-
-  # image: img/statistik1_icon.png
-  # description:  "Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools 'HaNS'"
-
 
 website:
   title: "hans-hackathon"
@@ -58,6 +54,8 @@ website:
         text: Lösung 05
       - href: challenge06-solution.qmd
         text: Lösung 06
+      - href: challenge07-solution.qmd
+        text: Lösung 07
       # - href: challenge03-solution.qmd
       #   text: Lösung 03
       # - href: challenge04-solution.qmd
@@ -81,6 +79,9 @@ website:
 
 
 format:
+  # typst:
+  #   toc: true
+  #   number-sections: true
   html:
     theme: cosmo
     css: styles.css
@@ -99,7 +100,7 @@ lang: de-DE
 citation: true
 #google-scholar: true
 description: |
- "Ein Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools 'HaNS'"
+ "Eine Hackathon-Variante zur Evaluation der Klickdaten des KI-Tools 'HaNS'"
 license: "MIT" 
 
 
